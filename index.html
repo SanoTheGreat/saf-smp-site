@@ -4,40 +4,43 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sano &amp; Friends SMP</title>
-<meta name="description" content="Sano &amp; Friends SMP — a modded Minecraft survival world protected by FTB Chunks. Grab the modpack and meet us at safsmp.agila.host.">
+<meta name="description" content="Sano &amp; Friends SMP — a modded Minecraft survival world protected by FTB Chunks. Grab the modpack and meet us at safsmp.online.">
 <meta property="og:title" content="Sano &amp; Friends SMP">
-<meta property="og:description" content="A modded survival world, claimed and protected, kept for a small crew. Grab the modpack and join at safsmp.agila.host.">
+<meta property="og:description" content="A modded survival world, claimed and protected, kept for a small crew. Grab the modpack and join at safsmp.online.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#14201C">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='7' y='6' width='10' height='10' rx='2' fill='%23E8A33D'/%3E%3Cpath d='M8 3h8l-1 3H9z' fill='%237CB342'/%3E%3Cpath d='M9 16l-1 5h8l-1-5' fill='%237CB342'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0E1B22">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='7' y='6' width='10' height='10' rx='2' fill='%23F2A93C'/%3E%3Cpath d='M8 3h8l-1 3H9z' fill='%236FCB4F'/%3E%3Cpath d='M9 16l-1 5h8l-1-5' fill='%236FCB4F'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Karla:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Karla:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --color-bg:#14201C;
-    --color-bg-alt:#0F1815;
-    --color-surface:#1E2E26;
-    --color-surface-alt:#25392E;
-    --color-border:rgba(241,233,210,0.10);
-    --color-amber:#E8A33D;
-    --color-amber-bright:#F4BB5E;
-    --color-moss:#7CB342;
-    --color-moss-dark:#4F7A2B;
-    --color-rust:#C1553B;
-    --color-text:#F1E9D2;
-    --color-text-muted:#A9B7AC;
-    --font-display:'Fraunces', serif;
+    --color-bg:#0E1B22;
+    --color-bg-alt:#0A1319;
+    --color-surface:#16262B;
+    --color-surface-alt:#1D3238;
+    --color-border:rgba(244,239,221,0.10);
+    --color-amber:#F2A93C;
+    --color-amber-bright:#FFC85C;
+    --color-moss:#6FCB4F;
+    --color-moss-dark:#3E8F3A;
+    --color-rust:#D65A3A;
+    --color-text:#F4EFDD;
+    --color-text-muted:#9FB3B8;
+    --font-display:'Karla', sans-serif;
+    --font-pixel:'Press Start 2P', monospace;
     --font-body:'Karla', sans-serif;
     --font-mono:'Space Mono', monospace;
-    --radius-sm:6px;
-    --radius-md:14px;
-    --radius-lg:26px;
-    --shadow-soft:0 12px 30px rgba(0,0,0,0.35);
+    --radius-sm:4px;
+    --radius-md:10px;
+    --radius-lg:22px;
+    --shadow-soft:0 14px 32px rgba(0,0,0,0.45);
     --ease:cubic-bezier(.22,.61,.36,1);
     --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px;
     --space-5:24px; --space-6:32px; --space-7:48px; --space-8:64px; --space-9:96px;
     --header-h:78px;
+    --pixel-clip-sm:polygon(0 6px,6px 6px,6px 0,calc(100% - 6px) 0,calc(100% - 6px) 6px,100% 6px,100% calc(100% - 6px),calc(100% - 6px) calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,6px calc(100% - 6px),0 calc(100% - 6px));
+    --pixel-clip-lg:polygon(0 14px,14px 14px,14px 0,calc(100% - 14px) 0,calc(100% - 14px) 14px,100% 14px,100% calc(100% - 14px),calc(100% - 14px) calc(100% - 14px),calc(100% - 14px) 100%,14px 100%,14px calc(100% - 14px),0 calc(100% - 14px));
   }
 
   *,*::before,*::after{ box-sizing:border-box; }
@@ -53,7 +56,7 @@
   }
   img,svg{ display:block; max-width:100%; }
   a{ color:inherit; }
-  h1,h2,h3{ font-family:var(--font-display); font-weight:600; margin:0; line-height:1.1; letter-spacing:-0.01em; }
+  h1,h2,h3{ font-family:var(--font-display); font-weight:700; margin:0; line-height:1.15; letter-spacing:-0.01em; }
   p{ margin:0; }
   ul,ol{ margin:0; padding:0; }
   button{ font:inherit; color:inherit; background:none; border:none; cursor:pointer; }
@@ -88,26 +91,50 @@
   /* Buttons */
   .btn{
     display:inline-flex; align-items:center; justify-content:center; gap:var(--space-2);
-    padding:14px 26px; border-radius:999px; font-weight:700; font-size:0.98rem;
-    text-decoration:none; transition:transform .2s var(--ease), box-shadow .2s var(--ease), background .2s var(--ease);
-    white-space:nowrap;
+    padding:14px 26px; border-radius:3px; font-weight:700; font-size:0.95rem;
+    text-decoration:none; white-space:nowrap; position:relative;
+    transition:filter .12s var(--ease), transform .08s var(--ease), box-shadow .08s var(--ease);
   }
   .btn svg{ width:18px; height:18px; }
-  .btn--primary{ background:var(--color-amber); color:var(--color-bg); box-shadow:var(--shadow-soft); }
-  .btn--primary:hover{ background:var(--color-amber-bright); transform:translateY(-2px); }
-  .btn--ghost{ background:transparent; color:var(--color-text); border:1px solid var(--color-border); }
-  .btn--ghost:hover{ border-color:var(--color-amber-bright); color:var(--color-amber-bright); transform:translateY(-2px); }
-  .btn--sm{ padding:8px 16px; font-size:0.85rem; }
+  .btn--primary{
+    background:linear-gradient(180deg, var(--color-amber-bright), var(--color-amber));
+    color:#2A1B05;
+    box-shadow:
+      inset 3px 3px 0 rgba(255,255,255,0.4),
+      inset -3px -3px 0 rgba(0,0,0,0.3),
+      0 0 26px rgba(242,169,60,0.4);
+  }
+  .btn--primary:hover{ filter:brightness(1.08); }
+  .btn--primary:active{
+    transform:translateY(3px);
+    box-shadow:
+      inset -3px -3px 0 rgba(255,255,255,0.25),
+      inset 3px 3px 0 rgba(0,0,0,0.35);
+  }
+  .btn--ghost{
+    background:var(--color-surface); color:var(--color-text); border:1px solid var(--color-border);
+    box-shadow:
+      inset 3px 3px 0 rgba(255,255,255,0.05),
+      inset -3px -3px 0 rgba(0,0,0,0.4);
+  }
+  .btn--ghost:hover{ filter:brightness(1.2); border-color:var(--color-amber-bright); color:var(--color-amber-bright); }
+  .btn--ghost:active{
+    transform:translateY(3px);
+    box-shadow:
+      inset -3px -3px 0 rgba(255,255,255,0.03),
+      inset 3px 3px 0 rgba(0,0,0,0.4);
+  }
+  .btn--sm{ padding:8px 16px; font-size:0.82rem; }
 
   .address-chip{
     display:inline-flex; align-items:center; gap:var(--space-3);
     background:var(--color-surface); border:1px solid var(--color-border);
-    border-radius:999px; padding:10px 10px 10px 20px;
+    clip-path:var(--pixel-clip-sm); padding:10px 10px 10px 20px;
   }
   .address-chip__text{ font-family:var(--font-mono); font-size:0.95rem; color:var(--color-amber-bright); }
   .copy-btn{
     display:flex; align-items:center; gap:6px;
-    background:var(--color-surface-alt); border-radius:999px; padding:8px 14px;
+    background:var(--color-surface-alt); clip-path:var(--pixel-clip-sm); padding:8px 14px;
     font-family:var(--font-mono); font-size:0.78rem; color:var(--color-text-muted);
     transition:color .2s var(--ease), background .2s var(--ease);
     position:relative;
@@ -116,7 +143,7 @@
   .copy-btn svg{ width:14px; height:14px; }
   .copy-btn__tip{
     position:absolute; bottom:calc(100% + 8px); left:50%; transform:translateX(-50%) translateY(4px);
-    background:var(--color-moss); color:#0F1815; font-weight:700; font-size:0.72rem;
+    background:var(--color-moss); color:#0A1319; font-weight:700; font-size:0.72rem;
     padding:4px 10px; border-radius:6px; opacity:0; pointer-events:none;
     transition:opacity .18s var(--ease), transform .18s var(--ease);
   }
@@ -126,13 +153,13 @@
   .site-header{
     position:sticky; top:0; z-index:100; height:var(--header-h);
     display:flex; align-items:center;
-    background:rgba(15,24,21,0.82); backdrop-filter:blur(10px);
+    background:rgba(10,19,25,0.82); backdrop-filter:blur(10px);
     border-bottom:1px solid var(--color-border);
   }
   .nav{ width:100%; display:flex; align-items:center; justify-content:space-between; }
   .nav__brand{ display:flex; align-items:center; gap:10px; text-decoration:none; }
   .nav__brand-mark{ width:34px; height:34px; flex:0 0 auto; }
-  .nav__brand-word{ font-family:var(--font-display); font-weight:700; font-size:1.08rem; }
+  .nav__brand-word{ font-family:var(--font-pixel); font-size:0.64rem; line-height:1.4; letter-spacing:0.02em; white-space:nowrap; }
   .nav__brand-word span{ color:var(--color-amber-bright); }
   .nav__links{ display:flex; align-items:center; gap:var(--space-6); list-style:none; }
   .nav__links a{
@@ -166,16 +193,16 @@
   }
 
   /* Hero */
-  .hero{ position:relative; overflow:hidden; padding:var(--space-9) 0 var(--space-8); }
+  .hero{ position:relative; overflow:hidden; padding:var(--space-9) 0 calc(var(--space-8) + 26px); }
   .hero__bg{ position:absolute; inset:0; z-index:0; }
   .hero__glow{
-    position:absolute; top:-10%; left:50%; transform:translateX(-50%);
+    position:absolute; top:-10%; left:38%; transform:translateX(-50%);
     width:900px; height:900px; max-width:160vw;
-    background:radial-gradient(circle, rgba(232,163,61,0.16) 0%, rgba(232,163,61,0) 62%);
+    background:radial-gradient(circle, rgba(255,200,92,0.14) 0%, rgba(255,200,92,0) 62%);
     pointer-events:none;
   }
   .hero__firefly{
-    position:absolute; width:5px; height:5px; border-radius:50%;
+    position:absolute; width:4px; height:4px; border-radius:0;
     background:var(--color-amber-bright);
     box-shadow:0 0 8px 2px rgba(244,187,94,0.7);
     animation:drift 9s ease-in-out infinite;
@@ -185,9 +212,60 @@
     0%,100%{ transform:translate(0,0); opacity:0.3; }
     50%{ transform:translate(14px,-22px); opacity:0.9; }
   }
-  .hero__hills{ position:absolute; left:0; right:0; bottom:0; width:100%; height:auto; }
+  .hero__sun-wrap{ position:absolute; top:4%; right:9%; width:130px; height:130px; }
+  .hero__sun-glow{
+    position:absolute; inset:-55px; border-radius:50%;
+    background:radial-gradient(circle, rgba(255,200,92,0.55) 0%, rgba(255,200,92,0.16) 42%, rgba(255,200,92,0) 72%);
+    filter:blur(1px);
+  }
+  .hero__rays{
+    position:absolute; inset:-100px; border-radius:50%;
+    background:conic-gradient(from 0deg,
+      rgba(255,216,115,0.18) 0deg 8deg, transparent 8deg 37deg,
+      rgba(255,216,115,0.18) 37deg 45deg, transparent 45deg 82deg,
+      rgba(255,216,115,0.18) 82deg 90deg, transparent 90deg 127deg,
+      rgba(255,216,115,0.18) 127deg 135deg, transparent 135deg 172deg,
+      rgba(255,216,115,0.18) 172deg 180deg, transparent 180deg 217deg,
+      rgba(255,216,115,0.18) 217deg 225deg, transparent 225deg 262deg,
+      rgba(255,216,115,0.18) 262deg 270deg, transparent 270deg 307deg,
+      rgba(255,216,115,0.18) 307deg 315deg, transparent 315deg 360deg);
+    animation:ray-spin 60s linear infinite;
+    mix-blend-mode:screen;
+  }
+  @keyframes ray-spin{ to{ transform:rotate(360deg); } }
+  .hero__sun{
+    position:relative; width:100%; height:100%; color:var(--color-amber-bright); fill:currentColor;
+    filter:drop-shadow(0 0 10px rgba(255,200,92,0.85));
+  }
+  .hero__clouds{ position:absolute; inset:0; overflow:hidden; }
+  .cloud{
+    position:absolute; background:rgba(244,239,221,0.32); width:46px; height:16px;
+    box-shadow:
+      22px -8px 0 0 rgba(244,239,221,0.32),
+      44px 0 0 0 rgba(244,239,221,0.32),
+      -18px 4px 0 0 rgba(244,239,221,0.22);
+    animation:cloud-drift linear infinite;
+  }
+  .cloud--1{ top:9%; left:-12%; animation-duration:75s; }
+  .cloud--2{ top:20%; left:-32%; width:64px; height:20px; animation-duration:95s; animation-delay:-20s; }
+  .cloud--3{ top:5%; left:-55%; width:34px; height:12px; animation-duration:85s; animation-delay:-42s; }
+  @keyframes cloud-drift{ to{ transform:translateX(145vw); } }
+  .hero__hills{ position:absolute; left:0; right:0; bottom:26px; width:100%; height:auto; }
+  .hero__water{ position:absolute; left:0; right:0; bottom:0; height:26px; overflow:hidden;
+    background:linear-gradient(90deg, #123842, #1C4B57, #123842);
+  }
+  .hero__water::after{
+    content:""; position:absolute; inset:0; background-size:220% 100%;
+    background-image:linear-gradient(90deg, transparent 0%, rgba(255,216,115,0.4) 50%, transparent 100%);
+    animation:water-shimmer 7s ease-in-out infinite;
+  }
+  @keyframes water-shimmer{ 0%{ background-position:220% 0; } 100%{ background-position:-220% 0; } }
   .hero__content{ position:relative; z-index:2; max-width:680px; }
-  .hero__content h1{ font-size:clamp(2.4rem, 6vw, 4rem); margin-bottom:var(--space-4); }
+  .hero__content h1{
+    font-family:var(--font-pixel); font-weight:400; text-transform:none;
+    font-size:clamp(1.5rem, 4.4vw, 2.7rem); line-height:1.6; letter-spacing:0.01em;
+    margin-bottom:var(--space-5); text-shadow:0 0 22px rgba(255,200,92,0.45), 3px 3px 0 rgba(0,0,0,0.4);
+  }
   .hero__content p.lede{ font-size:1.15rem; color:var(--color-text-muted); margin-bottom:var(--space-6); max-width:52ch; }
   .hero__ctas{ display:flex; flex-wrap:wrap; gap:var(--space-4); align-items:center; margin-bottom:var(--space-5); }
   .hero__status{
@@ -204,12 +282,12 @@
   /* Features */
   .features-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:var(--space-5); }
   .feature-card{
-    background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md);
+    background:var(--color-surface); border:1px solid var(--color-border); clip-path:var(--pixel-clip-lg);
     padding:var(--space-6); transition:transform .25s var(--ease), border-color .25s var(--ease);
   }
-  .feature-card:hover{ transform:translateY(-4px); border-color:rgba(232,163,61,0.4); }
+  .feature-card:hover{ transform:translateY(-4px); border-color:rgba(255,200,92,0.45); }
   .feature-card__icon{
-    width:44px; height:44px; border-radius:12px; background:var(--color-surface-alt);
+    width:44px; height:44px; clip-path:var(--pixel-clip-sm); background:var(--color-surface-alt);
     display:flex; align-items:center; justify-content:center; margin-bottom:var(--space-4);
     color:var(--color-amber-bright);
   }
@@ -223,12 +301,12 @@
   .recipe__slot{
     display:flex; flex-direction:column; align-items:center; gap:10px;
     width:132px; padding:var(--space-4) var(--space-3);
-    background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md);
-    text-align:center; transition:box-shadow .25s var(--ease), border-color .25s var(--ease);
+    background:var(--color-surface); border:1px solid var(--color-border); clip-path:var(--pixel-clip-sm);
+    text-align:center; transition:filter .25s var(--ease), border-color .25s var(--ease);
   }
-  .recipe__slot:hover{ border-color:rgba(232,163,61,0.5); box-shadow:0 0 0 3px rgba(232,163,61,0.08); }
+  .recipe__slot:hover{ border-color:rgba(255,200,92,0.55); filter:drop-shadow(0 0 8px rgba(255,200,92,0.45)); }
   .recipe__slot svg{ width:26px; height:26px; color:var(--color-moss); }
-  .recipe__slot--result{ background:var(--color-surface-alt); border-color:rgba(124,179,66,0.5); }
+  .recipe__slot--result{ background:var(--color-surface-alt); border-color:rgba(111,203,79,0.55); }
   .recipe__slot--result svg{ color:var(--color-amber-bright); }
   .recipe__slot span{ font-size:0.82rem; color:var(--color-text-muted); }
   .recipe__op{ font-family:var(--font-mono); font-size:1.3rem; color:var(--color-text-muted); }
@@ -243,8 +321,8 @@
   .steps{ list-style:none; display:flex; flex-direction:column; gap:var(--space-6); counter-reset:step; max-width:760px; margin:0 auto; }
   .step{ counter-increment:step; display:flex; gap:var(--space-5); align-items:flex-start; }
   .step__num{
-    flex:0 0 auto; width:2.4rem; height:2.4rem; border-radius:50%;
-    background:var(--color-amber); color:var(--color-bg); font-family:var(--font-mono); font-weight:700;
+    flex:0 0 auto; width:2.5rem; height:2.5rem; clip-path:var(--pixel-clip-sm);
+    background:linear-gradient(180deg, var(--color-amber-bright), var(--color-amber)); color:#2A1B05; font-family:var(--font-mono); font-weight:700;
     display:flex; align-items:center; justify-content:center;
   }
   .step__num::before{ content:counter(step); }
@@ -257,7 +335,7 @@
   .rule{
     display:flex; gap:var(--space-4); align-items:flex-start;
     background:var(--color-surface); border:1px solid var(--color-border);
-    border-radius:var(--radius-md); padding:var(--space-5);
+    clip-path:var(--pixel-clip-lg); padding:var(--space-5);
   }
   .rule__mark{ color:var(--color-amber-bright); font-family:var(--font-mono); flex:0 0 auto; }
   .rule p{ color:var(--color-text-muted); }
@@ -324,10 +402,35 @@
   <section class="hero" id="top">
     <div class="hero__bg" aria-hidden="true">
       <div class="hero__glow"></div>
-      <svg class="hero__hills" viewBox="0 0 1200 340" preserveAspectRatio="none">
-        <path d="M0 220 L120 170 L260 210 L400 140 L560 200 L720 130 L880 190 L1040 150 L1200 200 L1200 340 L0 340 Z" fill="#1B2A22"/>
-        <path d="M0 260 L150 220 L320 255 L480 200 L660 250 L840 210 L1000 245 L1200 220 L1200 340 L0 340 Z" fill="#152018"/>
+      <div class="hero__clouds">
+        <span class="cloud cloud--1"></span>
+        <span class="cloud cloud--2"></span>
+        <span class="cloud cloud--3"></span>
+      </div>
+      <div class="hero__sun-wrap">
+        <div class="hero__rays"></div>
+        <div class="hero__sun-glow"></div>
+        <svg class="hero__sun" viewBox="0 0 16 16" shape-rendering="crispEdges">
+          <rect x="6" y="6" width="4" height="4"/>
+          <rect x="7" y="0" width="2" height="6"/>
+          <rect x="7" y="10" width="2" height="6"/>
+          <rect x="0" y="7" width="6" height="2"/>
+          <rect x="10" y="7" width="6" height="2"/>
+          <rect x="2" y="2" width="2" height="2"/>
+          <rect x="4" y="4" width="2" height="2"/>
+          <rect x="12" y="2" width="2" height="2"/>
+          <rect x="10" y="4" width="2" height="2"/>
+          <rect x="2" y="12" width="2" height="2"/>
+          <rect x="4" y="10" width="2" height="2"/>
+          <rect x="12" y="12" width="2" height="2"/>
+          <rect x="10" y="10" width="2" height="2"/>
+        </svg>
+      </div>
+      <svg class="hero__hills" viewBox="0 0 1200 340" preserveAspectRatio="none" shape-rendering="crispEdges">
+        <path d="M0 260 H100 V220 H220 V240 H340 V200 H460 V230 H580 V190 H700 V220 H820 V180 H940 V210 H1060 V230 H1180 V200 H1200 V340 H0 Z" fill="#16262B"/>
+        <path d="M0 300 H80 V260 H180 V290 H280 V250 H400 V280 H520 V240 H640 V270 H760 V230 H880 V260 H1000 V220 H1120 V250 H1200 V340 H0 Z" fill="#0A1319"/>
       </svg>
+      <div class="hero__water"></div>
     </div>
 
     <div class="container hero__content">
@@ -340,8 +443,8 @@
           Download the Modpack
         </a>
         <div class="address-chip">
-          <span class="address-chip__text">safsmp.agila.host</span>
-          <button class="copy-btn" data-copy="safsmp.agila.host" aria-label="Copy server address">
+          <span class="address-chip__text">safsmp.online</span>
+          <button class="copy-btn" data-copy="safsmp.online" aria-label="Copy server address">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a1 1 0 0 1 1-1h9"/></svg>
             Copy
             <span class="copy-btn__tip">Copied!</span>
@@ -474,8 +577,8 @@
             <h3>Add the server</h3>
             <p>In-game, go to Multiplayer → Add Server, and paste in the address:</p>
             <div class="address-chip">
-              <span class="address-chip__text">safsmp.agila.host</span>
-              <button class="copy-btn" data-copy="safsmp.agila.host" aria-label="Copy server address">
+              <span class="address-chip__text">safsmp.online</span>
+              <button class="copy-btn" data-copy="safsmp.online" aria-label="Copy server address">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a1 1 0 0 1 1-1h9"/></svg>
                 Copy
                 <span class="copy-btn__tip">Copied!</span>
