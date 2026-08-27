@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sano &amp; Friends SMP</title>
+<meta name="description" content="Sano &amp; Friends SMP — a modded Minecraft survival world protected by FTB Chunks. Grab the modpack and meet us at safsmp.agila.host.">
+<meta property="og:title" content="Sano &amp; Friends SMP">
+<meta property="og:description" content="A modded survival world, claimed and protected, kept for a small crew. Grab the modpack and join at safsmp.agila.host.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#14201C">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='7' y='6' width='10' height='10' rx='2' fill='%23E8A33D'/%3E%3Cpath d='M8 3h8l-1 3H9z' fill='%237CB342'/%3E%3Cpath d='M9 16l-1 5h8l-1-5' fill='%237CB342'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Karla:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --color-bg:#14201C;
+    --color-bg-alt:#0F1815;
+    --color-surface:#1E2E26;
+    --color-surface-alt:#25392E;
+    --color-border:rgba(241,233,210,0.10);
+    --color-amber:#E8A33D;
+    --color-amber-bright:#F4BB5E;
+    --color-moss:#7CB342;
+    --color-moss-dark:#4F7A2B;
+    --color-rust:#C1553B;
+    --color-text:#F1E9D2;
+    --color-text-muted:#A9B7AC;
+    --font-display:'Fraunces', serif;
+    --font-body:'Karla', sans-serif;
+    --font-mono:'Space Mono', monospace;
+    --radius-sm:6px;
+    --radius-md:14px;
+    --radius-lg:26px;
+    --shadow-soft:0 12px 30px rgba(0,0,0,0.35);
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px;
+    --space-5:24px; --space-6:32px; --space-7:48px; --space-8:64px; --space-9:96px;
+    --header-h:78px;
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--color-bg);
+    color:var(--color-text);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{ display:block; max-width:100%; }
+  a{ color:inherit; }
+  h1,h2,h3{ font-family:var(--font-display); font-weight:600; margin:0; line-height:1.1; letter-spacing:-0.01em; }
+  p{ margin:0; }
+  ul,ol{ margin:0; padding:0; }
+  button{ font:inherit; color:inherit; background:none; border:none; cursor:pointer; }
+
+  :focus-visible{ outline:2px solid var(--color-amber-bright); outline-offset:3px; border-radius:4px; }
+
+  .skip-link{
+    position:absolute; left:-999px; top:auto;
+    background:var(--color-amber); color:var(--color-bg);
+    padding:10px 18px; border-radius:var(--radius-sm); font-weight:700;
+    z-index:200;
+  }
+  .skip-link:focus{ left:var(--space-5); top:var(--space-3); }
+
+  .container{ max-width:1120px; margin:0 auto; padding:0 var(--space-5); }
+  .section{ padding:var(--space-9) 0; position:relative; scroll-margin-top:var(--header-h); }
+  .section--tight{ padding:var(--space-8) 0; }
+  .section--alt{ background:var(--color-bg-alt); }
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:var(--space-2);
+    font-family:var(--font-mono); font-size:0.78rem; letter-spacing:0.14em;
+    text-transform:uppercase; color:var(--color-amber-bright);
+    margin-bottom:var(--space-3);
+  }
+  .eyebrow::before{ content:""; width:18px; height:1px; background:var(--color-amber-bright); }
+
+  .section__head{ max-width:640px; margin-bottom:var(--space-7); }
+  .section__head h2{ font-size:clamp(1.6rem, 3vw, 2.3rem); margin-bottom:var(--space-3); }
+  .section__head p{ color:var(--color-text-muted); font-size:1.05rem; }
+
+  /* Buttons */
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:var(--space-2);
+    padding:14px 26px; border-radius:999px; font-weight:700; font-size:0.98rem;
+    text-decoration:none; transition:transform .2s var(--ease), box-shadow .2s var(--ease), background .2s var(--ease);
+    white-space:nowrap;
+  }
+  .btn svg{ width:18px; height:18px; }
+  .btn--primary{ background:var(--color-amber); color:var(--color-bg); box-shadow:var(--shadow-soft); }
+  .btn--primary:hover{ background:var(--color-amber-bright); transform:translateY(-2px); }
+  .btn--ghost{ background:transparent; color:var(--color-text); border:1px solid var(--color-border); }
+  .btn--ghost:hover{ border-color:var(--color-amber-bright); color:var(--color-amber-bright); transform:translateY(-2px); }
+  .btn--sm{ padding:8px 16px; font-size:0.85rem; }
+
+  .address-chip{
+    display:inline-flex; align-items:center; gap:var(--space-3);
+    background:var(--color-surface); border:1px solid var(--color-border);
+    border-radius:999px; padding:10px 10px 10px 20px;
+  }
+  .address-chip__text{ font-family:var(--font-mono); font-size:0.95rem; color:var(--color-amber-bright); }
+  .copy-btn{
+    display:flex; align-items:center; gap:6px;
+    background:var(--color-surface-alt); border-radius:999px; padding:8px 14px;
+    font-family:var(--font-mono); font-size:0.78rem; color:var(--color-text-muted);
+    transition:color .2s var(--ease), background .2s var(--ease);
+    position:relative;
+  }
+  .copy-btn:hover{ color:var(--color-text); background:var(--color-moss-dark); }
+  .copy-btn svg{ width:14px; height:14px; }
+  .copy-btn__tip{
+    position:absolute; bottom:calc(100% + 8px); left:50%; transform:translateX(-50%) translateY(4px);
+    background:var(--color-moss); color:#0F1815; font-weight:700; font-size:0.72rem;
+    padding:4px 10px; border-radius:6px; opacity:0; pointer-events:none;
+    transition:opacity .18s var(--ease), transform .18s var(--ease);
+  }
+  .copy-btn.is-copied .copy-btn__tip{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+  /* Header */
+  .site-header{
+    position:sticky; top:0; z-index:100; height:var(--header-h);
+    display:flex; align-items:center;
+    background:rgba(15,24,21,0.82); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--color-border);
+  }
+  .nav{ width:100%; display:flex; align-items:center; justify-content:space-between; }
+  .nav__brand{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .nav__brand-mark{ width:34px; height:34px; flex:0 0 auto; }
+  .nav__brand-word{ font-family:var(--font-display); font-weight:700; font-size:1.08rem; }
+  .nav__brand-word span{ color:var(--color-amber-bright); }
+  .nav__links{ display:flex; align-items:center; gap:var(--space-6); list-style:none; }
+  .nav__links a{
+    text-decoration:none; font-size:0.94rem; color:var(--color-text-muted);
+    position:relative; padding:4px 0; transition:color .2s var(--ease);
+  }
+  .nav__links a::after{
+    content:""; position:absolute; left:0; right:100%; bottom:-2px; height:1px;
+    background:var(--color-amber-bright); transition:right .25s var(--ease);
+  }
+  .nav__links a:hover{ color:var(--color-text); }
+  .nav__links a:hover::after{ right:0; }
+  .nav__cta{ display:flex; align-items:center; gap:var(--space-4); }
+  .nav__toggle{ display:none; width:40px; height:40px; align-items:center; justify-content:center; }
+  .nav__toggle svg{ width:22px; height:22px; }
+  .nav__mobile{ display:none; }
+
+  @media (max-width: 860px){
+    .nav__links, .nav__cta .btn--ghost{ display:none; }
+    .nav__toggle{ display:flex; }
+    .nav__mobile{
+      display:block; position:fixed; inset:var(--header-h) 0 auto 0;
+      background:var(--color-bg-alt); border-bottom:1px solid var(--color-border);
+      padding:var(--space-5); transform:translateY(-8px); opacity:0; pointer-events:none;
+      transition:opacity .22s var(--ease), transform .22s var(--ease);
+    }
+    .nav__mobile.is-open{ opacity:1; transform:translateY(0); pointer-events:auto; }
+    .nav__mobile ul{ list-style:none; display:flex; flex-direction:column; gap:var(--space-4); margin-bottom:var(--space-5); }
+    .nav__mobile a{ text-decoration:none; color:var(--color-text); font-size:1.1rem; }
+    .nav__mobile .btn{ width:100%; }
+  }
+
+  /* Hero */
+  .hero{ position:relative; overflow:hidden; padding:var(--space-9) 0 var(--space-8); }
+  .hero__bg{ position:absolute; inset:0; z-index:0; }
+  .hero__glow{
+    position:absolute; top:-10%; left:50%; transform:translateX(-50%);
+    width:900px; height:900px; max-width:160vw;
+    background:radial-gradient(circle, rgba(232,163,61,0.16) 0%, rgba(232,163,61,0) 62%);
+    pointer-events:none;
+  }
+  .hero__firefly{
+    position:absolute; width:5px; height:5px; border-radius:50%;
+    background:var(--color-amber-bright);
+    box-shadow:0 0 8px 2px rgba(244,187,94,0.7);
+    animation:drift 9s ease-in-out infinite;
+    opacity:0.75;
+  }
+  @keyframes drift{
+    0%,100%{ transform:translate(0,0); opacity:0.3; }
+    50%{ transform:translate(14px,-22px); opacity:0.9; }
+  }
+  .hero__hills{ position:absolute; left:0; right:0; bottom:0; width:100%; height:auto; }
+  .hero__content{ position:relative; z-index:2; max-width:680px; }
+  .hero__content h1{ font-size:clamp(2.4rem, 6vw, 4rem); margin-bottom:var(--space-4); }
+  .hero__content p.lede{ font-size:1.15rem; color:var(--color-text-muted); margin-bottom:var(--space-6); max-width:52ch; }
+  .hero__ctas{ display:flex; flex-wrap:wrap; gap:var(--space-4); align-items:center; margin-bottom:var(--space-5); }
+  .hero__status{
+    display:flex; align-items:center; gap:8px; font-family:var(--font-mono);
+    font-size:0.85rem; color:var(--color-text-muted);
+  }
+  .hero__status .dot{ width:8px; height:8px; border-radius:50%; background:var(--color-text-muted); flex:0 0 auto; }
+  .hero__status.is-online .dot{ background:var(--color-moss); box-shadow:0 0 6px var(--color-moss); }
+  .hero__status.is-offline .dot{ background:var(--color-rust); }
+
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .6s var(--ease), transform .6s var(--ease); }
+  .reveal.is-visible{ opacity:1; transform:translateY(0); }
+
+  /* Features */
+  .features-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:var(--space-5); }
+  .feature-card{
+    background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md);
+    padding:var(--space-6); transition:transform .25s var(--ease), border-color .25s var(--ease);
+  }
+  .feature-card:hover{ transform:translateY(-4px); border-color:rgba(232,163,61,0.4); }
+  .feature-card__icon{
+    width:44px; height:44px; border-radius:12px; background:var(--color-surface-alt);
+    display:flex; align-items:center; justify-content:center; margin-bottom:var(--space-4);
+    color:var(--color-amber-bright);
+  }
+  .feature-card__icon svg{ width:22px; height:22px; }
+  .feature-card h3{ font-size:1.15rem; margin-bottom:var(--space-2); }
+  .feature-card p{ color:var(--color-text-muted); font-size:0.96rem; }
+
+  /* Recipe / join */
+  .recipe{ margin-bottom:var(--space-8); }
+  .recipe__row{ display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:var(--space-4); }
+  .recipe__slot{
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+    width:132px; padding:var(--space-4) var(--space-3);
+    background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md);
+    text-align:center; transition:box-shadow .25s var(--ease), border-color .25s var(--ease);
+  }
+  .recipe__slot:hover{ border-color:rgba(232,163,61,0.5); box-shadow:0 0 0 3px rgba(232,163,61,0.08); }
+  .recipe__slot svg{ width:26px; height:26px; color:var(--color-moss); }
+  .recipe__slot--result{ background:var(--color-surface-alt); border-color:rgba(124,179,66,0.5); }
+  .recipe__slot--result svg{ color:var(--color-amber-bright); }
+  .recipe__slot span{ font-size:0.82rem; color:var(--color-text-muted); }
+  .recipe__op{ font-family:var(--font-mono); font-size:1.3rem; color:var(--color-text-muted); }
+  .recipe__op--arrow{ color:var(--color-amber-bright); font-size:1.5rem; }
+  .recipe__caption{ text-align:center; color:var(--color-text-muted); font-size:0.85rem; margin-top:var(--space-4); font-style:italic; }
+
+  @media (max-width:640px){
+    .recipe__row{ flex-direction:column; }
+    .recipe__op--arrow{ transform:rotate(90deg); }
+  }
+
+  .steps{ list-style:none; display:flex; flex-direction:column; gap:var(--space-6); counter-reset:step; max-width:760px; margin:0 auto; }
+  .step{ counter-increment:step; display:flex; gap:var(--space-5); align-items:flex-start; }
+  .step__num{
+    flex:0 0 auto; width:2.4rem; height:2.4rem; border-radius:50%;
+    background:var(--color-amber); color:var(--color-bg); font-family:var(--font-mono); font-weight:700;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .step__num::before{ content:counter(step); }
+  .step__body h3{ font-size:1.1rem; margin-bottom:6px; }
+  .step__body p{ color:var(--color-text-muted); margin-bottom:var(--space-3); }
+  .step__body .address-chip{ margin-top:var(--space-2); }
+
+  /* Rules */
+  .rules-list{ list-style:none; display:grid; gap:var(--space-4); max-width:760px; margin:0 auto; }
+  .rule{
+    display:flex; gap:var(--space-4); align-items:flex-start;
+    background:var(--color-surface); border:1px solid var(--color-border);
+    border-radius:var(--radius-md); padding:var(--space-5);
+  }
+  .rule__mark{ color:var(--color-amber-bright); font-family:var(--font-mono); flex:0 0 auto; }
+  .rule p{ color:var(--color-text-muted); }
+  .rule strong{ color:var(--color-text); }
+
+  /* Community */
+  .community{ text-align:center; }
+  .community__inner{ max-width:560px; margin:0 auto; }
+  .community h2{ font-size:clamp(1.6rem,3vw,2.2rem); margin-bottom:var(--space-3); }
+  .community p{ color:var(--color-text-muted); margin-bottom:var(--space-6); }
+
+  /* Footer */
+  .site-footer{
+    border-top:1px solid var(--color-border); padding:var(--space-6) 0;
+    display:flex; flex-wrap:wrap; gap:var(--space-3); align-items:center; justify-content:space-between;
+    color:var(--color-text-muted); font-size:0.85rem;
+  }
+  .site-footer a{ text-decoration:none; color:var(--color-text-muted); }
+  .site-footer a:hover{ color:var(--color-amber-bright); }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="nav__brand" href="#top">
+      <svg class="nav__brand-mark" viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="7" y="6" width="10" height="10" rx="2" fill="var(--color-amber)"/>
+        <path d="M8 3h8l-1 3H9z" fill="var(--color-moss)"/>
+        <path d="M9 16l-1 5h8l-1-5" fill="var(--color-moss)"/>
+      </svg>
+      <span class="nav__brand-word">Sano <span>&amp;</span> Friends SMP</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#join">How to Join</a></li>
+      <li><a href="#rules">Rules</a></li>
+      <li><a href="#community">Community</a></li>
+    </ul>
+    <div class="nav__cta">
+      <a class="btn btn--ghost btn--sm" href="#join">How to Join</a>
+      <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navMobile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <nav class="nav__mobile" id="navMobile">
+    <ul>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#join">How to Join</a></li>
+      <li><a href="#rules">Rules</a></li>
+      <li><a href="#community">Community</a></li>
+    </ul>
+    <a class="btn btn--primary" href="#join">Get Started</a>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="hero" id="top">
+    <div class="hero__bg" aria-hidden="true">
+      <div class="hero__glow"></div>
+      <svg class="hero__hills" viewBox="0 0 1200 340" preserveAspectRatio="none">
+        <path d="M0 220 L120 170 L260 210 L400 140 L560 200 L720 130 L880 190 L1040 150 L1200 200 L1200 340 L0 340 Z" fill="#1B2A22"/>
+        <path d="M0 260 L150 220 L320 255 L480 200 L660 250 L840 210 L1000 245 L1200 220 L1200 340 L0 340 Z" fill="#152018"/>
+      </svg>
+    </div>
+
+    <div class="container hero__content">
+      <p class="eyebrow">A MODDED SURVIVAL WORLD</p>
+      <h1>Sano &amp; Friends SMP</h1>
+      <p class="lede">A curated modpack, a world where your builds actually stay yours, and a small crew worth logging back in for. This is SAF SMP.</p>
+      <div class="hero__ctas">
+        <a class="btn btn--primary" href="https://drive.google.com/file/d/17dJyj7_fF56bgk5Fy7ytYTM-l10jfJUW/view?usp=drive_link" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 19h16"/></svg>
+          Download the Modpack
+        </a>
+        <div class="address-chip">
+          <span class="address-chip__text">safsmp.agila.host</span>
+          <button class="copy-btn" data-copy="safsmp.agila.host" aria-label="Copy server address">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a1 1 0 0 1 1-1h9"/></svg>
+            Copy
+            <span class="copy-btn__tip">Copied!</span>
+          </button>
+        </div>
+      </div>
+      <p class="hero__status" id="statusLine"><span class="dot"></span> Checking server status…</p>
+      <noscript><p style="color:var(--color-text-muted); font-size:0.85rem;">Enable JavaScript to see live server status and use the copy buttons — the address above still works either way.</p></noscript>
+    </div>
+  </section>
+
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section__head reveal">
+        <p class="eyebrow">FEATURES</p>
+        <h2>Built for a small crew, not a crowd</h2>
+        <p>SAF SMP isn't trying to be a network. It's one curated world, set up so it's actually still standing next time you log in.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card reveal">
+          <div class="feature-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <h3>Land Claims &amp; Anti-Grief</h3>
+          <p>FTB Chunks lets everyone claim and protect their base. Go build somewhere without worrying about coming back to a hole in the ground.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-4 9 4-9 4-9-4z"/><path d="M3 8v8l9 4 9-4V8"/><path d="M12 12v6"/></svg>
+          </div>
+          <h3>One Modpack, Same World</h3>
+          <p>Everyone runs the same curated pack. Install it once through the Modrinth App and you're dropped straight into the same world as the rest of us.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-2 6-6 2 2-6 6-2z"/></svg>
+          </div>
+          <h3>More to Explore</h3>
+          <p>New biomes, tools, and mobs layered over the survival game you already know — enough to make exploring worth it again.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-7.5-4.6-10-9.3C.6 7.8 2.4 4.5 6 4.5c2.2 0 3.9 1.2 6 3.6 2.1-2.4 3.8-3.6 6-3.6 3.6 0 5.4 3.3 4 6.7-2.5 4.7-10 9.3-10 9.3z"/></svg>
+          </div>
+          <h3>Friendly by Default</h3>
+          <p>This is a friends-and-friends-of-friends server, not a public free-for-all. Show up decent and you'll fit right in.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/></svg>
+          </div>
+          <h3>Backed Up, Not Fragile</h3>
+          <p>The world gets backed up regularly, so a bad crash or a rough mod update doesn't mean losing what you've built.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M8 3v4M16 3v4"/><path d="M12 12l1 2 2 .3-1.5 1.4.3 2-1.8-1-1.8 1 .3-2L9 14.3l2-.3 1-2z"/></svg>
+          </div>
+          <h3>Events, When We Feel Like It</h3>
+          <p>Seasonal builds, group projects, and the occasional boss fight whenever enough of the crew is online for it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt" id="join">
+    <div class="container">
+      <div class="section__head reveal">
+        <p class="eyebrow">HOW TO JOIN</p>
+        <h2>The recipe for getting in</h2>
+        <p>Like any good recipe, you just need the right ingredients. This one's shapeless — the order doesn't matter, as long as you've got all three.</p>
+      </div>
+
+      <div class="recipe reveal">
+        <div class="recipe__row">
+          <div class="recipe__slot">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-4 9 4-9 4-9-4z"/><path d="M3 8v8l9 4 9-4V8"/><path d="M12 12v6"/></svg>
+            <span>Modpack file</span>
+          </div>
+          <span class="recipe__op">+</span>
+          <div class="recipe__slot">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M10 8l6 4-6 4V8z"/></svg>
+            <span>Modrinth App</span>
+          </div>
+          <span class="recipe__op">+</span>
+          <div class="recipe__slot">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 4 5.8 4 9s-1.5 6.5-4 9c-2.5-2.5-4-5.8-4-9s1.5-6.5 4-9z"/></svg>
+            <span>Server address</span>
+          </div>
+          <span class="recipe__op recipe__op--arrow">→</span>
+          <div class="recipe__slot recipe__slot--result">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="18" height="9" rx="2"/><path d="M3 10c0-3.3 2.7-6 6-6h6c3.3 0 6 2.7 6 6"/><circle cx="12" cy="14" r="1" fill="currentColor" stroke="none"/></svg>
+            <span>You're in</span>
+          </div>
+        </div>
+      </div>
+
+      <ol class="steps reveal">
+        <li class="step">
+          <span class="step__num"></span>
+          <div class="step__body">
+            <h3>Grab the modpack</h3>
+            <p>Download the SAF SMP modpack below. It's the exact pack everyone else on the server is running, so keep it as-is.</p>
+            <a class="btn btn--primary btn--sm" href="https://drive.google.com/file/d/17dJyj7_fF56bgk5Fy7ytYTM-l10jfJUW/view?usp=drive_link" target="_blank" rel="noopener noreferrer">Download the Modpack</a>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step__num"></span>
+          <div class="step__body">
+            <h3>Get the Modrinth App</h3>
+            <p>If you don't already have it, install the Modrinth App — the official Modrinth launcher. It's built to import modpacks like this one in a couple of clicks.</p>
+            <a class="btn btn--ghost btn--sm" href="https://modrinth.com/app" target="_blank" rel="noopener noreferrer">Get the Modrinth App</a>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step__num"></span>
+          <div class="step__body">
+            <p><strong>Import the pack.</strong> Open the Modrinth App, choose Import, and select the file you just downloaded. It'll pull in the mods, configs, and the right Minecraft version automatically — no manual setup needed.</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step__num"></span>
+          <div class="step__body">
+            <p><strong>Launch it once.</strong> Start the modpack from the Modrinth App before doing anything else, so everything finishes installing.</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step__num"></span>
+          <div class="step__body">
+            <h3>Add the server</h3>
+            <p>In-game, go to Multiplayer → Add Server, and paste in the address:</p>
+            <div class="address-chip">
+              <span class="address-chip__text">safsmp.agila.host</span>
+              <button class="copy-btn" data-copy="safsmp.agila.host" aria-label="Copy server address">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a1 1 0 0 1 1-1h9"/></svg>
+                Copy
+                <span class="copy-btn__tip">Copied!</span>
+              </button>
+            </div>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step__num"></span>
+          <div class="step__body">
+            <p><strong>Join in.</strong> Hit Join Server, wait for the world to load, and say hello in chat.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="rules">
+    <div class="container">
+      <div class="section__head reveal">
+        <p class="eyebrow">GROUND RULES</p>
+        <h2>Keep it simple</h2>
+        <p>Nothing complicated — just enough so the world stays good for everyone.</p>
+      </div>
+      <ul class="rules-list reveal">
+        <li class="rule">
+          <span class="rule__mark">01</span>
+          <p><strong>Claim your base with FTB Chunks.</strong> Anything outside a claim is fair game, so don't leave something valuable unclaimed.</p>
+        </li>
+        <li class="rule">
+          <span class="rule__mark">02</span>
+          <p><strong>No griefing, stealing, or PvP</strong> unless everyone involved has actually agreed to it first.</p>
+        </li>
+        <li class="rule">
+          <span class="rule__mark">03</span>
+          <p><strong>Keep the modpack as given.</strong> Extra mods or resource packs can desync you from the server or cause crashes.</p>
+        </li>
+        <li class="rule">
+          <span class="rule__mark">04</span>
+          <p><strong>Report bugs and dupes</strong> instead of using them. We'd rather fix it than ban someone over it.</p>
+        </li>
+        <li class="rule">
+          <span class="rule__mark">05</span>
+          <p><strong>Be a decent hang.</strong> It's a small server — treat it like you're a guest in someone's house, because you are.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--alt community" id="community">
+    <div class="container community__inner reveal">
+      <p class="eyebrow" style="justify-content:center;">STAY IN TOUCH</p>
+      <h2>Come say hi before you spawn in</h2>
+      <p>Questions about the modpack, ideas for the world, or just want to see what's being built? This is the place.</p>
+      <a class="btn btn--primary" href="https://discord.gg/HmvjD3GRYU" id="discordLink">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="6" width="16" height="12" rx="4"/><circle cx="9" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1" fill="currentColor" stroke="none"/></svg>
+        Join the Discord
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container" style="display:flex; flex-wrap:wrap; gap:var(--space-3); align-items:center; justify-content:space-between; width:100%;">
+    <span>Sano &amp; Friends SMP — a modded corner of the Overworld.</span>
+    <span>Not affiliated with Mojang or Microsoft.</span>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  var navToggle = document.getElementById('navToggle');
+  var navMobile = document.getElementById('navMobile');
+  navToggle.addEventListener('click', function(){
+    var isOpen = navMobile.classList.toggle('is-open');
+    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  navMobile.querySelectorAll('a').forEach(function(link){
+    link.addEventListener('click', function(){
+      navMobile.classList.remove('is-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Copy-to-clipboard buttons
+  document.querySelectorAll('.copy-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var text = btn.getAttribute('data-copy') || '';
+      var done = function(){
+        btn.classList.add('is-copied');
+        setTimeout(function(){ btn.classList.remove('is-copied'); }, 1500);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done).catch(done);
+      } else {
+        done();
+      }
+    });
+  });
+
+  // Scroll reveal
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var revealEls = document.querySelectorAll('.reveal');
+  if(prefersReduced || !('IntersectionObserver' in window)){
+    revealEls.forEach(function(el){ el.classList.add('is-visible'); });
+  } else {
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(function(el){ observer.observe(el); });
+  }
+
+  // Ambient fireflies (decorative, skipped under reduced motion)
+  if(!prefersReduced){
+    var bg = document.querySelector('.hero__bg');
+    for(var i=0;i<7;i++){
+      var f = document.createElement('span');
+      f.className = 'hero__firefly';
+      f.style.left = (8 + Math.random()*84) + '%';
+      f.style.top = (12 + Math.random()*55) + '%';
+      f.style.animationDelay = (Math.random()*6) + 's';
+      f.style.animationDuration = (7 + Math.random()*5) + 's';
+      bg.appendChild(f);
+    }
+  }
+
+  // Live server status via mcsrvstat.us (public, no key required)
+  var statusLine = document.getElementById('statusLine');
+  fetch('https://api.mcsrvstat.us/3/safsmp.agila.host')
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      if(data && data.online){
+        var count = (data.players && typeof data.players.online === 'number') ? data.players.online : 0;
+        statusLine.innerHTML = '<span class="dot"></span> Online now — ' + count + ' player' + (count === 1 ? '' : 's') + ' in the world';
+        statusLine.classList.add('is-online');
+      } else {
+        statusLine.innerHTML = '<span class="dot"></span> Offline right now — the world is still here when you join.';
+        statusLine.classList.add('is-offline');
+      }
+    })
+    .catch(function(){
+      statusLine.innerHTML = '<span class="dot"></span> Status unavailable — jump in and see for yourself.';
+    });
+</script>
+</body>
+</html>
