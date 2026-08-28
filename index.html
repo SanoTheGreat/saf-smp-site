@@ -1,46 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="night">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sano &amp; Friends SMP</title>
-<meta name="description" content="Sano &amp; Friends SMP — a modded Minecraft survival world protected by FTB Chunks. Grab the modpack and meet us at safsmp.online.">
-<meta property="og:title" content="Sano &amp; Friends SMP">
-<meta property="og:description" content="A modded survival world, claimed and protected, kept for a small crew. Grab the modpack and join at safsmp.online.">
+<title>SAF — Survival Adventure Frontier</title>
+<meta name="description" content="SAF — Survival Adventure Frontier. A free, private Bedrock Minecraft survival world. Join the Discord, apply, get interviewed, and we'll send over the IP and port.">
+<meta property="og:title" content="SAF — Survival Adventure Frontier">
+<meta property="og:description" content="A free, private Bedrock survival world for a small crew. Apply through Discord to get in.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#0E1B22">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='7' y='6' width='10' height='10' rx='2' fill='%23F2A93C'/%3E%3Cpath d='M8 3h8l-1 3H9z' fill='%236FCB4F'/%3E%3Cpath d='M9 16l-1 5h8l-1-5' fill='%236FCB4F'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0B1526" id="metaTheme">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M4 12 L20 4 L36 12 L20 20 Z' fill='%237CB342'/%3E%3Cpath d='M4 12 L20 20 L20 37 L4 29 Z' fill='%238B5A2B'/%3E%3Cpath d='M36 12 L20 20 L20 37 L36 29 Z' fill='%236B4423'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Karla:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --color-bg:#0E1B22;
-    --color-bg-alt:#0A1319;
-    --color-surface:#16262B;
-    --color-surface-alt:#1D3238;
-    --color-border:rgba(244,239,221,0.10);
-    --color-amber:#F2A93C;
-    --color-amber-bright:#FFC85C;
-    --color-moss:#6FCB4F;
-    --color-moss-dark:#3E8F3A;
-    --color-rust:#D65A3A;
-    --color-text:#F4EFDD;
-    --color-text-muted:#9FB3B8;
-    --font-display:'Karla', sans-serif;
-    --font-pixel:'Press Start 2P', monospace;
-    --font-body:'Karla', sans-serif;
-    --font-mono:'Space Mono', monospace;
+    --font-pixel:'Silkscreen', monospace;
+    --font-body:'Inter', sans-serif;
     --radius-sm:4px;
     --radius-md:10px;
-    --radius-lg:22px;
-    --shadow-soft:0 14px 32px rgba(0,0,0,0.45);
+    --radius-lg:18px;
+    --shadow-soft:0 12px 30px rgba(0,0,0,0.4);
     --ease:cubic-bezier(.22,.61,.36,1);
     --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px;
     --space-5:24px; --space-6:32px; --space-7:48px; --space-8:64px; --space-9:96px;
-    --header-h:78px;
-    --pixel-clip-sm:polygon(0 6px,6px 6px,6px 0,calc(100% - 6px) 0,calc(100% - 6px) 6px,100% 6px,100% calc(100% - 6px),calc(100% - 6px) calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,6px calc(100% - 6px),0 calc(100% - 6px));
-    --pixel-clip-lg:polygon(0 14px,14px 14px,14px 0,calc(100% - 14px) 0,calc(100% - 14px) 14px,100% 14px,100% calc(100% - 14px),calc(100% - 14px) calc(100% - 14px),calc(100% - 14px) 100%,14px 100%,14px calc(100% - 14px),0 calc(100% - 14px));
+    --header-h:76px;
+
+    /* Night (default) */
+    --sky-top:#0A1220; --sky-mid:#101B30; --sky-bottom:#16241C;
+    --color-bg:#101C16; --color-bg-alt:#0C1712;
+    --color-surface:#1B2B22; --color-surface-alt:#22392C;
+    --color-border:rgba(237,230,208,0.10);
+    --color-text:#EDE6D0; --color-text-muted:#9CB09E;
+    --grass:#63A83B; --grass-dark:#4C7A2A; --dirt:#8B5A2B; --dirt-dark:#5C3A1C;
+    --gold:#F4BB5E; --gold-bright:#FFD27A; --diamond:#5FD8E0; --redstone:#D2492A;
+    --glow-color:244,187,94;
+    --hill-1:#182A20; --hill-2:#101E17;
+    --face-shadow: rgba(0,0,0,.55);
+    --star-opacity:1; --cloud-opacity:0.18; --particle-color:var(--gold-bright);
+  }
+
+  [data-theme="day"]{
+    --sky-top:#8FD0F7; --sky-mid:#BEE6F9; --sky-bottom:#DCEFC6;
+    --color-bg:#F3EFDD; --color-bg-alt:#EAE4C9;
+    --color-surface:#FCFAEF; --color-surface-alt:#F2ECD6;
+    --color-border:rgba(40,45,20,0.12);
+    --color-text:#22301C; --color-text-muted:#5B6A50;
+    --grass:#4C8A2A; --grass-dark:#3A6B1F; --dirt:#8B5A2B; --dirt-dark:#6B4420;
+    --gold:#D98A1B; --gold-bright:#F0A93C; --diamond:#1FA8B4; --redstone:#B8391F;
+    --glow-color:255,197,92;
+    --hill-1:#9FCB7C; --hill-2:#7FB35C;
+    --face-shadow: rgba(0,0,0,.18);
+    --star-opacity:0; --cloud-opacity:0.9; --particle-color:#FFFFFF;
   }
 
   *,*::before,*::after{ box-sizing:border-box; }
@@ -53,19 +64,20 @@
     font-size:16px;
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
+    transition:background .5s var(--ease), color .5s var(--ease);
   }
   img,svg{ display:block; max-width:100%; }
   a{ color:inherit; }
-  h1,h2,h3{ font-family:var(--font-display); font-weight:700; margin:0; line-height:1.15; letter-spacing:-0.01em; }
+  h1,h2,h3{ font-family:var(--font-pixel); font-weight:700; margin:0; line-height:1.3; letter-spacing:-0.01em; text-shadow:2px 2px 0 var(--face-shadow); }
   p{ margin:0; }
   ul,ol{ margin:0; padding:0; }
   button{ font:inherit; color:inherit; background:none; border:none; cursor:pointer; }
 
-  :focus-visible{ outline:2px solid var(--color-amber-bright); outline-offset:3px; border-radius:4px; }
+  :focus-visible{ outline:2px solid var(--gold-bright); outline-offset:3px; border-radius:2px; }
 
   .skip-link{
     position:absolute; left:-999px; top:auto;
-    background:var(--color-amber); color:var(--color-bg);
+    background:var(--gold); color:#12200C;
     padding:10px 18px; border-radius:var(--radius-sm); font-weight:700;
     z-index:200;
   }
@@ -73,78 +85,56 @@
 
   .container{ max-width:1120px; margin:0 auto; padding:0 var(--space-5); }
   .section{ padding:var(--space-9) 0; position:relative; scroll-margin-top:var(--header-h); }
-  .section--tight{ padding:var(--space-8) 0; }
-  .section--alt{ background:var(--color-bg-alt); }
+  .section--alt{ background:var(--color-bg-alt); transition:background .5s var(--ease); }
 
   .eyebrow{
     display:inline-flex; align-items:center; gap:var(--space-2);
-    font-family:var(--font-mono); font-size:0.78rem; letter-spacing:0.14em;
-    text-transform:uppercase; color:var(--color-amber-bright);
-    margin-bottom:var(--space-3);
+    font-family:var(--font-pixel); font-size:0.7rem; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--gold-bright);
+    margin-bottom:var(--space-4);
   }
-  .eyebrow::before{ content:""; width:18px; height:1px; background:var(--color-amber-bright); }
+  .eyebrow::before{ content:""; width:16px; height:8px; background:var(--grass); box-shadow:0 -8px 0 var(--dirt); }
 
   .section__head{ max-width:640px; margin-bottom:var(--space-7); }
-  .section__head h2{ font-size:clamp(1.6rem, 3vw, 2.3rem); margin-bottom:var(--space-3); }
+  .section__head h2{ font-size:clamp(1.3rem, 2.6vw, 1.9rem); margin-bottom:var(--space-4); }
   .section__head p{ color:var(--color-text-muted); font-size:1.05rem; }
 
-  /* Buttons */
+  /* Blocky pixel buttons */
   .btn{
     display:inline-flex; align-items:center; justify-content:center; gap:var(--space-2);
-    padding:14px 26px; border-radius:3px; font-weight:700; font-size:0.95rem;
+    padding:14px 24px; border-radius:var(--radius-sm); font-weight:700; font-size:0.95rem;
     text-decoration:none; white-space:nowrap; position:relative;
-    transition:filter .12s var(--ease), transform .08s var(--ease), box-shadow .08s var(--ease);
+    transition:transform .12s var(--ease), box-shadow .12s var(--ease), background .2s var(--ease), filter .2s var(--ease);
+    box-shadow: inset 2px 2px 0 rgba(255,255,255,0.18), inset -3px -3px 0 rgba(0,0,0,0.28), var(--shadow-soft);
   }
   .btn svg{ width:18px; height:18px; }
-  .btn--primary{
-    background:linear-gradient(180deg, var(--color-amber-bright), var(--color-amber));
-    color:#2A1B05;
-    box-shadow:
-      inset 3px 3px 0 rgba(255,255,255,0.4),
-      inset -3px -3px 0 rgba(0,0,0,0.3),
-      0 0 26px rgba(242,169,60,0.4);
-  }
-  .btn--primary:hover{ filter:brightness(1.08); }
-  .btn--primary:active{
-    transform:translateY(3px);
-    box-shadow:
-      inset -3px -3px 0 rgba(255,255,255,0.25),
-      inset 3px 3px 0 rgba(0,0,0,0.35);
-  }
-  .btn--ghost{
-    background:var(--color-surface); color:var(--color-text); border:1px solid var(--color-border);
-    box-shadow:
-      inset 3px 3px 0 rgba(255,255,255,0.05),
-      inset -3px -3px 0 rgba(0,0,0,0.4);
-  }
-  .btn--ghost:hover{ filter:brightness(1.2); border-color:var(--color-amber-bright); color:var(--color-amber-bright); }
-  .btn--ghost:active{
-    transform:translateY(3px);
-    box-shadow:
-      inset -3px -3px 0 rgba(255,255,255,0.03),
-      inset 3px 3px 0 rgba(0,0,0,0.4);
-  }
-  .btn--sm{ padding:8px 16px; font-size:0.82rem; }
+  .btn--primary{ background:var(--grass); color:#12200C; }
+  .btn--primary:hover{ filter:brightness(1.1); transform:translateY(-2px); }
+  .btn--primary:active{ transform:translateY(1px); box-shadow: inset 2px 2px 0 rgba(0,0,0,0.25), inset -2px -2px 0 rgba(255,255,255,0.08); }
+  .btn--ghost{ background:var(--color-surface); color:var(--color-text); border:1px solid var(--color-border); box-shadow:none; }
+  .btn--ghost:hover{ border-color:var(--gold-bright); color:var(--gold-bright); transform:translateY(-2px); }
+  .btn--sm{ padding:9px 16px; font-size:0.82rem; }
 
   .address-chip{
     display:inline-flex; align-items:center; gap:var(--space-3);
     background:var(--color-surface); border:1px solid var(--color-border);
-    clip-path:var(--pixel-clip-sm); padding:10px 10px 10px 20px;
+    border-radius:var(--radius-sm); padding:10px 10px 10px 18px;
+    transition:background .5s var(--ease), border-color .5s var(--ease);
   }
-  .address-chip__text{ font-family:var(--font-mono); font-size:0.95rem; color:var(--color-amber-bright); }
+  .address-chip__text{ font-family:var(--font-pixel); font-size:0.85rem; color:var(--gold-bright); }
   .copy-btn{
     display:flex; align-items:center; gap:6px;
-    background:var(--color-surface-alt); clip-path:var(--pixel-clip-sm); padding:8px 14px;
-    font-family:var(--font-mono); font-size:0.78rem; color:var(--color-text-muted);
+    background:var(--color-surface-alt); border-radius:var(--radius-sm); padding:8px 14px;
+    font-family:var(--font-pixel); font-size:0.66rem; color:var(--color-text-muted);
     transition:color .2s var(--ease), background .2s var(--ease);
     position:relative;
   }
-  .copy-btn:hover{ color:var(--color-text); background:var(--color-moss-dark); }
+  .copy-btn:hover{ color:var(--color-text); background:var(--grass-dark); }
   .copy-btn svg{ width:14px; height:14px; }
   .copy-btn__tip{
     position:absolute; bottom:calc(100% + 8px); left:50%; transform:translateX(-50%) translateY(4px);
-    background:var(--color-moss); color:#0A1319; font-weight:700; font-size:0.72rem;
-    padding:4px 10px; border-radius:6px; opacity:0; pointer-events:none;
+    background:var(--grass); color:#12200C; font-weight:700; font-size:0.62rem; font-family:var(--font-pixel);
+    padding:5px 10px; border-radius:var(--radius-sm); opacity:0; pointer-events:none;
     transition:opacity .18s var(--ease), transform .18s var(--ease);
   }
   .copy-btn.is-copied .copy-btn__tip{ opacity:1; transform:translateX(-50%) translateY(0); }
@@ -153,32 +143,52 @@
   .site-header{
     position:sticky; top:0; z-index:100; height:var(--header-h);
     display:flex; align-items:center;
-    background:rgba(10,19,25,0.82); backdrop-filter:blur(10px);
+    background:rgba(10,18,15,0.82); backdrop-filter:blur(10px);
     border-bottom:1px solid var(--color-border);
+    transition:background .5s var(--ease), border-color .5s var(--ease);
   }
-  .nav{ width:100%; display:flex; align-items:center; justify-content:space-between; }
+  [data-theme="day"] .site-header{ background:rgba(243,239,221,0.82); }
+  .nav{ width:100%; display:flex; align-items:center; justify-content:space-between; gap:var(--space-4); }
   .nav__brand{ display:flex; align-items:center; gap:10px; text-decoration:none; }
-  .nav__brand-mark{ width:34px; height:34px; flex:0 0 auto; }
-  .nav__brand-word{ font-family:var(--font-pixel); font-size:0.64rem; line-height:1.4; letter-spacing:0.02em; white-space:nowrap; }
-  .nav__brand-word span{ color:var(--color-amber-bright); }
+  .nav__brand-mark{ width:32px; height:32px; flex:0 0 auto; }
+  .nav__brand-word{ font-family:var(--font-pixel); font-weight:700; font-size:1rem; color:var(--gold-bright); }
+  .nav__brand-sub{ font-size:0.72rem; color:var(--color-text-muted); }
   .nav__links{ display:flex; align-items:center; gap:var(--space-6); list-style:none; }
   .nav__links a{
-    text-decoration:none; font-size:0.94rem; color:var(--color-text-muted);
+    text-decoration:none; font-size:0.9rem; color:var(--color-text-muted); font-weight:500;
     position:relative; padding:4px 0; transition:color .2s var(--ease);
   }
   .nav__links a::after{
-    content:""; position:absolute; left:0; right:100%; bottom:-2px; height:1px;
-    background:var(--color-amber-bright); transition:right .25s var(--ease);
+    content:""; position:absolute; left:0; right:100%; bottom:-2px; height:2px;
+    background:var(--gold-bright); transition:right .25s var(--ease);
   }
   .nav__links a:hover{ color:var(--color-text); }
   .nav__links a:hover::after{ right:0; }
-  .nav__cta{ display:flex; align-items:center; gap:var(--space-4); }
-  .nav__toggle{ display:none; width:40px; height:40px; align-items:center; justify-content:center; }
+  .nav__cta{ display:flex; align-items:center; gap:var(--space-3); }
+  .nav__toggle{ display:none; width:38px; height:38px; align-items:center; justify-content:center; }
   .nav__toggle svg{ width:22px; height:22px; }
   .nav__mobile{ display:none; }
 
-  @media (max-width: 860px){
-    .nav__links, .nav__cta .btn--ghost{ display:none; }
+  /* Day/Night toggle */
+  .daynight-toggle{
+    display:flex; align-items:center; gap:8px;
+    background:var(--color-surface); border:1px solid var(--color-border);
+    border-radius:var(--radius-sm); padding:8px 12px;
+    font-family:var(--font-pixel); font-size:0.62rem; color:var(--color-text);
+    transition:background .3s var(--ease), border-color .3s var(--ease);
+  }
+  .daynight-toggle:hover{ border-color:var(--gold-bright); }
+  .daynight-toggle__icon{ width:16px; height:16px; position:relative; flex:0 0 auto; }
+  .daynight-toggle__icon .mini-sun, .daynight-toggle__icon .mini-moon{
+    position:absolute; inset:0; border-radius:3px; transition:opacity .3s var(--ease), transform .3s var(--ease);
+  }
+  .daynight-toggle__icon .mini-sun{ background:linear-gradient(145deg,#FFE28A,#F4B942); box-shadow:0 0 6px 2px rgba(244,187,94,.7); }
+  .daynight-toggle__icon .mini-moon{ background:linear-gradient(145deg,#F3F6FA,#C9D6E5); box-shadow:0 0 6px 2px rgba(201,214,229,.5); }
+  [data-theme="night"] .daynight-toggle__icon .mini-sun{ opacity:0; transform:scale(.4) rotate(90deg); }
+  [data-theme="day"] .daynight-toggle__icon .mini-moon{ opacity:0; transform:scale(.4) rotate(-90deg); }
+
+  @media (max-width: 900px){
+    .nav__links, .nav__cta .btn--primary, .nav__brand-sub{ display:none; }
     .nav__toggle{ display:flex; }
     .nav__mobile{
       display:block; position:fixed; inset:var(--header-h) 0 auto 0;
@@ -188,93 +198,74 @@
     }
     .nav__mobile.is-open{ opacity:1; transform:translateY(0); pointer-events:auto; }
     .nav__mobile ul{ list-style:none; display:flex; flex-direction:column; gap:var(--space-4); margin-bottom:var(--space-5); }
-    .nav__mobile a{ text-decoration:none; color:var(--color-text); font-size:1.1rem; }
-    .nav__mobile .btn{ width:100%; }
+    .nav__mobile a{ text-decoration:none; color:var(--color-text); font-size:1.05rem; }
+    .nav__mobile .btn{ width:100%; margin-bottom:var(--space-3); }
   }
 
   /* Hero */
-  .hero{ position:relative; overflow:hidden; padding:var(--space-9) 0 calc(var(--space-8) + 26px); }
-  .hero__bg{ position:absolute; inset:0; z-index:0; }
+  .hero{ position:relative; overflow:hidden; padding:var(--space-9) 0 var(--space-8); }
+  .hero__bg{ position:absolute; inset:0; z-index:0; background:linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 55%, var(--sky-bottom) 100%); transition:background 1s var(--ease); }
   .hero__glow{
-    position:absolute; top:-10%; left:38%; transform:translateX(-50%);
+    position:absolute; top:-10%; left:50%; transform:translateX(-50%);
     width:900px; height:900px; max-width:160vw;
-    background:radial-gradient(circle, rgba(255,200,92,0.14) 0%, rgba(255,200,92,0) 62%);
-    pointer-events:none;
+    background:radial-gradient(circle, rgba(var(--glow-color),0.18) 0%, rgba(var(--glow-color),0) 62%);
+    pointer-events:none; transition:background 1s var(--ease);
   }
-  .hero__firefly{
-    position:absolute; width:4px; height:4px; border-radius:0;
-    background:var(--color-amber-bright);
-    box-shadow:0 0 8px 2px rgba(244,187,94,0.7);
+
+  .stars{ position:absolute; inset:0; opacity:var(--star-opacity); transition:opacity 1s var(--ease); pointer-events:none; }
+  .star{ position:absolute; width:2px; height:2px; background:#fff; border-radius:1px; animation:twinkle 3s ease-in-out infinite; }
+  @keyframes twinkle{ 0%,100%{ opacity:.2; } 50%{ opacity:1; } }
+
+  .clouds{ position:absolute; inset:0; overflow:hidden; opacity:var(--cloud-opacity); transition:opacity 1s var(--ease); pointer-events:none; }
+  .cloud{ position:absolute; background:#fff; border-radius:6px; box-shadow: 30px 6px 0 #fff, -28px 4px 0 #fff, 14px -10px 0 #fff, -14px -8px 0 #fff; animation:drift-cloud linear infinite; }
+  .cloud--1{ width:70px; height:22px; top:4%; animation-duration:52s; }
+  .cloud--2{ width:50px; height:16px; top:11%; animation-duration:68s; animation-delay:-20s; }
+  .cloud--3{ width:60px; height:18px; top:1%; animation-duration:80s; animation-delay:-45s; }
+  @keyframes drift-cloud{ from{ transform:translateX(-140px); } to{ transform:translateX(110vw); } }
+
+  .celestial{ position:absolute; width:58px; height:58px; z-index:1; transition:left 1.4s var(--ease), top 1.4s var(--ease), opacity .9s var(--ease), transform 1.4s var(--ease); }
+  .sun, .moon{ position:absolute; inset:0; border-radius:8px; transition:opacity .8s var(--ease), transform .8s var(--ease); }
+  .sun{ background:linear-gradient(145deg,#FFE28A,#F4B942); box-shadow:0 0 46px 14px rgba(244,187,94,.55); animation:pulse-glow 4s ease-in-out infinite; }
+  .sun .ray{ position:absolute; top:50%; left:50%; width:6px; height:20px; background:#F4B942; border-radius:2px; opacity:.8;
+    transform:translate(-50%,-50%) rotate(calc(45deg * var(--i))) translateY(-36px); }
+  .moon{ background:linear-gradient(145deg,#F3F6FA,#C9D6E5); box-shadow:0 0 34px 10px rgba(201,214,229,.4); }
+  .moon .crater{ position:absolute; background:rgba(120,135,150,.55); border-radius:2px; }
+  .moon .crater--1{ width:10px; height:10px; top:10px; left:12px; }
+  .moon .crater--2{ width:7px; height:7px; top:28px; left:30px; }
+  .moon .crater--3{ width:6px; height:6px; top:36px; left:10px; }
+  @keyframes pulse-glow{ 0%,100%{ box-shadow:0 0 46px 14px rgba(244,187,94,.5); } 50%{ box-shadow:0 0 54px 18px rgba(244,187,94,.7); } }
+
+  [data-theme="night"] .celestial{ left:64%; top:8%; }
+  [data-theme="night"] .sun{ opacity:0; transform:scale(.5) rotate(90deg); }
+  [data-theme="night"] .moon{ opacity:1; transform:scale(1) rotate(0deg); }
+  [data-theme="day"] .celestial{ left:14%; top:6%; }
+  [data-theme="day"] .sun{ opacity:1; transform:scale(1) rotate(0deg); }
+  [data-theme="day"] .moon{ opacity:0; transform:scale(.5) rotate(-90deg); }
+
+  .hero__particle{
+    position:absolute; width:5px; height:5px; border-radius:50%;
+    background:var(--particle-color);
+    box-shadow:0 0 8px 2px rgba(var(--glow-color),0.7);
     animation:drift 9s ease-in-out infinite;
-    opacity:0.75;
+    opacity:0.75; transition:background .5s var(--ease);
   }
   @keyframes drift{
     0%,100%{ transform:translate(0,0); opacity:0.3; }
     50%{ transform:translate(14px,-22px); opacity:0.9; }
   }
-  .hero__sun-wrap{ position:absolute; top:4%; right:9%; width:130px; height:130px; }
-  .hero__sun-glow{
-    position:absolute; inset:-55px; border-radius:50%;
-    background:radial-gradient(circle, rgba(255,200,92,0.55) 0%, rgba(255,200,92,0.16) 42%, rgba(255,200,92,0) 72%);
-    filter:blur(1px);
-  }
-  .hero__rays{
-    position:absolute; inset:-100px; border-radius:50%;
-    background:conic-gradient(from 0deg,
-      rgba(255,216,115,0.18) 0deg 8deg, transparent 8deg 37deg,
-      rgba(255,216,115,0.18) 37deg 45deg, transparent 45deg 82deg,
-      rgba(255,216,115,0.18) 82deg 90deg, transparent 90deg 127deg,
-      rgba(255,216,115,0.18) 127deg 135deg, transparent 135deg 172deg,
-      rgba(255,216,115,0.18) 172deg 180deg, transparent 180deg 217deg,
-      rgba(255,216,115,0.18) 217deg 225deg, transparent 225deg 262deg,
-      rgba(255,216,115,0.18) 262deg 270deg, transparent 270deg 307deg,
-      rgba(255,216,115,0.18) 307deg 315deg, transparent 315deg 360deg);
-    animation:ray-spin 60s linear infinite;
-    mix-blend-mode:screen;
-  }
-  @keyframes ray-spin{ to{ transform:rotate(360deg); } }
-  .hero__sun{
-    position:relative; width:100%; height:100%; color:var(--color-amber-bright); fill:currentColor;
-    filter:drop-shadow(0 0 10px rgba(255,200,92,0.85));
-  }
-  .hero__clouds{ position:absolute; inset:0; overflow:hidden; }
-  .cloud{
-    position:absolute; background:rgba(244,239,221,0.32); width:46px; height:16px;
-    box-shadow:
-      22px -8px 0 0 rgba(244,239,221,0.32),
-      44px 0 0 0 rgba(244,239,221,0.32),
-      -18px 4px 0 0 rgba(244,239,221,0.22);
-    animation:cloud-drift linear infinite;
-  }
-  .cloud--1{ top:9%; left:-12%; animation-duration:75s; }
-  .cloud--2{ top:20%; left:-32%; width:64px; height:20px; animation-duration:95s; animation-delay:-20s; }
-  .cloud--3{ top:5%; left:-55%; width:34px; height:12px; animation-duration:85s; animation-delay:-42s; }
-  @keyframes cloud-drift{ to{ transform:translateX(145vw); } }
-  .hero__hills{ position:absolute; left:0; right:0; bottom:26px; width:100%; height:auto; }
-  .hero__water{ position:absolute; left:0; right:0; bottom:0; height:26px; overflow:hidden;
-    background:linear-gradient(90deg, #123842, #1C4B57, #123842);
-  }
-  .hero__water::after{
-    content:""; position:absolute; inset:0; background-size:220% 100%;
-    background-image:linear-gradient(90deg, transparent 0%, rgba(255,216,115,0.4) 50%, transparent 100%);
-    animation:water-shimmer 7s ease-in-out infinite;
-  }
-  @keyframes water-shimmer{ 0%{ background-position:220% 0; } 100%{ background-position:-220% 0; } }
+  .hero__hills{ position:absolute; left:0; right:0; bottom:0; width:100%; height:auto; }
+  .hero__hills path{ transition:fill 1s var(--ease); }
   .hero__content{ position:relative; z-index:2; max-width:680px; }
-  .hero__content h1{
-    font-family:var(--font-pixel); font-weight:400; text-transform:none;
-    font-size:clamp(1.5rem, 4.4vw, 2.7rem); line-height:1.6; letter-spacing:0.01em;
-    margin-bottom:var(--space-5); text-shadow:0 0 22px rgba(255,200,92,0.45), 3px 3px 0 rgba(0,0,0,0.4);
-  }
-  .hero__content p.lede{ font-size:1.15rem; color:var(--color-text-muted); margin-bottom:var(--space-6); max-width:52ch; }
+  .hero__content h1{ font-size:clamp(1.7rem, 5vw, 2.9rem); margin-bottom:var(--space-4); }
+  .hero__content p.lede{ font-size:1.1rem; color:var(--color-text-muted); margin-bottom:var(--space-6); max-width:52ch; }
   .hero__ctas{ display:flex; flex-wrap:wrap; gap:var(--space-4); align-items:center; margin-bottom:var(--space-5); }
   .hero__status{
-    display:flex; align-items:center; gap:8px; font-family:var(--font-mono);
-    font-size:0.85rem; color:var(--color-text-muted);
+    display:flex; align-items:center; gap:8px; font-family:var(--font-pixel);
+    font-size:0.72rem; color:var(--color-text-muted);
   }
   .hero__status .dot{ width:8px; height:8px; border-radius:50%; background:var(--color-text-muted); flex:0 0 auto; }
-  .hero__status.is-online .dot{ background:var(--color-moss); box-shadow:0 0 6px var(--color-moss); }
-  .hero__status.is-offline .dot{ background:var(--color-rust); }
+  .hero__status.is-online .dot{ background:var(--grass); box-shadow:0 0 6px var(--grass); }
+  .hero__status.is-offline .dot{ background:var(--redstone); }
 
   .reveal{ opacity:0; transform:translateY(18px); transition:opacity .6s var(--ease), transform .6s var(--ease); }
   .reveal.is-visible{ opacity:1; transform:translateY(0); }
@@ -282,18 +273,31 @@
   /* Features */
   .features-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:var(--space-5); }
   .feature-card{
-    background:var(--color-surface); border:1px solid var(--color-border); clip-path:var(--pixel-clip-lg);
-    padding:var(--space-6); transition:transform .25s var(--ease), border-color .25s var(--ease);
+    background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md);
+    padding:var(--space-6); transition:transform .25s var(--ease), border-color .25s var(--ease), background .5s var(--ease);
   }
-  .feature-card:hover{ transform:translateY(-4px); border-color:rgba(255,200,92,0.45); }
+  .feature-card:hover{ transform:translateY(-4px); border-color:rgba(244,187,94,0.4); }
   .feature-card__icon{
-    width:44px; height:44px; clip-path:var(--pixel-clip-sm); background:var(--color-surface-alt);
+    width:42px; height:42px; border-radius:8px; background:var(--color-surface-alt);
     display:flex; align-items:center; justify-content:center; margin-bottom:var(--space-4);
-    color:var(--color-amber-bright);
+    color:var(--gold-bright);
   }
   .feature-card__icon svg{ width:22px; height:22px; }
-  .feature-card h3{ font-size:1.15rem; margin-bottom:var(--space-2); }
-  .feature-card p{ color:var(--color-text-muted); font-size:0.96rem; }
+  .feature-card h3{ font-size:0.98rem; margin-bottom:var(--space-2); }
+  .feature-card p{ color:var(--color-text-muted); font-size:0.94rem; }
+
+  /* Biomes */
+  .biomes-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:var(--space-4); }
+  .biome-card{
+    position:relative; background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md);
+    padding:var(--space-5); text-align:center; overflow:hidden;
+    transition:transform .3s var(--ease), border-color .3s var(--ease), background .5s var(--ease);
+  }
+  .biome-card:hover{ transform:translateY(-6px) rotate(-1deg); border-color:rgba(244,187,94,0.5); }
+  .biome-cube{ width:52px; height:52px; margin:0 auto var(--space-3); overflow:visible; }
+  .biome-card__accent{ position:absolute; width:10px; height:10px; border-radius:50%; top:14px; right:14px; }
+  .biome-card h3{ font-size:0.86rem; margin-bottom:var(--space-2); }
+  .biome-card p{ color:var(--color-text-muted); font-size:0.84rem; }
 
   /* Recipe / join */
   .recipe{ margin-bottom:var(--space-8); }
@@ -301,16 +305,16 @@
   .recipe__slot{
     display:flex; flex-direction:column; align-items:center; gap:10px;
     width:132px; padding:var(--space-4) var(--space-3);
-    background:var(--color-surface); border:1px solid var(--color-border); clip-path:var(--pixel-clip-sm);
-    text-align:center; transition:filter .25s var(--ease), border-color .25s var(--ease);
+    background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md);
+    text-align:center; transition:box-shadow .25s var(--ease), border-color .25s var(--ease), background .5s var(--ease);
   }
-  .recipe__slot:hover{ border-color:rgba(255,200,92,0.55); filter:drop-shadow(0 0 8px rgba(255,200,92,0.45)); }
-  .recipe__slot svg{ width:26px; height:26px; color:var(--color-moss); }
-  .recipe__slot--result{ background:var(--color-surface-alt); border-color:rgba(111,203,79,0.55); }
-  .recipe__slot--result svg{ color:var(--color-amber-bright); }
-  .recipe__slot span{ font-size:0.82rem; color:var(--color-text-muted); }
-  .recipe__op{ font-family:var(--font-mono); font-size:1.3rem; color:var(--color-text-muted); }
-  .recipe__op--arrow{ color:var(--color-amber-bright); font-size:1.5rem; }
+  .recipe__slot:hover{ border-color:rgba(244,187,94,0.5); box-shadow:0 0 0 3px rgba(244,187,94,0.08); }
+  .recipe__slot svg{ width:26px; height:26px; color:var(--grass); }
+  .recipe__slot--result{ background:var(--color-surface-alt); border-color:rgba(95,216,224,0.5); }
+  .recipe__slot--result svg{ color:var(--gold-bright); }
+  .recipe__slot span{ font-size:0.78rem; color:var(--color-text-muted); }
+  .recipe__op{ font-family:var(--font-pixel); font-size:1.2rem; color:var(--color-text-muted); }
+  .recipe__op--arrow{ color:var(--gold-bright); font-size:1.4rem; }
   .recipe__caption{ text-align:center; color:var(--color-text-muted); font-size:0.85rem; margin-top:var(--space-4); font-style:italic; }
 
   @media (max-width:640px){
@@ -321,12 +325,13 @@
   .steps{ list-style:none; display:flex; flex-direction:column; gap:var(--space-6); counter-reset:step; max-width:760px; margin:0 auto; }
   .step{ counter-increment:step; display:flex; gap:var(--space-5); align-items:flex-start; }
   .step__num{
-    flex:0 0 auto; width:2.5rem; height:2.5rem; clip-path:var(--pixel-clip-sm);
-    background:linear-gradient(180deg, var(--color-amber-bright), var(--color-amber)); color:#2A1B05; font-family:var(--font-mono); font-weight:700;
+    flex:0 0 auto; width:2.3rem; height:2.3rem; border-radius:var(--radius-sm);
+    background:var(--grass); color:#12200C; font-family:var(--font-pixel); font-weight:700; font-size:0.9rem;
     display:flex; align-items:center; justify-content:center;
+    box-shadow: inset 2px 2px 0 rgba(255,255,255,0.2), inset -2px -2px 0 rgba(0,0,0,0.25);
   }
   .step__num::before{ content:counter(step); }
-  .step__body h3{ font-size:1.1rem; margin-bottom:6px; }
+  .step__body h3{ font-size:1rem; margin-bottom:6px; }
   .step__body p{ color:var(--color-text-muted); margin-bottom:var(--space-3); }
   .step__body .address-chip{ margin-top:var(--space-2); }
 
@@ -335,16 +340,17 @@
   .rule{
     display:flex; gap:var(--space-4); align-items:flex-start;
     background:var(--color-surface); border:1px solid var(--color-border);
-    clip-path:var(--pixel-clip-lg); padding:var(--space-5);
+    border-radius:var(--radius-md); padding:var(--space-5);
+    transition:background .5s var(--ease);
   }
-  .rule__mark{ color:var(--color-amber-bright); font-family:var(--font-mono); flex:0 0 auto; }
+  .rule__mark{ color:var(--gold-bright); font-family:var(--font-pixel); flex:0 0 auto; font-size:0.85rem; }
   .rule p{ color:var(--color-text-muted); }
   .rule strong{ color:var(--color-text); }
 
   /* Community */
   .community{ text-align:center; }
   .community__inner{ max-width:560px; margin:0 auto; }
-  .community h2{ font-size:clamp(1.6rem,3vw,2.2rem); margin-bottom:var(--space-3); }
+  .community h2{ font-size:clamp(1.3rem,2.6vw,1.9rem); margin-bottom:var(--space-3); }
   .community p{ color:var(--color-text-muted); margin-bottom:var(--space-6); }
 
   /* Footer */
@@ -352,9 +358,10 @@
     border-top:1px solid var(--color-border); padding:var(--space-6) 0;
     display:flex; flex-wrap:wrap; gap:var(--space-3); align-items:center; justify-content:space-between;
     color:var(--color-text-muted); font-size:0.85rem;
+    transition:border-color .5s var(--ease);
   }
   .site-footer a{ text-decoration:none; color:var(--color-text-muted); }
-  .site-footer a:hover{ color:var(--color-amber-bright); }
+  .site-footer a:hover{ color:var(--gold-bright); }
 
   @media (prefers-reduced-motion: reduce){
     *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
@@ -364,24 +371,37 @@
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
+<svg style="position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-cube" viewBox="0 0 40 40">
+    <path d="M4 12 L20 4 L36 12 L20 20 Z" fill="var(--face-top)"/>
+    <path d="M4 12 L20 20 L20 37 L4 29 Z" fill="var(--face-left)"/>
+    <path d="M36 12 L20 20 L20 37 L36 29 Z" fill="var(--face-right)"/>
+  </symbol>
+</svg>
+
 <header class="site-header">
   <div class="container nav">
     <a class="nav__brand" href="#top">
-      <svg class="nav__brand-mark" viewBox="0 0 24 24" aria-hidden="true">
-        <rect x="7" y="6" width="10" height="10" rx="2" fill="var(--color-amber)"/>
-        <path d="M8 3h8l-1 3H9z" fill="var(--color-moss)"/>
-        <path d="M9 16l-1 5h8l-1-5" fill="var(--color-moss)"/>
-      </svg>
-      <span class="nav__brand-word">Sano <span>&amp;</span> Friends SMP</span>
+      <svg class="nav__brand-mark" style="--face-top:#7CB342;--face-left:#8B5A2B;--face-right:#6B4423"><use href="#icon-cube"/></svg>
+      <span class="nav__brand-word">SAF</span>
+      <span class="nav__brand-sub">Survival Adventure Frontier</span>
     </a>
     <ul class="nav__links">
       <li><a href="#features">Features</a></li>
+      <li><a href="#biomes">Biomes</a></li>
       <li><a href="#join">How to Join</a></li>
       <li><a href="#rules">Rules</a></li>
       <li><a href="#community">Community</a></li>
     </ul>
     <div class="nav__cta">
-      <a class="btn btn--ghost btn--sm" href="#join">How to Join</a>
+      <button class="daynight-toggle" id="daynightToggle" aria-pressed="false" aria-label="Toggle day and night mode">
+        <span class="daynight-toggle__icon"><span class="mini-sun"></span><span class="mini-moon"></span></span>
+        <span id="daynightLabel">Night</span>
+      </button>
+      <a class="btn btn--primary btn--sm" href="https://discord.gg/HmvjD3GRYU" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="6" width="16" height="12" rx="4"/><circle cx="9" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1" fill="currentColor" stroke="none"/></svg>
+        Join Discord
+      </a>
       <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navMobile">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
@@ -390,11 +410,15 @@
   <nav class="nav__mobile" id="navMobile">
     <ul>
       <li><a href="#features">Features</a></li>
+      <li><a href="#biomes">Biomes</a></li>
       <li><a href="#join">How to Join</a></li>
       <li><a href="#rules">Rules</a></li>
       <li><a href="#community">Community</a></li>
     </ul>
-    <a class="btn btn--primary" href="#join">Get Started</a>
+    <a class="btn btn--primary" href="https://discord.gg/HmvjD3GRYU" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="6" width="16" height="12" rx="4"/><circle cx="9" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1" fill="currentColor" stroke="none"/></svg>
+      Join the Discord
+    </a>
   </nav>
 </header>
 
@@ -402,57 +426,42 @@
   <section class="hero" id="top">
     <div class="hero__bg" aria-hidden="true">
       <div class="hero__glow"></div>
-      <div class="hero__clouds">
-        <span class="cloud cloud--1"></span>
-        <span class="cloud cloud--2"></span>
-        <span class="cloud cloud--3"></span>
+      <div class="stars" id="starField"></div>
+      <div class="clouds">
+        <div class="cloud cloud--1"></div>
+        <div class="cloud cloud--2"></div>
+        <div class="cloud cloud--3"></div>
       </div>
-      <div class="hero__sun-wrap">
-        <div class="hero__rays"></div>
-        <div class="hero__sun-glow"></div>
-        <svg class="hero__sun" viewBox="0 0 16 16" shape-rendering="crispEdges">
-          <rect x="6" y="6" width="4" height="4"/>
-          <rect x="7" y="0" width="2" height="6"/>
-          <rect x="7" y="10" width="2" height="6"/>
-          <rect x="0" y="7" width="6" height="2"/>
-          <rect x="10" y="7" width="6" height="2"/>
-          <rect x="2" y="2" width="2" height="2"/>
-          <rect x="4" y="4" width="2" height="2"/>
-          <rect x="12" y="2" width="2" height="2"/>
-          <rect x="10" y="4" width="2" height="2"/>
-          <rect x="2" y="12" width="2" height="2"/>
-          <rect x="4" y="10" width="2" height="2"/>
-          <rect x="12" y="12" width="2" height="2"/>
-          <rect x="10" y="10" width="2" height="2"/>
-        </svg>
+      <div class="celestial">
+        <div class="sun">
+          <span class="ray" style="--i:0"></span><span class="ray" style="--i:1"></span>
+          <span class="ray" style="--i:2"></span><span class="ray" style="--i:3"></span>
+          <span class="ray" style="--i:4"></span><span class="ray" style="--i:5"></span>
+          <span class="ray" style="--i:6"></span><span class="ray" style="--i:7"></span>
+        </div>
+        <div class="moon">
+          <span class="crater crater--1"></span><span class="crater crater--2"></span><span class="crater crater--3"></span>
+        </div>
       </div>
-      <svg class="hero__hills" viewBox="0 0 1200 340" preserveAspectRatio="none" shape-rendering="crispEdges">
-        <path d="M0 260 H100 V220 H220 V240 H340 V200 H460 V230 H580 V190 H700 V220 H820 V180 H940 V210 H1060 V230 H1180 V200 H1200 V340 H0 Z" fill="#16262B"/>
-        <path d="M0 300 H80 V260 H180 V290 H280 V250 H400 V280 H520 V240 H640 V270 H760 V230 H880 V260 H1000 V220 H1120 V250 H1200 V340 H0 Z" fill="#0A1319"/>
+      <svg class="hero__hills" viewBox="0 0 1200 340" preserveAspectRatio="none">
+        <path d="M0 220 L120 170 L260 210 L400 140 L560 200 L720 130 L880 190 L1040 150 L1200 200 L1200 340 L0 340 Z" fill="var(--hill-1)"/>
+        <path d="M0 260 L150 220 L320 255 L480 200 L660 250 L840 210 L1000 245 L1200 220 L1200 340 L0 340 Z" fill="var(--hill-2)"/>
       </svg>
-      <div class="hero__water"></div>
     </div>
 
     <div class="container hero__content">
-      <p class="eyebrow">A MODDED SURVIVAL WORLD</p>
-      <h1>Sano &amp; Friends SMP</h1>
-      <p class="lede">A curated modpack, a world where your builds actually stay yours, and a small crew worth logging back in for. This is SAF SMP.</p>
+      <p class="eyebrow">A FREE, PRIVATE BEDROCK WORLD</p>
+      <h1>SAF — Survival Adventure Frontier</h1>
+      <p class="lede">SAF is a small, free Bedrock world — kept private on purpose. Join the Discord, send in an application, and sit down for a quick interview. Once you're approved, we hand you the IP and port ourselves.</p>
       <div class="hero__ctas">
-        <a class="btn btn--primary" href="https://www.mediafire.com/file/z77wdi4nuby5k1c/SURVIVAL_MULTIPLAYER_1.0.0.mrpack/file" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 19h16"/></svg>
-          Download the Modpack
+        <a class="btn btn--primary" href="https://discord.gg/HmvjD3GRYU" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="6" width="16" height="12" rx="4"/><circle cx="9" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1" fill="currentColor" stroke="none"/></svg>
+          Join the Discord
         </a>
-        <div class="address-chip">
-          <span class="address-chip__text">safsmp.online</span>
-          <button class="copy-btn" data-copy="safsmp.online" aria-label="Copy server address">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a1 1 0 0 1 1-1h9"/></svg>
-            Copy
-            <span class="copy-btn__tip">Copied!</span>
-          </button>
-        </div>
+        <a class="btn btn--ghost" href="#join">How to Join ↓</a>
       </div>
       <p class="hero__status" id="statusLine"><span class="dot"></span> Checking server status…</p>
-      <noscript><p style="color:var(--color-text-muted); font-size:0.85rem;">Enable JavaScript to see live server status and use the copy buttons — the address above still works either way.</p></noscript>
+      <noscript><p style="color:var(--color-text-muted); font-size:0.85rem;">Enable JavaScript to see live server status and day/night mode.</p></noscript>
     </div>
   </section>
 
@@ -461,7 +470,7 @@
       <div class="section__head reveal">
         <p class="eyebrow">FEATURES</p>
         <h2>Built for a small crew, not a crowd</h2>
-        <p>SAF SMP isn't trying to be a network. It's one curated world, set up so it's actually still standing next time you log in.</p>
+        <p>SAF isn't trying to be a network. It's one curated Bedrock world, set up so it's actually still standing next time you log in.</p>
       </div>
       <div class="features-grid">
         <div class="feature-card reveal">
@@ -469,21 +478,21 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
           </div>
           <h3>Land Claims &amp; Anti-Grief</h3>
-          <p>FTB Chunks lets everyone claim and protect their base. Go build somewhere without worrying about coming back to a hole in the ground.</p>
+          <p>Claim and protect your base with in-game land claims. Go build somewhere without worrying about coming back to a hole in the ground.</p>
         </div>
         <div class="feature-card reveal">
           <div class="feature-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-4 9 4-9 4-9-4z"/><path d="M3 8v8l9 4 9-4V8"/><path d="M12 12v6"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="12" rx="3"/><circle cx="8" cy="13" r="1.4" fill="currentColor" stroke="none"/><path d="M13 11h4M13 15h4"/></svg>
           </div>
-          <h3>One Modpack, Same World</h3>
-          <p>Everyone runs the same curated pack. Install it once through the Modrinth App and you're dropped straight into the same world as the rest of us.</p>
+          <h3>Play On Any Platform</h3>
+          <p>Bedrock Edition means Windows, Xbox, PlayStation, Switch, and mobile all drop into the same world. No launcher wrangling, no downloads.</p>
         </div>
         <div class="feature-card reveal">
           <div class="feature-card__icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-2 6-6 2 2-6 6-2z"/></svg>
           </div>
-          <h3>More to Explore</h3>
-          <p>New biomes, tools, and mobs layered over the survival game you already know — enough to make exploring worth it again.</p>
+          <h3>Biomes to Explore</h3>
+          <p>From sunbaked deserts to the Nether's fire, the full spread of vanilla biomes is out there waiting — enough to make exploring worth it again.</p>
         </div>
         <div class="feature-card reveal">
           <div class="feature-card__icon">
@@ -497,7 +506,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/></svg>
           </div>
           <h3>Backed Up, Not Fragile</h3>
-          <p>The world gets backed up regularly, so a bad crash or a rough mod update doesn't mean losing what you've built.</p>
+          <p>The world gets backed up regularly, so a bad crash doesn't mean losing what you've built.</p>
         </div>
         <div class="feature-card reveal">
           <div class="feature-card__icon">
@@ -510,34 +519,90 @@
     </div>
   </section>
 
-  <section class="section section--alt" id="join">
+  <section class="section section--alt" id="biomes">
+    <div class="container">
+      <div class="section__head reveal">
+        <p class="eyebrow">THE MAP</p>
+        <h2>A whole frontier to spread out into</h2>
+        <p>Plains for your first base, mountains for a stronghold, the Nether and the End for the ones who want more. Pick a biome and start claiming.</p>
+      </div>
+      <div class="biomes-grid">
+        <div class="biome-card reveal">
+          <svg class="biome-cube" style="--face-top:#7CB342;--face-left:#8B5A2B;--face-right:#6B4423"><use href="#icon-cube"/></svg>
+          <h3>Plains</h3>
+          <p>Wide open grass, easy building, the classic first-day spawn.</p>
+        </div>
+        <div class="biome-card reveal">
+          <svg class="biome-cube" style="--face-top:#4C7A2E;--face-left:#3B5F23;--face-right:#2E4A1B"><use href="#icon-cube"/></svg>
+          <h3>Forest</h3>
+          <p>Dense canopy, plenty of wood, and somewhere to lose the crowd.</p>
+        </div>
+        <div class="biome-card reveal">
+          <span class="biome-card__accent" style="background:#5E9E45"></span>
+          <svg class="biome-cube" style="--face-top:#E3C878;--face-left:#CBA75E;--face-right:#B08F4C"><use href="#icon-cube"/></svg>
+          <h3>Desert</h3>
+          <p>Sand for miles, hidden temples, and cacti that will absolutely hurt you.</p>
+        </div>
+        <div class="biome-card reveal">
+          <span class="biome-card__accent" style="background:#E0704F"></span>
+          <svg class="biome-cube" style="--face-top:#3E8FD0;--face-left:#2E6FA8;--face-right:#254F7A"><use href="#icon-cube"/></svg>
+          <h3>Ocean</h3>
+          <p>Coral reefs, shipwrecks, and whatever's waiting in the deep dark water.</p>
+        </div>
+        <div class="biome-card reveal">
+          <svg class="biome-cube" style="--face-top:#F0F4F5;--face-left:#8B8B8B;--face-right:#5F5F5F"><use href="#icon-cube"/></svg>
+          <h3>Mountains</h3>
+          <p>Snow caps and stone cliffs — a natural, half-built stronghold.</p>
+        </div>
+        <div class="biome-card reveal">
+          <span class="biome-card__accent" style="background:#F4BB5E"></span>
+          <svg class="biome-cube" style="--face-top:#7A2E22;--face-left:#5E2018;--face-right:#3E140F"><use href="#icon-cube"/></svg>
+          <h3>The Nether</h3>
+          <p>Fire, fortresses, and the fastest way to travel long distances — if you survive.</p>
+        </div>
+        <div class="biome-card reveal">
+          <span class="biome-card__accent" style="background:#7B4FA0"></span>
+          <svg class="biome-cube" style="--face-top:#E8E4A0;--face-left:#C9C588;--face-right:#A8A46E"><use href="#icon-cube"/></svg>
+          <h3>The End</h3>
+          <p>Void, islands, and a dragon that's still undefeated. For now.</p>
+        </div>
+        <div class="biome-card reveal">
+          <svg class="biome-cube" style="--face-top:#7CC6B0;--face-left:#5A9C8A;--face-right:#3F7666"><use href="#icon-cube"/></svg>
+          <h3>Swamp</h3>
+          <p>Murky water, witch huts, and mangroves worth the mud on your boots.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="join">
     <div class="container">
       <div class="section__head reveal">
         <p class="eyebrow">HOW TO JOIN</p>
         <h2>The recipe for getting in</h2>
-        <p>Like any good recipe, you just need the right ingredients. This one's shapeless — the order doesn't matter, as long as you've got all three.</p>
+        <p>This is a free, private server, so it's not quite instant. You'll need to join our Discord first — fill out the application, wait to get interviewed, and once you're approved, we'll send over the IP and port ourselves.</p>
       </div>
 
       <div class="recipe reveal">
         <div class="recipe__row">
           <div class="recipe__slot">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-4 9 4-9 4-9-4z"/><path d="M3 8v8l9 4 9-4V8"/><path d="M12 12v6"/></svg>
-            <span>Modpack file</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="4"/><circle cx="9" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1" fill="currentColor" stroke="none"/></svg>
+            <span>Join Discord</span>
           </div>
           <span class="recipe__op">+</span>
           <div class="recipe__slot">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M10 8l6 4-6 4V8z"/></svg>
-            <span>Modrinth App</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="16" rx="2"/><path d="M9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 10h6M9 14h6"/></svg>
+            <span>Apply</span>
           </div>
           <span class="recipe__op">+</span>
           <div class="recipe__slot">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 4 5.8 4 9s-1.5 6.5-4 9c-2.5-2.5-4-5.8-4-9s1.5-6.5 4-9z"/></svg>
-            <span>Server address</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10H9l-4 4V5z"/><path d="M8 9h8M8 12h5"/></svg>
+            <span>Interview</span>
           </div>
           <span class="recipe__op recipe__op--arrow">→</span>
           <div class="recipe__slot recipe__slot--result">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="18" height="9" rx="2"/><path d="M3 10c0-3.3 2.7-6 6-6h6c3.3 0 6 2.7 6 6"/><circle cx="12" cy="14" r="1" fill="currentColor" stroke="none"/></svg>
-            <span>You're in</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0"/></svg>
+            <span>IP &amp; Port</span>
           </div>
         </div>
       </div>
@@ -546,57 +611,37 @@
         <li class="step">
           <span class="step__num"></span>
           <div class="step__body">
-            <h3>Grab the modpack</h3>
-            <p>Download the SAF SMP modpack below. It's the exact pack everyone else on the server is running, so keep it as-is.</p>
-            <a class="btn btn--primary btn--sm" href="https://www.mediafire.com/file/z77wdi4nuby5k1c/SURVIVAL_MULTIPLAYER_1.0.0.mrpack/file" target="_blank" rel="noopener noreferrer">Download the Modpack</a>
+            <h3>Join the Discord</h3>
+            <p>That's where the whole process starts — applications, interviews, and announcements all happen there.</p>
+            <a class="btn btn--primary btn--sm" href="https://discord.gg/HmvjD3GRYU" target="_blank" rel="noopener noreferrer">Join the Discord</a>
           </div>
         </li>
         <li class="step">
           <span class="step__num"></span>
           <div class="step__body">
-            <h3>Get the Modrinth App</h3>
-            <p>If you don't already have it, install the Modrinth App — the official Modrinth launcher. It's built to import modpacks like this one in a couple of clicks.</p>
-            <a class="btn btn--ghost btn--sm" href="https://modrinth.com/app" target="_blank" rel="noopener noreferrer">Get the Modrinth App</a>
+            <h3>Submit your application</h3>
+            <p>Fill out the whitelist application posted in the server so we know a bit about you before you spawn in.</p>
           </div>
         </li>
         <li class="step">
           <span class="step__num"></span>
           <div class="step__body">
-            <p><strong>Import the pack.</strong> Open the Modrinth App, choose Import, and select the file you just downloaded. It'll pull in the mods, configs, and the right Minecraft version automatically — no manual setup needed.</p>
+            <h3>Get interviewed</h3>
+            <p>A short, casual chat with the team — just enough to make sure you're a good fit for a small crew.</p>
           </div>
         </li>
         <li class="step">
           <span class="step__num"></span>
           <div class="step__body">
-            <p><strong>Launch it once.</strong> Start the modpack from the Modrinth App before doing anything else, so everything finishes installing.</p>
-          </div>
-        </li>
-        <li class="step">
-          <span class="step__num"></span>
-          <div class="step__body">
-            <h3>Add the server</h3>
-            <p>In-game, go to Multiplayer → Add Server, and paste in the address:</p>
-            <div class="address-chip">
-              <span class="address-chip__text">safsmp.online</span>
-              <button class="copy-btn" data-copy="safsmp.online" aria-label="Copy server address">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a1 1 0 0 1 1-1h9"/></svg>
-                Copy
-                <span class="copy-btn__tip">Copied!</span>
-              </button>
-            </div>
-          </div>
-        </li>
-        <li class="step">
-          <span class="step__num"></span>
-          <div class="step__body">
-            <p><strong>Join in.</strong> Hit Join Server, wait for the world to load, and say hello in chat.</p>
+            <h3>Receive your IP &amp; Port</h3>
+            <p>Once you're approved, we'll DM you the connection details directly. Add the server in Bedrock — Servers → Add Server — and jump in.</p>
           </div>
         </li>
       </ol>
     </div>
   </section>
 
-  <section class="section" id="rules">
+  <section class="section section--alt" id="rules">
     <div class="container">
       <div class="section__head reveal">
         <p class="eyebrow">GROUND RULES</p>
@@ -606,19 +651,19 @@
       <ul class="rules-list reveal">
         <li class="rule">
           <span class="rule__mark">01</span>
-          <p><strong>Claim your base with FTB Chunks.</strong> Anything outside a claim is fair game, so don't leave something valuable unclaimed.</p>
+          <p><strong>Claim your base.</strong> Anything outside a claim is fair game, so don't leave something valuable unclaimed.</p>
         </li>
         <li class="rule">
           <span class="rule__mark">02</span>
-          <p><strong>No griefing, stealing, or PvP</strong> unless everyone involved has actually agreed to it first.</p>
+          <p><strong>No Griefing and Avoid Toxicity.</strong> Be kind show some respect</p>
         </li>
         <li class="rule">
           <span class="rule__mark">03</span>
-          <p><strong>Keep the modpack as given.</strong> Extra mods or resource packs can desync you from the server or cause crashes.</p>
+          <p><strong>No cheats or hacked clients.</strong> Play it straight — exploits and glitch abuse ruin it for everyone else.</p>
         </li>
         <li class="rule">
           <span class="rule__mark">04</span>
-          <p><strong>Report bugs and dupes</strong> instead of using them. We'd rather fix it than ban someone over it.</p>
+          <p><strong>Report bugs and dupes.</strong> instead of using them. We'd rather fix it than ban someone over it.</p>
         </li>
         <li class="rule">
           <span class="rule__mark">05</span>
@@ -628,11 +673,11 @@
     </div>
   </section>
 
-  <section class="section section--alt community" id="community">
+  <section class="section community" id="community">
     <div class="container community__inner reveal">
       <p class="eyebrow" style="justify-content:center;">STAY IN TOUCH</p>
       <h2>Come say hi before you spawn in</h2>
-      <p>Questions about the modpack, ideas for the world, or just want to see what's being built? This is the place.</p>
+      <p>Questions about the server, ideas for the world, or just want to see what's being built? This is the place.</p>
       <a class="btn btn--primary" href="https://discord.gg/HmvjD3GRYU" id="discordLink">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="6" width="16" height="12" rx="4"/><circle cx="9" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1" fill="currentColor" stroke="none"/></svg>
         Join the Discord
@@ -643,7 +688,7 @@
 
 <footer class="site-footer">
   <div class="container" style="display:flex; flex-wrap:wrap; gap:var(--space-3); align-items:center; justify-content:space-between; width:100%;">
-    <span>Sano &amp; Friends SMP — a modded corner of the Overworld.</span>
+    <span>SAF — Survival Adventure Frontier, a Bedrock corner of the Overworld. <a href="https://safsmp.online">safsmp.online</a></span>
     <span>Not affiliated with Mojang or Microsoft.</span>
   </div>
 </footer>
@@ -696,23 +741,58 @@
     revealEls.forEach(function(el){ observer.observe(el); });
   }
 
-  // Ambient fireflies (decorative, skipped under reduced motion)
+  // Ambient particles (fireflies at night, pollen by day)
   if(!prefersReduced){
     var bg = document.querySelector('.hero__bg');
     for(var i=0;i<7;i++){
       var f = document.createElement('span');
-      f.className = 'hero__firefly';
+      f.className = 'hero__particle';
       f.style.left = (8 + Math.random()*84) + '%';
-      f.style.top = (12 + Math.random()*55) + '%';
+      f.style.top = (30 + Math.random()*55) + '%';
       f.style.animationDelay = (Math.random()*6) + 's';
       f.style.animationDuration = (7 + Math.random()*5) + 's';
       bg.appendChild(f);
     }
   }
 
-  // Live server status via mcsrvstat.us (public, no key required)
+  // Star field
+  var starField = document.getElementById('starField');
+  for(var s=0;s<45;s++){
+    var star = document.createElement('span');
+    star.className = 'star';
+    star.style.left = (Math.random()*100) + '%';
+    star.style.top = (Math.random()*70) + '%';
+    star.style.animationDelay = (Math.random()*3) + 's';
+    starField.appendChild(star);
+  }
+
+  // Day / Night mode
+  var root = document.documentElement;
+  var toggleBtn = document.getElementById('daynightToggle');
+  var daynightLabel = document.getElementById('daynightLabel');
+  var metaTheme = document.getElementById('metaTheme');
+  var THEME_KEY = 'saf-theme';
+
+  function applyTheme(theme){
+    root.setAttribute('data-theme', theme);
+    toggleBtn.setAttribute('aria-pressed', theme === 'day' ? 'true' : 'false');
+    daynightLabel.textContent = theme === 'day' ? 'Day' : 'Night';
+    metaTheme.setAttribute('content', theme === 'day' ? '#8FD0F7' : '#0B1526');
+  }
+
+  var savedTheme = null;
+  try{ savedTheme = localStorage.getItem(THEME_KEY); }catch(e){}
+  applyTheme(savedTheme === 'day' || savedTheme === 'night' ? savedTheme : 'night');
+
+  toggleBtn.addEventListener('click', function(){
+    var next = root.getAttribute('data-theme') === 'day' ? 'night' : 'day';
+    applyTheme(next);
+    try{ localStorage.setItem(THEME_KEY, next); }catch(e){}
+  });
+
+  // Live Bedrock server status via mcsrvstat.us (public, no key required)
   var statusLine = document.getElementById('statusLine');
-  fetch('https://api.mcsrvstat.us/3/safsmp.agila.host')
+  fetch('https://api.mcsrvstat.us/bedrock/3/play.safsmp.online')
     .then(function(r){ return r.json(); })
     .then(function(data){
       if(data && data.online){
