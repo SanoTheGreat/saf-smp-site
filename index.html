@@ -792,7 +792,7 @@
 
   // Live Bedrock server status via mcsrvstat.us (public, no key required)
   var statusLine = document.getElementById('statusLine');
-  fetch('https://api.mcsrvstat.us/bedrock/3/play.safsmp.online')
+  fetch('https://api.mcsrvstat.us/bedrock/3/play.safsmp.online:25722')
     .then(function(r){ return r.json(); })
     .then(function(data){
       if(data && data.online){
