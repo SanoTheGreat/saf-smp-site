@@ -12,7 +12,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M4 12 L20 4 L36 12 L20 20 Z' fill='%237CB342'/%3E%3Cpath d='M4 12 L20 20 L20 37 L4 29 Z' fill='%238B5A2B'/%3E%3Cpath d='M36 12 L20 20 L20 37 L36 29 Z' fill='%236B4423'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Inter:wght@400;500;600;700;800&family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@700&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 <style>
   :root{
     --font-pixel:'Silkscreen', monospace;
@@ -267,22 +267,38 @@
   .hero__status.is-online .dot{ background:var(--grass); box-shadow:0 0 6px var(--grass); }
   .hero__status.is-offline .dot{ background:var(--redstone); }
 
-  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .6s var(--ease), transform .6s var(--ease); }
-  .reveal.is-visible{ opacity:1; transform:translateY(0); }
+  .reveal{ opacity:0; transform:translateY(10px) scale(.98); transition:opacity .3s steps(6), transform .3s steps(6); }
+  .reveal.is-visible{ opacity:1; transform:translateY(0) scale(1); }
+
+  /* Blocky GUI-slot bevel, shared by every card-like surface on the site so
+     it reads as game UI (inventory/item slots) instead of a flat design-
+     system card. Hard corners, light top-left / dark bottom-right bevel,
+     plus a faint pixel-dot dither so surfaces aren't perfectly flat vector. */
+  .gui-panel{
+    background-color:var(--color-surface);
+    background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 4px 4px;
+    border-radius:2px;
+    box-shadow:
+      inset 2px 2px 0 rgba(255,255,255,0.10),
+      inset -2px -2px 0 rgba(0,0,0,0.35),
+      0 0 0 2px var(--color-bg-alt);
+    transition:box-shadow .25s var(--ease), transform .2s var(--ease), background-color .5s var(--ease);
+  }
 
   /* Features */
   .features-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:var(--space-5); }
   .feature-card{
-    background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md);
-    padding:var(--space-6); transition:transform .25s var(--ease), border-color .25s var(--ease), background .5s var(--ease);
+    padding:var(--space-6);
   }
-  .feature-card:hover{ transform:translateY(-4px); border-color:rgba(244,187,94,0.4); }
+  .feature-card:hover{ transform:translateY(-3px); box-shadow: inset 2px 2px 0 rgba(255,255,255,0.10), inset -2px -2px 0 rgba(0,0,0,0.35), 0 0 0 2px var(--gold-bright); }
   .feature-card__icon{
-    width:42px; height:42px; border-radius:8px; background:var(--color-surface-alt);
+    width:44px; height:44px; border-radius:2px; background:var(--color-bg);
     display:flex; align-items:center; justify-content:center; margin-bottom:var(--space-4);
     color:var(--gold-bright);
+    box-shadow: inset 2px 2px 0 rgba(255,255,255,0.08), inset -2px -2px 0 rgba(0,0,0,0.4);
   }
-  .feature-card__icon svg{ width:22px; height:22px; }
+  .feature-card__icon svg{ width:24px; height:24px; }
   .feature-card h3{ font-size:0.98rem; margin-bottom:var(--space-2); }
   .feature-card p{ color:var(--color-text-muted); font-size:0.94rem; }
 
@@ -298,6 +314,57 @@
   .biome-card__accent{ position:absolute; width:10px; height:10px; border-radius:50%; top:14px; right:14px; }
   .biome-card h3{ font-size:0.86rem; margin-bottom:var(--space-2); }
   .biome-card p{ color:var(--color-text-muted); font-size:0.84rem; }
+
+  .sr-only{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; }
+
+  /* Clans */
+  .clans-grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr));
+    gap:var(--space-5); max-width:920px; margin:0 auto;
+  }
+  .clan-card{
+    display:flex; flex-direction:column; align-items:center;
+    width:100%; padding:var(--space-3); text-align:center;
+    transition:transform .25s var(--ease), box-shadow .25s var(--ease);
+  }
+  .clan-card svg{ width:100%; height:auto; display:block; }
+  .clan-card:hover, .clan-card:focus-visible{
+    transform:translateY(-4px);
+    box-shadow: inset 2px 2px 0 rgba(255,255,255,0.10), inset -2px -2px 0 rgba(0,0,0,0.35), 0 0 0 2px var(--gold-bright);
+  }
+
+  .clan-modal{
+    padding:0; border:none; max-width:min(92vw, 420px);
+    background-color:var(--color-surface);
+    background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 4px 4px;
+    border-radius:2px;
+    box-shadow:
+      inset 2px 2px 0 rgba(255,255,255,0.10),
+      inset -2px -2px 0 rgba(0,0,0,0.35),
+      0 0 0 2px var(--color-bg-alt),
+      var(--shadow-soft);
+    color:var(--color-text);
+  }
+  .clan-modal::backdrop{ background:rgba(6,10,8,0.72); backdrop-filter:blur(3px); }
+  .clan-modal__inner{ position:relative; padding:var(--space-6) var(--space-5) var(--space-5); }
+  .clan-modal__close{
+    position:absolute; top:var(--space-3); right:var(--space-3);
+    width:32px; height:32px; display:flex; align-items:center; justify-content:center;
+    font-size:1.3rem; line-height:1; color:var(--color-text-muted); border-radius:var(--radius-sm);
+    transition:color .2s var(--ease), background .2s var(--ease);
+  }
+  .clan-modal__close:hover{ color:var(--color-text); background:var(--color-surface-alt); }
+  .clan-modal h3{
+    font-family:'Cinzel Decorative','Cinzel',serif; font-weight:700;
+    font-size:1.4rem; color:var(--gold-bright); margin-bottom:6px; padding-right:var(--space-6);
+    text-shadow:none; letter-spacing:0.02em;
+  }
+  .clan-modal__tag{
+    font-family:'Cinzel',serif; font-weight:600; font-size:0.72rem; letter-spacing:0.12em;
+    text-transform:uppercase; color:var(--color-text-muted); margin-bottom:var(--space-4);
+  }
+  .clan-modal__desc{ font-family:'EB Garamond',serif; font-size:1.05rem; color:var(--color-text); }
 
   /* Recipe / join */
   .recipe{ margin-bottom:var(--space-8); }
@@ -389,6 +456,7 @@
     <ul class="nav__links">
       <li><a href="#features">Features</a></li>
       <li><a href="#biomes">Biomes</a></li>
+      <li><a href="#clans">Clans</a></li>
       <li><a href="#join">How to Join</a></li>
       <li><a href="#rules">Rules</a></li>
       <li><a href="#community">Community</a></li>
@@ -411,6 +479,7 @@
     <ul>
       <li><a href="#features">Features</a></li>
       <li><a href="#biomes">Biomes</a></li>
+      <li><a href="#clans">Clans</a></li>
       <li><a href="#join">How to Join</a></li>
       <li><a href="#rules">Rules</a></li>
       <li><a href="#community">Community</a></li>
@@ -473,42 +542,42 @@
         <p>SAF isn't trying to be a network. It's one curated Bedrock world, set up so it's actually still standing next time you log in.</p>
       </div>
       <div class="features-grid">
-        <div class="feature-card reveal">
+        <div class="feature-card gui-panel reveal">
           <div class="feature-card__icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
           </div>
           <h3>Land Claims &amp; Anti-Grief</h3>
           <p>Claim and protect your base with in-game land claims. Go build somewhere without worrying about coming back to a hole in the ground.</p>
         </div>
-        <div class="feature-card reveal">
+        <div class="feature-card gui-panel reveal">
           <div class="feature-card__icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="12" rx="3"/><circle cx="8" cy="13" r="1.4" fill="currentColor" stroke="none"/><path d="M13 11h4M13 15h4"/></svg>
           </div>
           <h3>Play On Any Platform</h3>
           <p>Bedrock Edition means Windows, Xbox, PlayStation, Switch, and mobile all drop into the same world. No launcher wrangling, no downloads.</p>
         </div>
-        <div class="feature-card reveal">
+        <div class="feature-card gui-panel reveal">
           <div class="feature-card__icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-2 6-6 2 2-6 6-2z"/></svg>
           </div>
           <h3>Biomes to Explore</h3>
           <p>From sunbaked deserts to the Nether's fire, the full spread of vanilla biomes is out there waiting — enough to make exploring worth it again.</p>
         </div>
-        <div class="feature-card reveal">
+        <div class="feature-card gui-panel reveal">
           <div class="feature-card__icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-7.5-4.6-10-9.3C.6 7.8 2.4 4.5 6 4.5c2.2 0 3.9 1.2 6 3.6 2.1-2.4 3.8-3.6 6-3.6 3.6 0 5.4 3.3 4 6.7-2.5 4.7-10 9.3-10 9.3z"/></svg>
           </div>
           <h3>Friendly by Default</h3>
           <p>This is a friends-and-friends-of-friends server, not a public free-for-all. Show up decent and you'll fit right in.</p>
         </div>
-        <div class="feature-card reveal">
+        <div class="feature-card gui-panel reveal">
           <div class="feature-card__icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/></svg>
           </div>
           <h3>Backed Up, Not Fragile</h3>
           <p>The world gets backed up regularly, so a bad crash doesn't mean losing what you've built.</p>
         </div>
-        <div class="feature-card reveal">
+        <div class="feature-card gui-panel reveal">
           <div class="feature-card__icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M8 3v4M16 3v4"/><path d="M12 12l1 2 2 .3-1.5 1.4.3 2-1.8-1-1.8 1 .3-2L9 14.3l2-.3 1-2z"/></svg>
           </div>
@@ -573,6 +642,247 @@
         </div>
       </div>
     </div>
+  </section>
+
+  <section class="section" id="clans">
+    <div class="container">
+      <div class="section__head reveal">
+        <p class="eyebrow">TERRITORIES</p>
+        <h2>Five clans hold the frontier</h2>
+        <p>Land claims on SAF aren't just personal — players group into one of five clans, each built around its own corner of the economy. Click a crest to see what each one's about.</p>
+      </div>
+
+      <div class="clans-grid">
+        <button type="button" class="clan-card gui-panel reveal" aria-haspopup="dialog" data-name="Arcanum" data-tag="Clan 1 — Magic &amp; XP" data-desc="Magic &amp; XP economy — enchanting, librarian trading, XP/sculk farms.">
+          <svg viewBox="0 0 400 700" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="shieldGrad1" x1="30" y1="60" x2="370" y2="545" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#8f1d1d"/><stop offset="100%" stop-color="#3d0a0a"/>
+              </linearGradient>
+              <linearGradient id="goldGrad1" x1="35" y1="60" x2="365" y2="545" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#f0d896"/><stop offset="50%" stop-color="#c9a227"/><stop offset="100%" stop-color="#8a6a2b"/>
+              </linearGradient>
+              <linearGradient id="ribbonGrad1" x1="60" y1="560" x2="340" y2="625" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#3d0a0a"/><stop offset="100%" stop-color="#220505"/>
+              </linearGradient>
+            </defs>
+            <path d="M200,15 L208,33 L228,38 L208,43 L200,61 L192,43 L172,38 L192,33 Z" fill="url(#goldGrad1)"/>
+            <circle cx="200" cy="38" r="3" fill="#f0d896"/>
+            <path d="M200 60 L365 105 L365 285 C365 405 298 498 200 545 C102 498 35 405 35 285 L35 105 Z" fill="url(#shieldGrad1)" stroke="url(#goldGrad1)" stroke-width="6"/>
+            <path d="M200 60 L365 105 L365 285 C365 405 298 498 200 545 C102 498 35 405 35 285 L35 105 Z" fill="none" stroke="rgba(240,216,150,0.35)" stroke-width="1.5" transform="translate(47,32) scale(0.9)"/>
+            <g transform="translate(200,300)">
+              <circle cx="0" cy="-55" r="34" fill="#ff6b57" opacity="0.22"/>
+              <circle cx="0" cy="-55" r="24" fill="none" stroke="#f6e8bf" stroke-width="2.5"/>
+              <path d="M0,-77 L5,-62 L21,-62 L8,-52 L13,-37 L0,-46 L-13,-37 L-8,-52 L-21,-62 L-5,-62 Z" fill="#f6e8bf"/>
+              <rect x="-6" y="-8" width="12" height="86" rx="3" fill="#c9a227"/>
+              <path d="M-95,3 L-8,-16 L-8,66 L-95,50 Z" fill="#f6e8bf" opacity="0.95"/>
+              <path d="M95,3 L8,-16 L8,66 L95,50 Z" fill="#f6e8bf" opacity="0.95"/>
+              <line x1="-82" y1="8" x2="-20" y2="-4" stroke="#ff6b57" stroke-width="2" opacity="0.55"/>
+              <line x1="-82" y1="20" x2="-20" y2="9" stroke="#ff6b57" stroke-width="2" opacity="0.55"/>
+              <line x1="-82" y1="32" x2="-20" y2="22" stroke="#ff6b57" stroke-width="2" opacity="0.55"/>
+              <line x1="82" y1="8" x2="20" y2="-4" stroke="#ff6b57" stroke-width="2" opacity="0.55"/>
+              <line x1="82" y1="20" x2="20" y2="9" stroke="#ff6b57" stroke-width="2" opacity="0.55"/>
+              <line x1="82" y1="32" x2="20" y2="22" stroke="#ff6b57" stroke-width="2" opacity="0.55"/>
+            </g>
+            <path d="M60,560 L18,578 L46,592.5 L18,607 L60,625 Z" fill="url(#ribbonGrad1)" stroke="#8a6a2b" stroke-width="1.5"/>
+            <path d="M340,560 L382,578 L354,592.5 L382,607 L340,625 Z" fill="url(#ribbonGrad1)" stroke="#8a6a2b" stroke-width="1.5"/>
+            <path d="M60,560 L340,560 L340,625 L60,625 Z" fill="url(#ribbonGrad1)" stroke="#8a6a2b" stroke-width="1.5"/>
+            <line x1="60" y1="568" x2="340" y2="568" stroke="rgba(240,216,150,0.3)" stroke-width="1"/>
+            <line x1="60" y1="617" x2="340" y2="617" stroke="rgba(240,216,150,0.3)" stroke-width="1"/>
+            <text x="200" y="602" text-anchor="middle" font-family="'Cinzel Decorative','Cinzel',serif" font-weight="700" font-size="36" fill="#f6e8bf" letter-spacing="1">Arcanum</text>
+            <text x="200" y="652" text-anchor="middle" font-family="'Cinzel',serif" font-weight="600" font-size="16" fill="#d4af5a" letter-spacing="3">CLAN1 — MAGIC &amp; XP</text>
+            <text x="200" y="678" text-anchor="middle" font-family="'EB Garamond',serif" font-style="italic" font-size="13" fill="rgba(240,230,200,0.65)">Enchanting · Librarian Trade · XP Farms</text>
+          </svg>
+          <span class="sr-only">View Arcanum</span>
+        </button>
+
+        <button type="button" class="clan-card gui-panel reveal" aria-haspopup="dialog" data-name="Ironhold" data-tag="Clan 2 — Infrastructure" data-desc="Infrastructure economy — iron golem farms, smithing, redstone/crafter automation.">
+          <svg viewBox="0 0 400 700" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="shieldGrad2" x1="30" y1="60" x2="370" y2="545" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#146873"/><stop offset="100%" stop-color="#07282c"/>
+              </linearGradient>
+              <linearGradient id="goldGrad2" x1="35" y1="60" x2="365" y2="545" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#f0d896"/><stop offset="50%" stop-color="#c9a227"/><stop offset="100%" stop-color="#8a6a2b"/>
+              </linearGradient>
+              <linearGradient id="ribbonGrad2" x1="60" y1="560" x2="340" y2="625" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#0b3339"/><stop offset="100%" stop-color="#04181b"/>
+              </linearGradient>
+            </defs>
+            <path d="M200,15 L208,33 L228,38 L208,43 L200,61 L192,43 L172,38 L192,33 Z" fill="url(#goldGrad2)"/>
+            <circle cx="200" cy="38" r="3" fill="#f0d896"/>
+            <path d="M200 60 L365 105 L365 285 C365 405 298 498 200 545 C102 498 35 405 35 285 L35 105 Z" fill="url(#shieldGrad2)" stroke="url(#goldGrad2)" stroke-width="6"/>
+            <path d="M200 60 L365 105 L365 285 C365 405 298 498 200 545 C102 498 35 405 35 285 L35 105 Z" fill="none" stroke="rgba(240,216,150,0.35)" stroke-width="1.5" transform="translate(47,32) scale(0.9)"/>
+            <g transform="translate(200,300)">
+              <circle cx="25" cy="-35" r="42" fill="#0c454c" stroke="#f6e8bf" stroke-width="2"/>
+              <rect x="66" y="-42" width="14" height="14" fill="#0c454c" stroke="#f6e8bf" stroke-width="1"/>
+              <rect x="51.9" y="-8" width="14" height="14" fill="#0c454c" stroke="#f6e8bf" stroke-width="1"/>
+              <rect x="18" y="6" width="14" height="14" fill="#0c454c" stroke="#f6e8bf" stroke-width="1"/>
+              <rect x="-15.9" y="-8" width="14" height="14" fill="#0c454c" stroke="#f6e8bf" stroke-width="1"/>
+              <rect x="-30" y="-42" width="14" height="14" fill="#0c454c" stroke="#f6e8bf" stroke-width="1"/>
+              <rect x="-15.9" y="-75.9" width="14" height="14" fill="#0c454c" stroke="#f6e8bf" stroke-width="1"/>
+              <rect x="18" y="-90" width="14" height="14" fill="#0c454c" stroke="#f6e8bf" stroke-width="1"/>
+              <rect x="51.9" y="-75.9" width="14" height="14" fill="#0c454c" stroke="#f6e8bf" stroke-width="1"/>
+              <circle cx="25" cy="-35" r="14" fill="rgba(0,0,0,0.35)"/>
+              <path d="M-65,5 L65,5 L55,25 L-55,25 Z" fill="#f6e8bf" stroke="#08282c" stroke-width="1"/>
+              <path d="M-65,5 L-105,20 L-65,25 Z" fill="#f6e8bf" stroke="#08282c" stroke-width="1"/>
+              <path d="M-25,25 L25,25 L18,50 L-18,50 Z" fill="#f6e8bf" stroke="#08282c" stroke-width="1"/>
+              <path d="M-40,50 L40,50 L50,70 L-50,70 Z" fill="#f6e8bf" stroke="#08282c" stroke-width="1"/>
+            </g>
+            <path d="M60,560 L18,578 L46,592.5 L18,607 L60,625 Z" fill="url(#ribbonGrad2)" stroke="#8a6a2b" stroke-width="1.5"/>
+            <path d="M340,560 L382,578 L354,592.5 L382,607 L340,625 Z" fill="url(#ribbonGrad2)" stroke="#8a6a2b" stroke-width="1.5"/>
+            <path d="M60,560 L340,560 L340,625 L60,625 Z" fill="url(#ribbonGrad2)" stroke="#8a6a2b" stroke-width="1.5"/>
+            <line x1="60" y1="568" x2="340" y2="568" stroke="rgba(240,216,150,0.3)" stroke-width="1"/>
+            <line x1="60" y1="617" x2="340" y2="617" stroke="rgba(240,216,150,0.3)" stroke-width="1"/>
+            <text x="200" y="602" text-anchor="middle" font-family="'Cinzel Decorative','Cinzel',serif" font-weight="700" font-size="34" fill="#f6e8bf" letter-spacing="1">Ironhold</text>
+            <text x="200" y="652" text-anchor="middle" font-family="'Cinzel',serif" font-weight="600" font-size="16" fill="#d4af5a" letter-spacing="3">CLAN2 — INFRASTRUCTURE</text>
+            <text x="200" y="678" text-anchor="middle" font-family="'EB Garamond',serif" font-style="italic" font-size="13" fill="rgba(240,230,200,0.65)">Golem Farms · Smithing · Redstone Automation</text>
+          </svg>
+          <span class="sr-only">View Ironhold</span>
+        </button>
+
+        <button type="button" class="clan-card gui-panel reveal" aria-haspopup="dialog" data-name="Stormrunners" data-tag="Clan 3 — Mobility &amp; Warfare" data-desc="Mobility &amp; warfare economy — potion brewing, witch farms, totems, raid loot.">
+          <svg viewBox="0 0 400 700" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="shieldGrad3" x1="30" y1="60" x2="370" y2="545" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#236b38"/><stop offset="100%" stop-color="#0e3018"/>
+              </linearGradient>
+              <linearGradient id="goldGrad3" x1="35" y1="60" x2="365" y2="545" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#f0d896"/><stop offset="50%" stop-color="#c9a227"/><stop offset="100%" stop-color="#8a6a2b"/>
+              </linearGradient>
+              <linearGradient id="ribbonGrad3" x1="60" y1="560" x2="340" y2="625" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#123a20"/><stop offset="100%" stop-color="#081f11"/>
+              </linearGradient>
+            </defs>
+            <path d="M200,15 L208,33 L228,38 L208,43 L200,61 L192,43 L172,38 L192,33 Z" fill="url(#goldGrad3)"/>
+            <circle cx="200" cy="38" r="3" fill="#f0d896"/>
+            <path d="M200 60 L365 105 L365 285 C365 405 298 498 200 545 C102 498 35 405 35 285 L35 105 Z" fill="url(#shieldGrad3)" stroke="url(#goldGrad3)" stroke-width="6"/>
+            <path d="M200 60 L365 105 L365 285 C365 405 298 498 200 545 C102 498 35 405 35 285 L35 105 Z" fill="none" stroke="rgba(240,216,150,0.35)" stroke-width="1.5" transform="translate(47,32) scale(0.9)"/>
+            <g transform="translate(200,300)">
+              <path d="M-24,22 L-41,-74 L-77,-59 L-103,-30 L-114,-1 Z" fill="#a9e8b0" opacity="0.92"/>
+              <line x1="-24" y1="22" x2="-41" y2="-74" stroke="#123a20" stroke-width="1" opacity="0.4"/>
+              <line x1="-24" y1="22" x2="-77" y2="-59" stroke="#123a20" stroke-width="1" opacity="0.4"/>
+              <line x1="-24" y1="22" x2="-103" y2="-30" stroke="#123a20" stroke-width="1" opacity="0.4"/>
+              <path d="M24,22 L41,-74 L77,-59 L103,-30 L114,-1 Z" fill="#a9e8b0" opacity="0.92"/>
+              <line x1="24" y1="22" x2="41" y2="-74" stroke="#123a20" stroke-width="1" opacity="0.4"/>
+              <line x1="24" y1="22" x2="77" y2="-59" stroke="#123a20" stroke-width="1" opacity="0.4"/>
+              <line x1="24" y1="22" x2="103" y2="-30" stroke="#123a20" stroke-width="1" opacity="0.4"/>
+              <rect x="-20" y="-42" width="40" height="42" rx="8" fill="#f6e8bf" stroke="#123a20" stroke-width="1.5"/>
+              <rect x="-26" y="0" width="52" height="40" rx="6" fill="#f6e8bf" stroke="#123a20" stroke-width="1.5"/>
+              <rect x="-46" y="10" width="22" height="14" rx="4" fill="#a9e8b0" stroke="#123a20" stroke-width="1"/>
+              <rect x="24" y="10" width="22" height="14" rx="4" fill="#a9e8b0" stroke="#123a20" stroke-width="1"/>
+              <rect x="-22" y="40" width="44" height="40" rx="6" fill="#f6e8bf" stroke="#123a20" stroke-width="1.5"/>
+              <circle cx="-8" cy="-24" r="3.5" fill="#123a20"/>
+              <circle cx="8" cy="-24" r="3.5" fill="#123a20"/>
+              <polyline points="-10,-8 -3,-13 4,-8 11,-13" stroke="#123a20" stroke-width="2" fill="none"/>
+            </g>
+            <path d="M60,560 L18,578 L46,592.5 L18,607 L60,625 Z" fill="url(#ribbonGrad3)" stroke="#8a6a2b" stroke-width="1.5"/>
+            <path d="M340,560 L382,578 L354,592.5 L382,607 L340,625 Z" fill="url(#ribbonGrad3)" stroke="#8a6a2b" stroke-width="1.5"/>
+            <path d="M60,560 L340,560 L340,625 L60,625 Z" fill="url(#ribbonGrad3)" stroke="#8a6a2b" stroke-width="1.5"/>
+            <line x1="60" y1="568" x2="340" y2="568" stroke="rgba(240,216,150,0.3)" stroke-width="1"/>
+            <line x1="60" y1="617" x2="340" y2="617" stroke="rgba(240,216,150,0.3)" stroke-width="1"/>
+            <text x="200" y="602" text-anchor="middle" font-family="'Cinzel Decorative','Cinzel',serif" font-weight="700" font-size="28" fill="#f6e8bf" letter-spacing="1">Stormrunners</text>
+            <text x="200" y="652" text-anchor="middle" font-family="'Cinzel',serif" font-weight="600" font-size="16" fill="#d4af5a" letter-spacing="3">CLAN3 — MOBILITY &amp; WARFARE</text>
+            <text x="200" y="678" text-anchor="middle" font-family="'EB Garamond',serif" font-style="italic" font-size="13" fill="rgba(240,230,200,0.65)">Potion Brewing · Witch Farms · Raid Loot</text>
+          </svg>
+          <span class="sr-only">View Stormrunners</span>
+        </button>
+
+        <button type="button" class="clan-card gui-panel reveal" aria-haspopup="dialog" data-name="Bastionborn" data-tag="Clan 4 — Nether &amp; Elite Gear" data-desc="Nether &amp; elite gear economy — piglin/wither farms, netherite, golden food.">
+          <svg viewBox="0 0 400 700" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="shieldGrad4" x1="30" y1="60" x2="370" y2="545" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#7a5a10"/><stop offset="100%" stop-color="#3a2b06"/>
+              </linearGradient>
+              <linearGradient id="goldGrad4" x1="35" y1="60" x2="365" y2="545" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#ffe27a"/><stop offset="50%" stop-color="#d9a441"/><stop offset="100%" stop-color="#8a6a2b"/>
+              </linearGradient>
+              <linearGradient id="ribbonGrad4" x1="60" y1="560" x2="340" y2="625" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#3a2b06"/><stop offset="100%" stop-color="#1c1402"/>
+              </linearGradient>
+            </defs>
+            <path d="M200,15 L208,33 L228,38 L208,43 L200,61 L192,43 L172,38 L192,33 Z" fill="url(#goldGrad4)"/>
+            <circle cx="200" cy="38" r="3" fill="#ffe27a"/>
+            <path d="M200 60 L365 105 L365 285 C365 405 298 498 200 545 C102 498 35 405 35 285 L35 105 Z" fill="url(#shieldGrad4)" stroke="url(#goldGrad4)" stroke-width="6"/>
+            <path d="M200 60 L365 105 L365 285 C365 405 298 498 200 545 C102 498 35 405 35 285 L35 105 Z" fill="none" stroke="rgba(255,226,122,0.35)" stroke-width="1.5" transform="translate(47,32) scale(0.9)"/>
+            <g transform="translate(200,300)">
+              <path d="M-55,70 L-15,50 L-5,60 L-45,80 Z" fill="url(#goldGrad4)" stroke="#6b4e12" stroke-width="1.5"/>
+              <path d="M55,70 L15,50 L5,60 L45,80 Z" fill="url(#goldGrad4)" stroke="#6b4e12" stroke-width="1.5"/>
+              <rect x="-70" y="30" width="140" height="18" rx="3" fill="#f6e8bf" stroke="#6b4e12" stroke-width="1"/>
+              <path d="M-70,30 L-70,10 L-42,-30 L-14,10 L0,-45 L14,10 L42,-30 L70,10 L70,30 Z" fill="#f6e8bf" stroke="#6b4e12" stroke-width="2"/>
+              <circle cx="-42" cy="-25" r="5" fill="#b0242f" stroke="#f6e8bf" stroke-width="1"/>
+              <circle cx="0" cy="-40" r="6" fill="#b0242f" stroke="#f6e8bf" stroke-width="1"/>
+              <circle cx="42" cy="-25" r="5" fill="#b0242f" stroke="#f6e8bf" stroke-width="1"/>
+            </g>
+            <path d="M60,560 L18,578 L46,592.5 L18,607 L60,625 Z" fill="url(#ribbonGrad4)" stroke="#8a6a2b" stroke-width="1.5"/>
+            <path d="M340,560 L382,578 L354,592.5 L382,607 L340,625 Z" fill="url(#ribbonGrad4)" stroke="#8a6a2b" stroke-width="1.5"/>
+            <path d="M60,560 L340,560 L340,625 L60,625 Z" fill="url(#ribbonGrad4)" stroke="#8a6a2b" stroke-width="1.5"/>
+            <line x1="60" y1="568" x2="340" y2="568" stroke="rgba(255,226,122,0.3)" stroke-width="1"/>
+            <line x1="60" y1="617" x2="340" y2="617" stroke="rgba(255,226,122,0.3)" stroke-width="1"/>
+            <text x="200" y="602" text-anchor="middle" font-family="'Cinzel Decorative','Cinzel',serif" font-weight="700" font-size="28" fill="#fdf0c8" letter-spacing="1">Bastionborn</text>
+            <text x="200" y="652" text-anchor="middle" font-family="'Cinzel',serif" font-weight="600" font-size="16" fill="#e0b23a" letter-spacing="3">CLAN4 — NETHER &amp; ELITE GEAR</text>
+            <text x="200" y="678" text-anchor="middle" font-family="'EB Garamond',serif" font-style="italic" font-size="13" fill="rgba(253,240,200,0.65)">Piglin Farms · Netherite · Golden Food</text>
+          </svg>
+          <span class="sr-only">View Bastionborn</span>
+        </button>
+
+        <button type="button" class="clan-card gui-panel reveal" aria-haspopup="dialog" data-name="Verdant Foundry" data-tag="Clan 5 — Redstone &amp; Botany" data-desc="Redstone physics &amp; botany economy — slime and guardian farms, bone meal/wood production.">
+          <svg viewBox="0 0 400 700" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="shieldGrad5" x1="30" y1="60" x2="370" y2="545" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#5f2f7a"/><stop offset="100%" stop-color="#2a1236"/>
+              </linearGradient>
+              <linearGradient id="goldGrad5" x1="35" y1="60" x2="365" y2="545" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#f0d896"/><stop offset="50%" stop-color="#c9a227"/><stop offset="100%" stop-color="#8a6a2b"/>
+              </linearGradient>
+              <linearGradient id="ribbonGrad5" x1="60" y1="560" x2="340" y2="625" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#331646"/><stop offset="100%" stop-color="#180821"/>
+              </linearGradient>
+            </defs>
+            <path d="M200,15 L208,33 L228,38 L208,43 L200,61 L192,43 L172,38 L192,33 Z" fill="url(#goldGrad5)"/>
+            <circle cx="200" cy="38" r="3" fill="#f0d896"/>
+            <path d="M200 60 L365 105 L365 285 C365 405 298 498 200 545 C102 498 35 405 35 285 L35 105 Z" fill="url(#shieldGrad5)" stroke="url(#goldGrad5)" stroke-width="6"/>
+            <path d="M200 60 L365 105 L365 285 C365 405 298 498 200 545 C102 498 35 405 35 285 L35 105 Z" fill="none" stroke="rgba(240,216,150,0.35)" stroke-width="1.5" transform="translate(47,32) scale(0.9)"/>
+            <g transform="translate(200,300)">
+              <path d="M-70,90 Q-30,60 -10,70 Q30,85 20,40 Q45,10 70,20" fill="none" stroke="#7ed957" stroke-width="5" stroke-linecap="round"/>
+              <ellipse cx="-55" cy="78" rx="9" ry="4.5" fill="#7ed957" transform="rotate(-30 -55 78)"/>
+              <ellipse cx="-15" cy="68" rx="9" ry="4.5" fill="#7ed957" transform="rotate(20 -15 68)"/>
+              <ellipse cx="10" cy="55" rx="9" ry="4.5" fill="#7ed957" transform="rotate(-40 10 55)"/>
+              <ellipse cx="55" cy="25" rx="9" ry="4.5" fill="#7ed957" transform="rotate(15 55 25)"/>
+              <circle cx="0" cy="0" r="55" fill="#4a2361" stroke="#f6e8bf" stroke-width="3"/>
+              <rect x="53" y="-7" width="14" height="14" fill="#4a2361" stroke="#f6e8bf" stroke-width="1"/>
+              <rect x="35.4" y="35.4" width="14" height="14" fill="#4a2361" stroke="#f6e8bf" stroke-width="1"/>
+              <rect x="-7" y="53" width="14" height="14" fill="#4a2361" stroke="#f6e8bf" stroke-width="1"/>
+              <rect x="-49.4" y="35.4" width="14" height="14" fill="#4a2361" stroke="#f6e8bf" stroke-width="1"/>
+              <rect x="-67" y="-7" width="14" height="14" fill="#4a2361" stroke="#f6e8bf" stroke-width="1"/>
+              <rect x="-49.4" y="-49.4" width="14" height="14" fill="#4a2361" stroke="#f6e8bf" stroke-width="1"/>
+              <rect x="-7" y="-67" width="14" height="14" fill="#4a2361" stroke="#f6e8bf" stroke-width="1"/>
+              <rect x="35.4" y="-49.4" width="14" height="14" fill="#4a2361" stroke="#f6e8bf" stroke-width="1"/>
+              <circle cx="0" cy="0" r="18" fill="rgba(0,0,0,0.35)"/>
+              <path d="M0,-14 C8,-2 14,8 0,18 C-14,8 -8,-2 0,-14 Z" fill="#d9b3f0" stroke="#f6e8bf" stroke-width="1"/>
+            </g>
+            <path d="M60,560 L18,578 L46,592.5 L18,607 L60,625 Z" fill="url(#ribbonGrad5)" stroke="#8a6a2b" stroke-width="1.5"/>
+            <path d="M340,560 L382,578 L354,592.5 L382,607 L340,625 Z" fill="url(#ribbonGrad5)" stroke="#8a6a2b" stroke-width="1.5"/>
+            <path d="M60,560 L340,560 L340,625 L60,625 Z" fill="url(#ribbonGrad5)" stroke="#8a6a2b" stroke-width="1.5"/>
+            <line x1="60" y1="568" x2="340" y2="568" stroke="rgba(240,216,150,0.3)" stroke-width="1"/>
+            <line x1="60" y1="617" x2="340" y2="617" stroke="rgba(240,216,150,0.3)" stroke-width="1"/>
+            <text x="200" y="602" text-anchor="middle" font-family="'Cinzel Decorative','Cinzel',serif" font-weight="700" font-size="24" fill="#f6e8bf" letter-spacing="1">Verdant Foundry</text>
+            <text x="200" y="652" text-anchor="middle" font-family="'Cinzel',serif" font-weight="600" font-size="16" fill="#d4af5a" letter-spacing="3">CLAN5 — REDSTONE &amp; BOTANY</text>
+            <text x="200" y="678" text-anchor="middle" font-family="'EB Garamond',serif" font-style="italic" font-size="13" fill="rgba(240,230,200,0.65)">Redstone Physics · Slime Farms · Botany</text>
+          </svg>
+          <span class="sr-only">View Verdant Foundry</span>
+        </button>
+      </div>
+    </div>
+
+    <dialog class="clan-modal" id="clanModal" aria-labelledby="clanModalName">
+      <div class="clan-modal__inner">
+        <button type="button" class="clan-modal__close" id="clanModalClose" aria-label="Close">&times;</button>
+        <h3 id="clanModalName"></h3>
+        <p class="clan-modal__tag" id="clanModalTag"></p>
+        <p class="clan-modal__desc" id="clanModalDesc"></p>
+      </div>
+    </dialog>
   </section>
 
   <section class="section" id="join">
@@ -807,6 +1117,37 @@
     .catch(function(){
       statusLine.innerHTML = '<span class="dot"></span> Status unavailable — jump in and see for yourself.';
     });
+
+  // Clan crest modal
+  var clanModal = document.getElementById('clanModal');
+  if(clanModal){
+    var clanModalName = document.getElementById('clanModalName');
+    var clanModalTag = document.getElementById('clanModalTag');
+    var clanModalDesc = document.getElementById('clanModalDesc');
+    var clanModalClose = document.getElementById('clanModalClose');
+
+    document.querySelectorAll('.clan-card').forEach(function(card){
+      card.addEventListener('click', function(){
+        clanModalName.textContent = card.getAttribute('data-name') || '';
+        clanModalTag.textContent = card.getAttribute('data-tag') || '';
+        clanModalDesc.textContent = card.getAttribute('data-desc') || '';
+        if(typeof clanModal.showModal === 'function'){
+          clanModal.showModal();
+        } else {
+          clanModal.setAttribute('open', '');
+        }
+      });
+    });
+
+    clanModalClose.addEventListener('click', function(){ clanModal.close(); });
+
+    // Click on the dialog's own backdrop area (outside the padded inner
+    // wrapper) closes it — the inner wrapper stops the click from ever
+    // reaching this listener when it lands on actual content.
+    clanModal.addEventListener('click', function(e){
+      if(e.target === clanModal) clanModal.close();
+    });
+  }
 </script>
 </body>
 </html>
