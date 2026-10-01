@@ -114,6 +114,11 @@
   .btn--ghost{ background:var(--color-surface); color:var(--color-text); border:1px solid var(--color-border); box-shadow:none; }
   .btn--ghost:hover{ border-color:var(--gold-bright); color:var(--gold-bright); transform:translateY(-2px); }
   .btn--sm{ padding:9px 16px; font-size:0.82rem; }
+  /* Store button (gold) */
+  .btn--store{ background:var(--gold); color:#2A1A05; }
+  .btn--store:hover{ filter:brightness(1.08); transform:translateY(-2px); }
+  .btn--store:active{ transform:translateY(1px); box-shadow: inset 2px 2px 0 rgba(0,0,0,0.25), inset -2px -2px 0 rgba(255,255,255,0.08); }
+  .nav__links a.nav__store{ color:var(--gold-bright); font-weight:700; }
 
   .address-chip{
     display:inline-flex; align-items:center; gap:var(--space-3);
@@ -357,6 +362,7 @@
   .community__inner{ max-width:560px; margin:0 auto; }
   .community h2{ font-size:clamp(1.3rem,2.6vw,1.9rem); margin-bottom:var(--space-3); }
   .community p{ color:var(--color-text-muted); margin-bottom:var(--space-6); }
+  .community__btns{ display:flex; flex-wrap:wrap; gap:var(--space-4); justify-content:center; }
 
   /* Footer */
   .site-footer{
@@ -382,6 +388,10 @@
     <path d="M4 12 L20 20 L20 37 L4 29 Z" fill="var(--face-left)"/>
     <path d="M36 12 L20 20 L20 37 L36 29 Z" fill="var(--face-right)"/>
   </symbol>
+  <symbol id="icon-cart" viewBox="0 0 24 24">
+    <path d="M3 4h2l2.4 10.2a1 1 0 0 0 1 .8h8.9a1 1 0 0 0 1-.8L20 8H6.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="9.5" cy="19" r="1.5" fill="currentColor"/><circle cx="17" cy="19" r="1.5" fill="currentColor"/>
+  </symbol>
 </svg>
 
 <header class="site-header">
@@ -396,12 +406,17 @@
       <li><a href="#join">How to Join</a></li>
       <li><a href="#rules">Rules</a></li>
       <li><a href="#community">Community</a></li>
+      <li><a href="store.html" class="nav__store">Store</a></li>
     </ul>
     <div class="nav__cta">
       <button class="daynight-toggle" id="daynightToggle" aria-pressed="false" aria-label="Toggle day and night mode">
         <span class="daynight-toggle__icon"><span class="mini-sun"></span><span class="mini-moon"></span></span>
         <span id="daynightLabel">Night</span>
       </button>
+      <a class="btn btn--store btn--sm" href="store.html">
+        <svg aria-hidden="true"><use href="#icon-cart"/></svg>
+        Store
+      </a>
       <a class="btn btn--primary btn--sm" href="https://discord.gg/DzztgFdqKV" target="_blank" rel="noopener noreferrer">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="6" width="16" height="12" rx="4"/><circle cx="9" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1" fill="currentColor" stroke="none"/></svg>
         Join Discord
@@ -417,7 +432,12 @@
       <li><a href="#join">How to Join</a></li>
       <li><a href="#rules">Rules</a></li>
       <li><a href="#community">Community</a></li>
+      <li><a href="store.html">Store</a></li>
     </ul>
+    <a class="btn btn--store" href="store.html">
+      <svg aria-hidden="true"><use href="#icon-cart"/></svg>
+      Visit the Store
+    </a>
     <a class="btn btn--primary" href="https://discord.gg/DzztgFdqKV" target="_blank" rel="noopener noreferrer">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="6" width="16" height="12" rx="4"/><circle cx="9" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1" fill="currentColor" stroke="none"/></svg>
       Join the Discord
@@ -460,6 +480,10 @@
         <a class="btn btn--primary" href="https://discord.gg/DzztgFdqKV" target="_blank" rel="noopener noreferrer">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="6" width="16" height="12" rx="4"/><circle cx="9" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1" fill="currentColor" stroke="none"/></svg>
           Join the Discord
+        </a>
+        <a class="btn btn--store" href="store.html">
+          <svg aria-hidden="true"><use href="#icon-cart"/></svg>
+          Visit the Store
         </a>
         <a class="btn btn--ghost" href="#join">How to Join ↓</a>
       </div>
@@ -622,17 +646,23 @@
       <p class="eyebrow" style="justify-content:center;">STAY IN TOUCH</p>
       <h2>Come say hi before you spawn in</h2>
       <p>Questions about the server, ideas for the world, or just want to see what's being built? This is the place.</p>
-      <a class="btn btn--primary" href="https://discord.gg/DzztgFdqKV" id="discordLink">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="6" width="16" height="12" rx="4"/><circle cx="9" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1" fill="currentColor" stroke="none"/></svg>
-        Join the Discord
-      </a>
+      <div class="community__btns">
+        <a class="btn btn--primary" href="https://discord.gg/DzztgFdqKV" id="discordLink">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="6" width="16" height="12" rx="4"/><circle cx="9" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1" fill="currentColor" stroke="none"/></svg>
+          Join the Discord
+        </a>
+        <a class="btn btn--store" href="store.html">
+          <svg aria-hidden="true"><use href="#icon-cart"/></svg>
+          Support SAF in the Store
+        </a>
+      </div>
     </div>
   </section>
 </main>
 
 <footer class="site-footer">
   <div class="container" style="display:flex; flex-wrap:wrap; gap:var(--space-3); align-items:center; justify-content:space-between; width:100%;">
-    <span>SAF — Sunrise Asylum Foundation, a chill Java + Bedrock economy SMP. <a href="https://safsmp.online">safsmp.online</a></span>
+    <span>SAF — Sunrise Asylum Foundation, a chill Java + Bedrock economy SMP. <a href="https://safsmp.online">safsmp.online</a> · <a href="store.html">Store</a></span>
     <span>Not affiliated with Mojang or Microsoft.</span>
   </div>
 </footer>
