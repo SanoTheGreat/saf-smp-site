@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/site.css?v=20261008-2">
 <style>
   /* ===== EDIT HERE: Discord link and prices are in the HTML below (search "EDIT") ===== */
 
@@ -62,9 +62,10 @@
   .starlight{background:radial-gradient(120% 80% at 80% 0%,#c45cff66,transparent 60%),radial-gradient(90% 70% at 0% 100%,#e05aa855,transparent 60%),linear-gradient(160deg,#2a0d52,#140628)}
   .celestial-rank{background:radial-gradient(120% 80% at 80% 0%,#ffb72e55,transparent 60%),radial-gradient(90% 70% at 0% 100%,#e0402a55,transparent 60%),linear-gradient(160deg,#4a0b14,#24050a);border-color:#f2c23088}
   .tagline{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#FFD27A;margin-bottom:6px}
-  /* Badges are 84x24 pixel art: only scale by whole numbers (2x, 3x) so every pixel stays the same size */
-  .badge{width:168px;height:48px;image-rendering:pixelated;display:block;margin:2px 0 12px}
-  @media (max-width:560px){ .badge{ width:252px; height:72px; } }
+  /* Badge files are pre-enlarged 8x with hard pixel edges, so the browser can
+     shrink them smoothly to any size and they stay sharp on scaled screens too */
+  .badge{width:100%;max-width:216px;height:auto;display:block;margin:2px 0 12px}
+  @media (max-width:560px){ .badge{ max-width:260px; } }
   .price{font-size:34px;font-weight:800;margin:2px 0 2px}
   .price small{font-size:14px;color:#B9C4B5;font-weight:600}
   .bonus{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 12px}
@@ -187,7 +188,7 @@
       <!-- ASTRAL -->
       <div class="card astral reveal" data-tilt>
         <div class="tagline">Starter</div>
-        <img class="badge" src="/assets/img/rank-astral.png" width="84" height="24" alt="Astral">
+        <img class="badge" src="/assets/img/rank-astral-8x.png" width="672" height="192" alt="Astral">
         <div class="price">&#8369;99 <small>/ 45 days</small></div><!-- EDIT price -->
         <div class="bonus"><span class="chip gold">$50,000</span><span class="chip gold">200 Ecoins</span></div>
         <ul class="perks">
@@ -209,7 +210,7 @@
       <!-- ECLIPSE -->
       <div class="card eclipse reveal" data-tilt>
         <div class="tagline">Popular</div>
-        <img class="badge" src="/assets/img/rank-eclipse.png" width="84" height="24" alt="Eclipse">
+        <img class="badge" src="/assets/img/rank-eclipse-8x.png" width="672" height="192" alt="Eclipse">
         <div class="price">&#8369;199 <small>/ 45 days</small></div><!-- EDIT price -->
         <div class="bonus"><span class="chip gold">$150,000</span><span class="chip gold">350 Ecoins</span></div>
         <ul class="perks">
@@ -233,7 +234,7 @@
       <!-- STARLIGHT -->
       <div class="card starlight card--featured reveal" data-tilt>
         <div class="tagline">Best value</div>
-        <img class="badge" src="/assets/img/rank-starlight.png" width="84" height="24" alt="Starlight">
+        <img class="badge" src="/assets/img/rank-starlight-8x.png" width="672" height="192" alt="Starlight">
         <div class="price">&#8369;349 <small>/ 45 days</small></div><!-- EDIT price -->
         <div class="bonus"><span class="chip gold">$300,000</span><span class="chip gold">600 Ecoins</span></div>
         <ul class="perks">
@@ -261,7 +262,7 @@
       <!-- CELESTIAL -->
       <div class="card celestial-rank reveal" data-tilt>
         <div class="tagline">Ultimate</div>
-        <img class="badge" src="/assets/img/rank-celestial.png" width="84" height="24" alt="Celestial">
+        <img class="badge" src="/assets/img/rank-celestial-8x.png" width="672" height="192" alt="Celestial">
         <div class="price">&#8369;499 <small>/ 45 days</small></div><!-- EDIT price -->
         <div class="bonus"><span class="chip gold">$500,000</span><span class="chip gold">1,000 Ecoins</span></div>
         <ul class="perks">
@@ -355,6 +356,6 @@
 
 <button type="button" class="to-top" aria-label="Back to top" data-burst="grass"><svg aria-hidden="true"><use href="#icon-up"/></svg></button>
 
-<script src="/assets/site.js"></script>
+<script src="/assets/site.js?v=20261008-2"></script>
 </body>
 </html>
