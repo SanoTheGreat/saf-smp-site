@@ -1,786 +1,510 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="night">
+<html lang="en" data-theme="night" class="no-js">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SAF — Sunrise Asylum Foundation</title>
-<meta name="description" content="SAF — Sunrise Asylum Foundation. A chill Java + Bedrock economy SMP with land claims and peaceful teams. Open to everyone.">
-<meta property="og:title" content="SAF — Sunrise Asylum Foundation">
+<title>SAF SMP — Sunrise Asylum Foundation</title>
+<meta name="description" content="SAF — Sunrise Asylum Foundation. A chill Java + Bedrock economy SMP with land claims, player shops and peaceful teams. Free and open to everyone.">
+<meta property="og:title" content="SAF SMP — Sunrise Asylum Foundation">
 <meta property="og:description" content="A chill Java + Bedrock economy SMP. Land claims, peaceful teams, consent-based PvP. Open to everyone.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://safsmp.online/">
+<meta property="og:image" content="https://safsmp.online/assets/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0B1526" id="metaTheme">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M4 12 L20 4 L36 12 L20 20 Z' fill='%237CB342'/%3E%3Cpath d='M4 12 L20 20 L20 37 L4 29 Z' fill='%238B5A2B'/%3E%3Cpath d='M36 12 L20 20 L20 37 L36 29 Z' fill='%236B4423'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/assets/img/favicon.png">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" as="image" href="/assets/img/logo.webp" type="image/webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Inter:wght@400;500;600;700;800&family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@700&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
 <style>
-  :root{
-    --font-pixel:'Silkscreen', monospace;
-    --font-body:'Inter', sans-serif;
-    --radius-sm:4px;
-    --radius-md:10px;
-    --radius-lg:18px;
-    --shadow-soft:0 12px 30px rgba(0,0,0,0.4);
-    --ease:cubic-bezier(.22,.61,.36,1);
-    --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px;
-    --space-5:24px; --space-6:32px; --space-7:48px; --space-8:64px; --space-9:96px;
-    --header-h:76px;
+  /* ---------- Hero ---------- */
+  .hero{ position:relative; overflow:hidden; padding:var(--space-8) 0 calc(var(--space-9) + 40px); min-height:calc(100vh - var(--header-h)); display:flex; align-items:center; }
+  .hero__inner{ position:relative; z-index:2; display:grid; grid-template-columns:1.05fr .95fr; gap:var(--space-7); align-items:center; width:100%; }
+  .hero__content h1{ font-size:clamp(1.9rem, 5vw, 3.2rem); margin-bottom:var(--space-4); }
+  .hero__content h1 span{ display:block; font-size:.45em; color:var(--gold-bright); margin-top:var(--space-2); letter-spacing:.02em; }
+  .hero__lede{ font-size:1.12rem; color:var(--color-text-muted); margin-bottom:var(--space-6); max-width:52ch; }
+  .hero__ctas{ display:flex; flex-wrap:wrap; gap:var(--space-3); margin-bottom:var(--space-6); }
+  .hero__art{ position:relative; display:flex; justify-content:center; }
+  .hero__logo{ width:100%; max-width:520px; cursor:pointer; filter:drop-shadow(0 22px 40px rgba(0,0,0,.45)); -webkit-tap-highlight-color:transparent; }
+  .hero__logo img{ width:100%; height:auto; user-select:none; -webkit-user-drag:none; }
+  .hero__hint{ position:absolute; bottom:-6px; left:50%; transform:translateX(-50%); font-family:var(--font-pixel); font-size:.6rem; color:var(--color-text-muted); opacity:.75; white-space:nowrap; }
 
-    /* Night (default) */
-    --sky-top:#0A1220; --sky-mid:#101B30; --sky-bottom:#16241C;
-    --color-bg:#101C16; --color-bg-alt:#0C1712;
-    --color-surface:#1B2B22; --color-surface-alt:#22392C;
-    --color-border:rgba(237,230,208,0.10);
-    --color-text:#EDE6D0; --color-text-muted:#9CB09E;
-    --grass:#63A83B; --grass-dark:#4C7A2A; --dirt:#8B5A2B; --dirt-dark:#5C3A1C;
-    --gold:#F4BB5E; --gold-bright:#FFD27A; --diamond:#5FD8E0; --redstone:#D2492A;
-    --glow-color:244,187,94;
-    --hill-1:#182A20; --hill-2:#101E17;
-    --face-shadow: rgba(0,0,0,.55);
-    --star-opacity:1; --cloud-opacity:0.18; --particle-color:var(--gold-bright);
+  .server-card{ padding:var(--space-5); max-width:520px; }
+  .server-card__top{ display:flex; align-items:center; justify-content:space-between; gap:var(--space-3); margin-bottom:var(--space-4); flex-wrap:wrap; }
+  .status{ display:flex; align-items:center; gap:10px; font-weight:600; font-size:.92rem; }
+  .status small{ display:block; font-weight:400; font-size:.78rem; color:var(--color-text-muted); }
+  .status .dot{ width:10px; height:10px; border-radius:2px; background:var(--color-text-muted); flex:0 0 auto; }
+  .status.is-online .dot{ background:#7EFC20; box-shadow:0 0 0 0 rgba(126,252,32,.6); animation:ping 1.8s infinite; }
+  .status.is-offline .dot{ background:var(--redstone); }
+  @keyframes ping{ 0%{ box-shadow:0 0 0 0 rgba(126,252,32,.55); } 100%{ box-shadow:0 0 0 10px rgba(126,252,32,0); } }
+  .players-pill{ font-family:var(--font-pixel); font-size:.7rem; padding:6px 10px; border-radius:var(--radius-sm); background:var(--color-bg); color:var(--gold-bright); }
+  .server-card__addresses{ display:grid; gap:var(--space-2); }
+
+  @media (max-width:900px){
+    .hero{ min-height:0; padding-top:var(--space-6); }
+    .hero__inner{ grid-template-columns:1fr; gap:var(--space-5); }
+    .hero__art{ order:-1; }
+    .hero__logo{ max-width:320px; }
+    .hero__hint{ display:none; }
   }
 
-  [data-theme="day"]{
-    --sky-top:#8FD0F7; --sky-mid:#BEE6F9; --sky-bottom:#DCEFC6;
-    --color-bg:#F3EFDD; --color-bg-alt:#EAE4C9;
-    --color-surface:#FCFAEF; --color-surface-alt:#F2ECD6;
-    --color-border:rgba(40,45,20,0.12);
-    --color-text:#22301C; --color-text-muted:#5B6A50;
-    --grass:#4C8A2A; --grass-dark:#3A6B1F; --dirt:#8B5A2B; --dirt-dark:#6B4420;
-    --gold:#D98A1B; --gold-bright:#F0A93C; --diamond:#1FA8B4; --redstone:#B8391F;
-    --glow-color:255,197,92;
-    --hill-1:#9FCB7C; --hill-2:#7FB35C;
-    --face-shadow: rgba(0,0,0,.18);
-    --star-opacity:0; --cloud-opacity:0.9; --particle-color:#FFFFFF;
-  }
+  /* ---------- Marquee ---------- */
+  .marquee{ background:var(--grass); color:#10200A; overflow:hidden; border-block:3px solid var(--grass-dark); position:relative; z-index:3; }
+  .marquee__track{ display:flex; gap:var(--space-7); width:max-content; padding:12px 0; animation:marquee 32s linear infinite; }
+  .marquee:hover .marquee__track{ animation-play-state:paused; }
+  .marquee span{ font-family:var(--font-pixel); font-size:.78rem; white-space:nowrap; display:flex; align-items:center; gap:var(--space-7); }
+  .marquee span::after{ content:""; width:8px; height:8px; background:#10200A; opacity:.5; }
+  @keyframes marquee{ to{ transform:translateX(-50%); } }
 
-  *,*::before,*::after{ box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
-  body{
-    margin:0;
-    background:var(--color-bg);
-    color:var(--color-text);
-    font-family:var(--font-body);
-    font-size:16px;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    transition:background .5s var(--ease), color .5s var(--ease);
-  }
-  img,svg{ display:block; max-width:100%; }
-  a{ color:inherit; }
-  h1,h2,h3{ font-family:var(--font-pixel); font-weight:700; margin:0; line-height:1.3; letter-spacing:-0.01em; text-shadow:2px 2px 0 var(--face-shadow); }
-  p{ margin:0; }
-  ul,ol{ margin:0; padding:0; }
-  button{ font:inherit; color:inherit; background:none; border:none; cursor:pointer; }
-
-  :focus-visible{ outline:2px solid var(--gold-bright); outline-offset:3px; border-radius:2px; }
-
-  .skip-link{
-    position:absolute; left:-999px; top:auto;
-    background:var(--gold); color:#12200C;
-    padding:10px 18px; border-radius:var(--radius-sm); font-weight:700;
-    z-index:200;
-  }
-  .skip-link:focus{ left:var(--space-5); top:var(--space-3); }
-
-  .container{ max-width:1120px; margin:0 auto; padding:0 var(--space-5); }
-  .section{ padding:var(--space-9) 0; position:relative; scroll-margin-top:var(--header-h); }
-  .section--alt{ background:var(--color-bg-alt); transition:background .5s var(--ease); }
-
-  .eyebrow{
-    display:inline-flex; align-items:center; gap:var(--space-2);
-    font-family:var(--font-pixel); font-size:0.7rem; letter-spacing:0.08em;
-    text-transform:uppercase; color:var(--gold-bright);
-    margin-bottom:var(--space-4);
-  }
-  .eyebrow::before{ content:""; width:16px; height:8px; background:var(--grass); box-shadow:0 -8px 0 var(--dirt); }
-
-  .section__head{ max-width:640px; margin-bottom:var(--space-7); }
-  .section__head h2{ font-size:clamp(1.3rem, 2.6vw, 1.9rem); margin-bottom:var(--space-4); }
-  .section__head p{ color:var(--color-text-muted); font-size:1.05rem; }
-
-  /* Blocky pixel buttons */
-  .btn{
-    display:inline-flex; align-items:center; justify-content:center; gap:var(--space-2);
-    padding:14px 24px; border-radius:var(--radius-sm); font-weight:700; font-size:0.95rem;
-    text-decoration:none; white-space:nowrap; position:relative;
-    transition:transform .12s var(--ease), box-shadow .12s var(--ease), background .2s var(--ease), filter .2s var(--ease);
-    box-shadow: inset 2px 2px 0 rgba(255,255,255,0.18), inset -3px -3px 0 rgba(0,0,0,0.28), var(--shadow-soft);
-  }
-  .btn svg{ width:18px; height:18px; }
-  .btn--primary{ background:var(--grass); color:#12200C; }
-  .btn--primary:hover{ filter:brightness(1.1); transform:translateY(-2px); }
-  .btn--primary:active{ transform:translateY(1px); box-shadow: inset 2px 2px 0 rgba(0,0,0,0.25), inset -2px -2px 0 rgba(255,255,255,0.08); }
-  .btn--ghost{ background:var(--color-surface); color:var(--color-text); border:1px solid var(--color-border); box-shadow:none; }
-  .btn--ghost:hover{ border-color:var(--gold-bright); color:var(--gold-bright); transform:translateY(-2px); }
-  .btn--sm{ padding:9px 16px; font-size:0.82rem; }
-  /* Store button (gold) */
-  .btn--store{ background:var(--gold); color:#2A1A05; }
-  .btn--store:hover{ filter:brightness(1.08); transform:translateY(-2px); }
-  .btn--store:active{ transform:translateY(1px); box-shadow: inset 2px 2px 0 rgba(0,0,0,0.25), inset -2px -2px 0 rgba(255,255,255,0.08); }
-  .nav__links a.nav__store{ color:var(--gold-bright); font-weight:700; }
-
-  .address-chip{
-    display:inline-flex; align-items:center; gap:var(--space-3);
-    background:var(--color-surface); border:1px solid var(--color-border);
-    border-radius:var(--radius-sm); padding:10px 10px 10px 18px;
-    transition:background .5s var(--ease), border-color .5s var(--ease);
-  }
-  .address-chip__text{ font-family:var(--font-pixel); font-size:0.85rem; color:var(--gold-bright); }
-  .copy-btn{
-    display:flex; align-items:center; gap:6px;
-    background:var(--color-surface-alt); border-radius:var(--radius-sm); padding:8px 14px;
-    font-family:var(--font-pixel); font-size:0.66rem; color:var(--color-text-muted);
-    transition:color .2s var(--ease), background .2s var(--ease);
-    position:relative;
-  }
-  .copy-btn:hover{ color:var(--color-text); background:var(--grass-dark); }
-  .copy-btn svg{ width:14px; height:14px; }
-  .copy-btn__tip{
-    position:absolute; bottom:calc(100% + 8px); left:50%; transform:translateX(-50%) translateY(4px);
-    background:var(--grass); color:#12200C; font-weight:700; font-size:0.62rem; font-family:var(--font-pixel);
-    padding:5px 10px; border-radius:var(--radius-sm); opacity:0; pointer-events:none;
-    transition:opacity .18s var(--ease), transform .18s var(--ease);
-  }
-  .copy-btn.is-copied .copy-btn__tip{ opacity:1; transform:translateX(-50%) translateY(0); }
-
-  /* Header */
-  .site-header{
-    position:sticky; top:0; z-index:100; height:var(--header-h);
-    display:flex; align-items:center;
-    background:rgba(10,18,15,0.82); backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--color-border);
-    transition:background .5s var(--ease), border-color .5s var(--ease);
-  }
-  [data-theme="day"] .site-header{ background:rgba(243,239,221,0.82); }
-  .nav{ width:100%; display:flex; align-items:center; justify-content:space-between; gap:var(--space-4); }
-  .nav__brand{ display:flex; align-items:center; gap:10px; text-decoration:none; }
-  .nav__brand-mark{ width:32px; height:32px; flex:0 0 auto; }
-  .nav__brand-word{ font-family:var(--font-pixel); font-weight:700; font-size:1rem; color:var(--gold-bright); }
-  .nav__brand-sub{ font-size:0.72rem; color:var(--color-text-muted); }
-  .nav__links{ display:flex; align-items:center; gap:var(--space-6); list-style:none; }
-  .nav__links a{
-    text-decoration:none; font-size:0.9rem; color:var(--color-text-muted); font-weight:500;
-    position:relative; padding:4px 0; transition:color .2s var(--ease);
-  }
-  .nav__links a::after{
-    content:""; position:absolute; left:0; right:100%; bottom:-2px; height:2px;
-    background:var(--gold-bright); transition:right .25s var(--ease);
-  }
-  .nav__links a:hover{ color:var(--color-text); }
-  .nav__links a:hover::after{ right:0; }
-  .nav__cta{ display:flex; align-items:center; gap:var(--space-3); }
-  .nav__toggle{ display:none; width:38px; height:38px; align-items:center; justify-content:center; }
-  .nav__toggle svg{ width:22px; height:22px; }
-  .nav__mobile{ display:none; }
-
-  /* Day/Night toggle */
-  .daynight-toggle{
-    display:flex; align-items:center; gap:8px;
-    background:var(--color-surface); border:1px solid var(--color-border);
-    border-radius:var(--radius-sm); padding:8px 12px;
-    font-family:var(--font-pixel); font-size:0.62rem; color:var(--color-text);
-    transition:background .3s var(--ease), border-color .3s var(--ease);
-  }
-  .daynight-toggle:hover{ border-color:var(--gold-bright); }
-  .daynight-toggle__icon{ width:16px; height:16px; position:relative; flex:0 0 auto; }
-  .daynight-toggle__icon .mini-sun, .daynight-toggle__icon .mini-moon{
-    position:absolute; inset:0; border-radius:3px; transition:opacity .3s var(--ease), transform .3s var(--ease);
-  }
-  .daynight-toggle__icon .mini-sun{ background:linear-gradient(145deg,#FFE28A,#F4B942); box-shadow:0 0 6px 2px rgba(244,187,94,.7); }
-  .daynight-toggle__icon .mini-moon{ background:linear-gradient(145deg,#F3F6FA,#C9D6E5); box-shadow:0 0 6px 2px rgba(201,214,229,.5); }
-  [data-theme="night"] .daynight-toggle__icon .mini-sun{ opacity:0; transform:scale(.4) rotate(90deg); }
-  [data-theme="day"] .daynight-toggle__icon .mini-moon{ opacity:0; transform:scale(.4) rotate(-90deg); }
-
-  @media (max-width: 900px){
-    .nav__links, .nav__cta .btn--primary, .nav__brand-sub{ display:none; }
-    .nav__toggle{ display:flex; }
-    .nav__mobile{
-      display:block; position:fixed; inset:var(--header-h) 0 auto 0;
-      background:var(--color-bg-alt); border-bottom:1px solid var(--color-border);
-      padding:var(--space-5); transform:translateY(-8px); opacity:0; pointer-events:none;
-      transition:opacity .22s var(--ease), transform .22s var(--ease);
-    }
-    .nav__mobile.is-open{ opacity:1; transform:translateY(0); pointer-events:auto; }
-    .nav__mobile ul{ list-style:none; display:flex; flex-direction:column; gap:var(--space-4); margin-bottom:var(--space-5); }
-    .nav__mobile a{ text-decoration:none; color:var(--color-text); font-size:1.05rem; }
-    .nav__mobile .btn{ width:100%; margin-bottom:var(--space-3); }
-  }
-
-  /* Hero */
-  .hero{ position:relative; overflow:hidden; padding:var(--space-9) 0 var(--space-8); }
-  .hero__bg{ position:absolute; inset:0; z-index:0; background:linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 55%, var(--sky-bottom) 100%); transition:background 1s var(--ease); }
-  .hero__glow{
-    position:absolute; top:-10%; left:50%; transform:translateX(-50%);
-    width:900px; height:900px; max-width:160vw;
-    background:radial-gradient(circle, rgba(var(--glow-color),0.18) 0%, rgba(var(--glow-color),0) 62%);
-    pointer-events:none; transition:background 1s var(--ease);
-  }
-
-  .stars{ position:absolute; inset:0; opacity:var(--star-opacity); transition:opacity 1s var(--ease); pointer-events:none; }
-  .star{ position:absolute; width:2px; height:2px; background:#fff; border-radius:1px; animation:twinkle 3s ease-in-out infinite; }
-  @keyframes twinkle{ 0%,100%{ opacity:.2; } 50%{ opacity:1; } }
-
-  .clouds{ position:absolute; inset:0; overflow:hidden; opacity:var(--cloud-opacity); transition:opacity 1s var(--ease); pointer-events:none; }
-  .cloud{ position:absolute; background:#fff; border-radius:6px; box-shadow: 30px 6px 0 #fff, -28px 4px 0 #fff, 14px -10px 0 #fff, -14px -8px 0 #fff; animation:drift-cloud linear infinite; }
-  .cloud--1{ width:70px; height:22px; top:4%; animation-duration:52s; }
-  .cloud--2{ width:50px; height:16px; top:11%; animation-duration:68s; animation-delay:-20s; }
-  .cloud--3{ width:60px; height:18px; top:1%; animation-duration:80s; animation-delay:-45s; }
-  @keyframes drift-cloud{ from{ transform:translateX(-140px); } to{ transform:translateX(110vw); } }
-
-  .celestial{ position:absolute; width:58px; height:58px; z-index:1; transition:left 1.4s var(--ease), top 1.4s var(--ease), opacity .9s var(--ease), transform 1.4s var(--ease); }
-  .sun, .moon{ position:absolute; inset:0; border-radius:8px; transition:opacity .8s var(--ease), transform .8s var(--ease); }
-  .sun{ background:linear-gradient(145deg,#FFE28A,#F4B942); box-shadow:0 0 46px 14px rgba(244,187,94,.55); animation:pulse-glow 4s ease-in-out infinite; }
-  .sun .ray{ position:absolute; top:50%; left:50%; width:6px; height:20px; background:#F4B942; border-radius:2px; opacity:.8;
-    transform:translate(-50%,-50%) rotate(calc(45deg * var(--i))) translateY(-36px); }
-  .moon{ background:linear-gradient(145deg,#F3F6FA,#C9D6E5); box-shadow:0 0 34px 10px rgba(201,214,229,.4); }
-  .moon .crater{ position:absolute; background:rgba(120,135,150,.55); border-radius:2px; }
-  .moon .crater--1{ width:10px; height:10px; top:10px; left:12px; }
-  .moon .crater--2{ width:7px; height:7px; top:28px; left:30px; }
-  .moon .crater--3{ width:6px; height:6px; top:36px; left:10px; }
-  @keyframes pulse-glow{ 0%,100%{ box-shadow:0 0 46px 14px rgba(244,187,94,.5); } 50%{ box-shadow:0 0 54px 18px rgba(244,187,94,.7); } }
-
-  [data-theme="night"] .celestial{ left:64%; top:8%; }
-  [data-theme="night"] .sun{ opacity:0; transform:scale(.5) rotate(90deg); }
-  [data-theme="night"] .moon{ opacity:1; transform:scale(1) rotate(0deg); }
-  [data-theme="day"] .celestial{ left:14%; top:6%; }
-  [data-theme="day"] .sun{ opacity:1; transform:scale(1) rotate(0deg); }
-  [data-theme="day"] .moon{ opacity:0; transform:scale(.5) rotate(-90deg); }
-
-  .hero__particle{
-    position:absolute; width:5px; height:5px; border-radius:50%;
-    background:var(--particle-color);
-    box-shadow:0 0 8px 2px rgba(var(--glow-color),0.7);
-    animation:drift 9s ease-in-out infinite;
-    opacity:0.75; transition:background .5s var(--ease);
-  }
-  @keyframes drift{
-    0%,100%{ transform:translate(0,0); opacity:0.3; }
-    50%{ transform:translate(14px,-22px); opacity:0.9; }
-  }
-  .hero__hills{ position:absolute; left:0; right:0; bottom:0; width:100%; height:auto; }
-  .hero__hills path{ transition:fill 1s var(--ease); }
-  .hero__content{ position:relative; z-index:2; max-width:680px; }
-  .hero__content h1{ font-size:clamp(1.7rem, 5vw, 2.9rem); margin-bottom:var(--space-4); }
-  .hero__content p.lede{ font-size:1.1rem; color:var(--color-text-muted); margin-bottom:var(--space-6); max-width:52ch; }
-  .hero__ctas{ display:flex; flex-wrap:wrap; gap:var(--space-4); align-items:center; margin-bottom:var(--space-5); }
-  .hero__status{
-    display:flex; align-items:center; gap:8px; font-family:var(--font-pixel);
-    font-size:0.72rem; color:var(--color-text-muted);
-  }
-  .hero__status .dot{ width:8px; height:8px; border-radius:50%; background:var(--color-text-muted); flex:0 0 auto; }
-  .hero__status.is-online .dot{ background:var(--grass); box-shadow:0 0 6px var(--grass); }
-  .hero__status.is-offline .dot{ background:var(--redstone); }
-
-  .reveal{ opacity:0; transform:translateY(10px) scale(.98); transition:opacity .3s steps(6), transform .3s steps(6); }
-  .reveal.is-visible{ opacity:1; transform:translateY(0) scale(1); }
-
-  /* Blocky GUI-slot bevel, shared by every card-like surface on the site so
-     it reads as game UI (inventory/item slots) instead of a flat design-
-     system card. Hard corners, light top-left / dark bottom-right bevel,
-     plus a faint pixel-dot dither so surfaces aren't perfectly flat vector. */
-  .gui-panel{
-    background-color:var(--color-surface);
-    background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
-    background-size: 4px 4px;
-    border-radius:2px;
-    box-shadow:
-      inset 2px 2px 0 rgba(255,255,255,0.10),
-      inset -2px -2px 0 rgba(0,0,0,0.35),
-      0 0 0 2px var(--color-bg-alt);
-    transition:box-shadow .25s var(--ease), transform .2s var(--ease), background-color .5s var(--ease);
-  }
-
-  /* Features */
-  .features-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:var(--space-5); }
-  .feature-card{
-    padding:var(--space-6);
-  }
-  .feature-card:hover{ transform:translateY(-3px); box-shadow: inset 2px 2px 0 rgba(255,255,255,0.10), inset -2px -2px 0 rgba(0,0,0,0.35), 0 0 0 2px var(--gold-bright); }
+  /* ---------- Features ---------- */
+  .features-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-5); }
+  @media (max-width:900px){ .features-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:600px){ .features-grid{ grid-template-columns:1fr; } }
+  .feature-card{ padding:var(--space-6); }
   .feature-card__icon{
-    width:44px; height:44px; border-radius:2px; background:var(--color-bg);
+    width:48px; height:48px; border-radius:3px; background:var(--color-bg);
     display:flex; align-items:center; justify-content:center; margin-bottom:var(--space-4);
-    color:var(--gold-bright);
-    box-shadow: inset 2px 2px 0 rgba(255,255,255,0.08), inset -2px -2px 0 rgba(0,0,0,0.4);
+    color:var(--gold-bright); transition:transform .3s cubic-bezier(.3,1.6,.5,1), color .2s;
+    box-shadow:inset 2px 2px 0 rgba(255,255,255,0.08), inset -2px -2px 0 rgba(0,0,0,0.4);
   }
+  .feature-card:hover .feature-card__icon{ transform:rotate(-8deg) scale(1.12); color:#7EFC20; }
   .feature-card__icon svg{ width:24px; height:24px; }
-  .feature-card h3{ font-size:0.98rem; margin-bottom:var(--space-2); }
-  .feature-card p{ color:var(--color-text-muted); font-size:0.94rem; }
+  .feature-card h3{ font-size:.98rem; margin-bottom:var(--space-2); }
+  .feature-card p{ color:var(--color-text-muted); font-size:.95rem; }
 
-  .sr-only{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; }
-
-  /* Recipe / join */
-  .recipe{ margin-bottom:var(--space-8); }
-  .recipe__row{ display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:var(--space-4); }
-  .recipe__slot{
-    display:flex; flex-direction:column; align-items:center; gap:10px;
-    width:132px; padding:var(--space-4) var(--space-3);
-    background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md);
-    text-align:center; transition:box-shadow .25s var(--ease), border-color .25s var(--ease), background .5s var(--ease);
-  }
-  .recipe__slot:hover{ border-color:rgba(244,187,94,0.5); box-shadow:0 0 0 3px rgba(244,187,94,0.08); }
-  .recipe__slot svg{ width:26px; height:26px; color:var(--grass); }
-  .recipe__slot--result{ background:var(--color-surface-alt); border-color:rgba(95,216,224,0.5); }
-  .recipe__slot--result svg{ color:var(--gold-bright); }
-  .recipe__slot span{ font-size:0.78rem; color:var(--color-text-muted); }
-  .recipe__op{ font-family:var(--font-pixel); font-size:1.2rem; color:var(--color-text-muted); }
-  .recipe__op--arrow{ color:var(--gold-bright); font-size:1.4rem; }
-  .recipe__caption{ text-align:center; color:var(--color-text-muted); font-size:0.85rem; margin-top:var(--space-4); font-style:italic; }
-
-  @media (max-width:640px){
-    .recipe__row{ flex-direction:column; }
-    .recipe__op--arrow{ transform:rotate(90deg); }
-  }
-
-  .steps{ list-style:none; display:flex; flex-direction:column; gap:var(--space-6); counter-reset:step; max-width:760px; margin:0 auto; }
-  .step{ counter-increment:step; display:flex; gap:var(--space-5); align-items:flex-start; }
+  /* ---------- Join ---------- */
+  .join{ display:grid; grid-template-columns:1fr 1.1fr; gap:var(--space-7); align-items:start; }
+  @media (max-width:900px){ .join{ grid-template-columns:1fr; } }
+  .steps{ list-style:none; display:grid; gap:var(--space-5); counter-reset:step; }
+  .step{ counter-increment:step; display:flex; gap:var(--space-4); align-items:flex-start; }
   .step__num{
-    flex:0 0 auto; width:2.3rem; height:2.3rem; border-radius:var(--radius-sm);
-    background:var(--grass); color:#12200C; font-family:var(--font-pixel); font-weight:700; font-size:0.9rem;
+    flex:0 0 auto; width:2.4rem; height:2.4rem; border-radius:3px;
+    background:var(--grass); color:#10200A; font-family:var(--font-pixel); font-weight:700; font-size:.9rem;
     display:flex; align-items:center; justify-content:center;
-    box-shadow: inset 2px 2px 0 rgba(255,255,255,0.2), inset -2px -2px 0 rgba(0,0,0,0.25);
+    box-shadow:inset 2px 2px 0 rgba(255,255,255,0.2), inset -2px -2px 0 rgba(0,0,0,0.25);
   }
   .step__num::before{ content:counter(step); }
-  .step__body h3{ font-size:1rem; margin-bottom:6px; }
-  .step__body p{ color:var(--color-text-muted); margin-bottom:var(--space-3); }
-  .step__body .address-chip{ margin-top:var(--space-2); display:flex; width:fit-content; max-width:100%; }
+  .step h3{ font-size:.95rem; margin-bottom:6px; }
+  .step p{ color:var(--color-text-muted); }
 
-  /* Rules */
-  .rules-list{ list-style:none; display:grid; gap:var(--space-4); max-width:760px; margin:0 auto; }
-  .rule{
-    display:flex; gap:var(--space-4); align-items:flex-start;
-    background:var(--color-surface); border:1px solid var(--color-border);
-    border-radius:var(--radius-md); padding:var(--space-5);
-    transition:background .5s var(--ease);
+  .connect{ padding:var(--space-5); }
+  .tabs{ display:flex; gap:var(--space-2); margin-bottom:var(--space-5); background:var(--color-bg); padding:4px; border-radius:var(--radius-sm); }
+  .tab{ flex:1; padding:10px 12px; border-radius:3px; font-family:var(--font-pixel); font-size:.72rem; color:var(--color-text-muted); transition:background .2s var(--ease), color .2s var(--ease); }
+  .tab:hover{ color:var(--color-text); }
+  .tab[aria-selected="true"]{ background:var(--grass); color:#10200A; box-shadow:inset 2px 2px 0 rgba(255,255,255,.2), inset -2px -2px 0 rgba(0,0,0,.25); }
+  .tabpanel ol{ padding-left:1.2em; display:grid; gap:var(--space-2); color:var(--color-text-muted); margin-bottom:var(--space-4); }
+  .tabpanel ol strong{ color:var(--color-text); }
+  .tabpanel .address + .address{ margin-top:var(--space-2); }
+  .tabpanel:not([hidden]){ animation:panel-in .3s var(--ease); }
+  @keyframes panel-in{ from{ opacity:0; transform:translateY(6px); } to{ opacity:1; transform:none; } }
+
+  /* ---------- Ranks preview ---------- */
+  .ranks{ display:grid; grid-template-columns:repeat(4,1fr); gap:var(--space-4); margin-bottom:var(--space-6); }
+  @media (max-width:960px){ .ranks{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:480px){ .ranks{ grid-template-columns:1fr; } }
+  .rank{
+    position:relative; display:flex; flex-direction:column; gap:var(--space-3); padding:var(--space-5);
+    border-radius:var(--radius-md); text-decoration:none; color:#EDE6D0; overflow:hidden;
+    border:2px solid rgba(255,255,255,.08); box-shadow:0 14px 30px rgba(0,0,0,.3);
+    transition:transform .2s var(--ease), border-color .2s var(--ease);
   }
-  .rule__mark{ color:var(--gold-bright); font-family:var(--font-pixel); flex:0 0 auto; font-size:0.85rem; }
+  .rank:hover{ border-color:rgba(255,210,122,.6); }
+  .rank::before{ content:""; position:absolute; inset:0; pointer-events:none; opacity:.8;
+    background-image:radial-gradient(1.5px 1.5px at 12% 18%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 72% 12%,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 85% 60%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 30% 75%,#fff 50%,transparent 51%); }
+  .rank > *{ position:relative; }
+  .rank__tag{ font-size:.7rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:#FFD27A; }
+  .rank img{ width:100%; max-width:210px; image-rendering:pixelated; }
+  .rank__price{ font-size:1.6rem; font-weight:800; }
+  .rank__price small{ font-size:.8rem; color:#B9C4B5; font-weight:600; }
+  .rank__more{ font-size:.85rem; color:#FFD27A; font-weight:600; margin-top:auto; }
+  .astral{ background:radial-gradient(120% 80% at 80% 0%,#3f7dff55,transparent 60%),radial-gradient(90% 70% at 0% 100%,#6a3bd644,transparent 60%),linear-gradient(160deg,#0a1240,#070b2a); }
+  .eclipse{ background:radial-gradient(120% 80% at 80% 0%,#28c27a55,transparent 60%),radial-gradient(90% 70% at 0% 100%,#1ea3a044,transparent 60%),linear-gradient(160deg,#07301c,#03140c); }
+  .starlight{ background:radial-gradient(120% 80% at 80% 0%,#c45cff66,transparent 60%),radial-gradient(90% 70% at 0% 100%,#e05aa855,transparent 60%),linear-gradient(160deg,#2a0d52,#140628); }
+  .celestial-rank{ background:radial-gradient(120% 80% at 80% 0%,#ffb72e55,transparent 60%),radial-gradient(90% 70% at 0% 100%,#e0402a55,transparent 60%),linear-gradient(160deg,#4a0b14,#24050a); border-color:#f2c23088; }
+  .ranks-cta{ text-align:center; }
+  .ranks-cta p{ color:var(--color-text-muted); font-size:.9rem; margin-top:var(--space-3); }
+
+  /* ---------- Rules ---------- */
+  .rules-list{ list-style:none; display:grid; grid-template-columns:repeat(2,1fr); gap:var(--space-4); }
+  @media (max-width:760px){ .rules-list{ grid-template-columns:1fr; } }
+  .rule{ display:flex; gap:var(--space-4); align-items:flex-start; padding:var(--space-5); }
+  .rule__mark{ color:var(--gold-bright); font-family:var(--font-pixel); flex:0 0 auto; font-size:.9rem; padding-top:2px; }
   .rule p{ color:var(--color-text-muted); }
-  .rule strong{ color:var(--color-text); }
+  .rule strong{ color:var(--color-text); display:block; margin-bottom:2px; }
 
-  /* Community */
-  .community{ text-align:center; }
-  .community__inner{ max-width:560px; margin:0 auto; }
-  .community h2{ font-size:clamp(1.3rem,2.6vw,1.9rem); margin-bottom:var(--space-3); }
-  .community p{ color:var(--color-text-muted); margin-bottom:var(--space-6); }
-  .community__btns{ display:flex; flex-wrap:wrap; gap:var(--space-4); justify-content:center; }
+  /* ---------- FAQ ---------- */
+  .faq{ max-width:780px; margin:0 auto; display:grid; gap:var(--space-3); }
+  .faq details{ padding:0; overflow:hidden; }
+  .faq summary{ list-style:none; cursor:pointer; padding:var(--space-4) var(--space-5); font-weight:700; display:flex; justify-content:space-between; align-items:center; gap:var(--space-4); }
+  .faq summary::-webkit-details-marker{ display:none; }
+  .faq summary::after{ content:"+"; font-family:var(--font-pixel); color:var(--gold-bright); font-size:1.1rem; transition:transform .25s var(--ease); flex:0 0 auto; }
+  .faq details[open] summary::after{ transform:rotate(45deg); }
+  .faq summary:hover{ color:var(--gold-bright); }
+  .faq details p{ padding:0 var(--space-5) var(--space-5); color:var(--color-text-muted); }
+  .faq details[open] p{ animation:panel-in .3s var(--ease); }
 
-  /* Footer */
-  .site-footer{
-    border-top:1px solid var(--color-border); padding:var(--space-6) 0;
-    display:flex; flex-wrap:wrap; gap:var(--space-3); align-items:center; justify-content:space-between;
-    color:var(--color-text-muted); font-size:0.85rem;
-    transition:border-color .5s var(--ease);
-  }
-  .site-footer a{ text-decoration:none; color:var(--color-text-muted); }
-  .site-footer a:hover{ color:var(--gold-bright); }
-
-  @media (prefers-reduced-motion: reduce){
-    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
-  }
+  /* ---------- Bottom CTA ---------- */
+  .cta-band .sky{ border-radius:inherit; }
+  .cta-band > *:not(.sky){ position:relative; z-index:2; }
+  .cta-band img{ width:140px; margin:0 auto var(--space-4); }
 </style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
+<div class="xp-bar" aria-hidden="true"><div class="xp-bar__fill"></div></div>
 
 <svg style="position:absolute;width:0;height:0" aria-hidden="true">
-  <symbol id="icon-cube" viewBox="0 0 40 40">
-    <path d="M4 12 L20 4 L36 12 L20 20 Z" fill="var(--face-top)"/>
-    <path d="M4 12 L20 20 L20 37 L4 29 Z" fill="var(--face-left)"/>
-    <path d="M36 12 L20 20 L20 37 L36 29 Z" fill="var(--face-right)"/>
-  </symbol>
-  <symbol id="icon-cart" viewBox="0 0 24 24">
-    <path d="M3 4h2l2.4 10.2a1 1 0 0 0 1 .8h8.9a1 1 0 0 0 1-.8L20 8H6.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="9.5" cy="19" r="1.5" fill="currentColor"/><circle cx="17" cy="19" r="1.5" fill="currentColor"/>
-  </symbol>
+  <symbol id="icon-cart" viewBox="0 0 24 24"><path d="M3 4h2l2.4 10.2a1 1 0 0 0 1 .8h8.9a1 1 0 0 0 1-.8L20 8H6.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.5" cy="19" r="1.5" fill="currentColor"/><circle cx="17" cy="19" r="1.5" fill="currentColor"/></symbol>
+  <symbol id="icon-discord" viewBox="0 0 24 24"><path fill="currentColor" d="M20.3 4.4A19.6 19.6 0 0 0 15.4 3l-.6 1.3a18.2 18.2 0 0 0-5.6 0L8.6 3a19.5 19.5 0 0 0-4.9 1.5C.6 9.1-.3 13.6.1 18.1a19.7 19.7 0 0 0 6 3l1.3-2.1a12.8 12.8 0 0 1-2-1l.5-.4a14 14 0 0 0 12.2 0l.5.4a12.8 12.8 0 0 1-2 1l1.3 2.1a19.6 19.6 0 0 0 6-3c.5-5.2-.8-9.7-3.6-13.7ZM8 15.3c-1.2 0-2.2-1.1-2.2-2.4S6.8 10.5 8 10.5s2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Zm8 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Z"/></symbol>
+  <symbol id="icon-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></g></symbol>
+  <symbol id="icon-up" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></symbol>
 </svg>
 
 <header class="site-header">
   <div class="container nav">
-    <a class="nav__brand" href="#top">
-      <svg class="nav__brand-mark" style="--face-top:#7CB342;--face-left:#8B5A2B;--face-right:#6B4423"><use href="#icon-cube"/></svg>
-      <span class="nav__brand-word">SAF</span>
-      <span class="nav__brand-sub">Sunrise Asylum Foundation</span>
+    <a class="nav__brand" href="/" aria-label="SAF SMP home">
+      <img src="/assets/img/logo-sm.webp" width="38" height="32" alt="">
+      <span class="nav__brand-word">SAF SMP<span class="nav__brand-sub">Sunrise Asylum Foundation</span></span>
     </a>
     <ul class="nav__links">
       <li><a href="#features">Features</a></li>
       <li><a href="#join">How to Join</a></li>
+      <li><a href="#ranks">Ranks</a></li>
       <li><a href="#rules">Rules</a></li>
-      <li><a href="#community">Community</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li><a href="/store" class="nav__store">Store</a></li>
     </ul>
     <div class="nav__cta">
       <button class="daynight-toggle" id="daynightToggle" aria-pressed="false" aria-label="Toggle day and night mode">
         <span class="daynight-toggle__icon"><span class="mini-sun"></span><span class="mini-moon"></span></span>
-        <span id="daynightLabel">Night</span>
+        <span data-theme-label>Night</span>
       </button>
-      <a class="btn btn--store btn--sm" href="/store">
-        <svg aria-hidden="true"><use href="#icon-cart"/></svg>
-        Store
-      </a>
-      <a class="btn btn--primary btn--sm" href="https://discord.gg/DzztgFdqKV" target="_blank" rel="noopener noreferrer">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="6" width="16" height="12" rx="4"/><circle cx="9" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1" fill="currentColor" stroke="none"/></svg>
-        Join Discord
+      <a class="btn btn--discord btn--sm" href="https://discord.gg/DzztgFdqKV" target="_blank" rel="noopener noreferrer">
+        <svg aria-hidden="true"><use href="#icon-discord"/></svg>Discord
       </a>
       <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navMobile">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
     </div>
   </div>
-  <nav class="nav__mobile" id="navMobile">
+  <nav class="nav__mobile" id="navMobile" aria-label="Mobile">
     <ul>
       <li><a href="#features">Features</a></li>
       <li><a href="#join">How to Join</a></li>
+      <li><a href="#ranks">Ranks</a></li>
       <li><a href="#rules">Rules</a></li>
-      <li><a href="#community">Community</a></li>
-      <li><a href="/store">Store</a></li>
+      <li><a href="#faq">FAQ</a></li>
     </ul>
-    <a class="btn btn--store" href="/store">
-      <svg aria-hidden="true"><use href="#icon-cart"/></svg>
-      Visit the Store
-    </a>
-    <a class="btn btn--primary" href="https://discord.gg/DzztgFdqKV" target="_blank" rel="noopener noreferrer">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="6" width="16" height="12" rx="4"/><circle cx="9" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1" fill="currentColor" stroke="none"/></svg>
-      Join the Discord
-    </a>
+    <a class="btn btn--store" href="/store"><svg aria-hidden="true"><use href="#icon-cart"/></svg>Visit the Store</a>
+    <a class="btn btn--discord" href="https://discord.gg/DzztgFdqKV" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#icon-discord"/></svg>Join the Discord</a>
   </nav>
 </header>
 
 <main id="main">
+  <!-- ======================= HERO ======================= -->
   <section class="hero" id="top">
-    <div class="hero__bg" aria-hidden="true">
-      <div class="hero__glow"></div>
-      <div class="stars" id="starField"></div>
-      <div class="clouds">
-        <div class="cloud cloud--1"></div>
-        <div class="cloud cloud--2"></div>
-        <div class="cloud cloud--3"></div>
-      </div>
+    <div class="sky" aria-hidden="true">
+      <div class="sky__glow"></div>
+      <div class="stars"></div>
+      <div class="clouds"><div class="cloud cloud--1"></div><div class="cloud cloud--2"></div><div class="cloud cloud--3"></div></div>
       <div class="celestial">
-        <div class="sun">
-          <span class="ray" style="--i:0"></span><span class="ray" style="--i:1"></span>
-          <span class="ray" style="--i:2"></span><span class="ray" style="--i:3"></span>
-          <span class="ray" style="--i:4"></span><span class="ray" style="--i:5"></span>
-          <span class="ray" style="--i:6"></span><span class="ray" style="--i:7"></span>
-        </div>
-        <div class="moon">
-          <span class="crater crater--1"></span><span class="crater crater--2"></span><span class="crater crater--3"></span>
-        </div>
+        <div class="sun"></div>
+        <div class="moon"><span class="crater crater--1"></span><span class="crater crater--2"></span><span class="crater crater--3"></span></div>
       </div>
-      <svg class="hero__hills" viewBox="0 0 1200 340" preserveAspectRatio="none">
-        <path d="M0 220 L120 170 L260 210 L400 140 L560 200 L720 130 L880 190 L1040 150 L1200 200 L1200 340 L0 340 Z" fill="var(--hill-1)"/>
-        <path d="M0 260 L150 220 L320 255 L480 200 L660 250 L840 210 L1000 245 L1200 220 L1200 340 L0 340 Z" fill="var(--hill-2)"/>
+      <svg class="sky__hills" viewBox="0 0 1200 340" preserveAspectRatio="none">
+        <path d="M0 200 L120 160 L260 200 L400 130 L560 190 L720 120 L880 180 L1040 140 L1200 190 L1200 340 L0 340 Z" fill="var(--hill-1)"/>
+        <path d="M0 250 L150 215 L320 250 L480 195 L660 245 L840 205 L1000 240 L1200 215 L1200 340 L0 340 Z" fill="var(--hill-2)"/>
+        <path d="M0 300 L200 285 L400 305 L600 280 L800 300 L1000 285 L1200 300 L1200 340 L0 340 Z" fill="var(--color-bg)"/>
       </svg>
     </div>
 
-    <div class="container hero__content">
-      <p class="eyebrow">A CHILL JAVA + BEDROCK ECONOMY SMP</p>
-      <h1>SAF — Sunrise Asylum Foundation</h1>
-      <p class="lede">SAF is a free, open economy SMP — land claims, player-run shops, and teams instead of chaos. PvP only happens with consent. Join the Discord or connect directly on Java or Bedrock.</p>
-      <div class="hero__ctas">
-        <a class="btn btn--primary" href="https://discord.gg/DzztgFdqKV" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="6" width="16" height="12" rx="4"/><circle cx="9" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1" fill="currentColor" stroke="none"/></svg>
-          Join the Discord
-        </a>
-        <a class="btn btn--store" href="/store">
-          <svg aria-hidden="true"><use href="#icon-cart"/></svg>
-          Visit the Store
-        </a>
-        <a class="btn btn--ghost" href="#join">How to Join ↓</a>
+    <div class="container hero__inner">
+      <div class="hero__content">
+        <p class="eyebrow">Java + Bedrock economy SMP</p>
+        <h1>Build. Trade. Chill.<span>Sunrise Asylum Foundation</span></h1>
+        <p class="hero__lede">A free, open economy SMP: land claims, player-run shops and teams instead of chaos. PvP only happens with consent. No whitelist, just hop on.</p>
+        <div class="hero__ctas">
+          <a class="btn btn--primary" href="#join">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            Play Now
+          </a>
+          <a class="btn btn--discord" href="https://discord.gg/DzztgFdqKV" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#icon-discord"/></svg>Join the Discord</a>
+          <a class="btn btn--store" href="/store"><svg aria-hidden="true"><use href="#icon-cart"/></svg>Store</a>
+        </div>
+
+        <div class="server-card gui-panel">
+          <div class="server-card__top">
+            <div class="status is-unknown" data-status aria-live="polite">
+              <span class="dot"></span>
+              <span><span data-status-text>Checking server status…</span><small data-status-detail></small></span>
+            </div>
+            <span class="players-pill" title="Players online" hidden><span data-players></span> online</span>
+          </div>
+          <div class="server-card__addresses">
+            <div class="address">
+              <span><span class="address__label">Java</span><span class="address__value" data-fill="java-address">play.safsmp.online</span></span>
+              <button type="button" class="copy-btn" data-copy-key="java" data-copy="play.safsmp.online" aria-label="Copy Java address"><svg aria-hidden="true"><use href="#icon-copy"/></svg>Copy<span class="copy-btn__tip">Copied!</span></button>
+            </div>
+            <div class="address">
+              <span><span class="address__label">Bedrock</span><span class="address__value"><span data-fill="bedrock-address">play.safsmp.online</span> · Port <span data-fill="bedrock-port">50338</span></span></span>
+              <button type="button" class="copy-btn" data-copy-key="bedrock" data-copy="play.safsmp.online:50338" aria-label="Copy Bedrock address"><svg aria-hidden="true"><use href="#icon-copy"/></svg>Copy<span class="copy-btn__tip">Copied!</span></button>
+            </div>
+          </div>
+        </div>
       </div>
-      <p class="hero__status" id="statusLine"><span class="dot"></span> Checking server status…</p>
-      <noscript><p style="color:var(--color-text-muted); font-size:0.85rem;">Enable JavaScript to see live server status and day/night mode.</p></noscript>
+
+      <div class="hero__art">
+        <button type="button" class="hero__logo logo-bob" data-logo aria-label="SAF SMP logo, click me">
+          <picture>
+            <source srcset="/assets/img/logo.webp" type="image/webp">
+            <img src="/assets/img/logo.png" width="720" height="598" alt="SAF SMP logo">
+          </picture>
+        </button>
+        <span class="hero__hint" aria-hidden="true">psst, click the logo</span>
+      </div>
     </div>
   </section>
 
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Java + Bedrock</span><span>Land Claims</span><span>Player Shops</span><span>Consent-Only PvP</span><span>No Whitelist</span><span>Regular Backups</span><span>Chill Community</span>
+      <span>Java + Bedrock</span><span>Land Claims</span><span>Player Shops</span><span>Consent-Only PvP</span><span>No Whitelist</span><span>Regular Backups</span><span>Chill Community</span>
+    </div>
+  </div>
+
+  <!-- ======================= FEATURES ======================= -->
   <section class="section" id="features">
     <div class="container">
       <div class="section__head reveal">
-        <p class="eyebrow">FEATURES</p>
+        <p class="eyebrow">Features</p>
         <h2>Built to stay chill</h2>
-        <p>SAF is a free economy SMP — claim land, run a shop, team up with people you trust, and only fight when both sides say yes.</p>
+        <p>Claim land, run a shop, team up with people you trust, and only fight when both sides say yes.</p>
       </div>
       <div class="features-grid">
-        <div class="feature-card gui-panel reveal">
-          <div class="feature-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
-          </div>
+        <div class="feature-card gui-panel gui-panel--hover reveal">
+          <div class="feature-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div>
           <h3>Land Claims &amp; Anti-Grief</h3>
-          <p>Claim and protect your base with in-game land claims. Go build somewhere without worrying about coming back to a hole in the ground.</p>
+          <p>Claim and protect your base with in-game land claims. Build without worrying about coming back to a hole in the ground.</p>
         </div>
-        <div class="feature-card gui-panel reveal">
-          <div class="feature-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="12" rx="3"/><circle cx="8" cy="13" r="1.4" fill="currentColor" stroke="none"/><path d="M13 11h4M13 15h4"/></svg>
-          </div>
+        <div class="feature-card gui-panel gui-panel--hover reveal">
+          <div class="feature-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="12" rx="3"/><circle cx="8" cy="13" r="1.4" fill="currentColor" stroke="none"/><path d="M13 11h4M13 15h4"/></svg></div>
           <h3>Java &amp; Bedrock, Same World</h3>
-          <p>Cross-play means PC, console, and mobile all drop into the same economy. One IP, one port, no launcher wrangling.</p>
+          <p>Cross-play means PC, console and mobile all drop into the same economy. No launcher wrangling.</p>
         </div>
-        <div class="feature-card gui-panel reveal">
-          <div class="feature-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
-          </div>
+        <div class="feature-card gui-panel gui-panel--hover reveal">
+          <div class="feature-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M14.5 9.5c-.5-1-1.5-1.5-2.5-1.5-1.4 0-2.5.8-2.5 2s1.1 1.7 2.5 2 2.5.8 2.5 2-1.1 2-2.5 2c-1 0-2-.5-2.5-1.5M12 6.5v11"/></svg></div>
           <h3>Player-Driven Economy</h3>
-          <p>Set up shop, trade with other players, and build up your own corner of the market. Currency and prices are shaped by the crew, not a plugin default.</p>
+          <p>Set up shop, trade with other players and build your own corner of the market. Prices are shaped by the crew, not a plugin default.</p>
         </div>
-        <div class="feature-card gui-panel reveal">
-          <div class="feature-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-7.5-4.6-10-9.3C.6 7.8 2.4 4.5 6 4.5c2.2 0 3.9 1.2 6 3.6 2.1-2.4 3.8-3.6 6-3.6 3.6 0 5.4 3.3 4 6.7-2.5 4.7-10 9.3-10 9.3z"/></svg>
-          </div>
+        <div class="feature-card gui-panel gui-panel--hover reveal">
+          <div class="feature-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-7.5-4.6-10-9.3C.6 7.8 2.4 4.5 6 4.5c2.2 0 3.9 1.2 6 3.6 2.1-2.4 3.8-3.6 6-3.6 3.6 0 5.4 3.3 4 6.7-2.5 4.7-10 9.3-10 9.3z"/></svg></div>
           <h3>Teams, Not Warfare</h3>
-          <p>Group up with people you trust. It's peaceful by default — PvP only happens when both sides agree to it.</p>
+          <p>Group up with people you trust. It's peaceful by default: PvP only happens when both sides agree to it.</p>
         </div>
-        <div class="feature-card gui-panel reveal">
-          <div class="feature-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/></svg>
-          </div>
+        <div class="feature-card gui-panel gui-panel--hover reveal">
+          <div class="feature-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/></svg></div>
           <h3>Backed Up, Not Fragile</h3>
           <p>The world gets backed up regularly, so a bad crash doesn't mean losing what you've built.</p>
         </div>
-        <div class="feature-card gui-panel reveal">
-          <div class="feature-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13a4 4 0 1 0 4 4M8 13V7a4 4 0 0 1 8 0v3"/><path d="M4 20c1.5-1.5 3-2 4-2M20 20c-1.5-1.5-3-2-4-2"/></svg>
-          </div>
+        <div class="feature-card gui-panel gui-panel--hover reveal">
+          <div class="feature-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3.5 19c.6-3 2.8-5 5.5-5s4.9 2 5.5 5M14.5 14.3c.8-.5 1.6-.8 2.5-.8 2.2 0 3.8 1.6 4.3 4"/></svg></div>
           <h3>Chill, Low-Drama Community</h3>
-          <p>No forced PvP, no surprise raids. Show up decent, build what you want, and trade at your own pace.</p>
+          <p>No forced PvP, no surprise raids. Show up decent, build what you want and trade at your own pace.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section" id="join">
+  <!-- ======================= JOIN ======================= -->
+  <section class="section section--alt" id="join">
+    <div class="container join">
+      <div class="reveal">
+        <div class="section__head" style="margin-bottom:var(--space-6)">
+          <p class="eyebrow">How to Join</p>
+          <h2>Jump straight in</h2>
+          <p>SAF is an open server: no whitelist, no application, no approval.</p>
+        </div>
+        <ol class="steps">
+          <li class="step"><span class="step__num"></span><div><h3>Join the Discord</h3><p>Announcements, support, events and other players. Optional, but it's where the community hangs out.</p></div></li>
+          <li class="step"><span class="step__num"></span><div><h3>Add the server</h3><p>Pick your edition on the right and copy the address straight into Minecraft.</p></div></li>
+          <li class="step"><span class="step__num"></span><div><h3>Claim your base</h3><p>Anything outside a claim is fair game, so protect your build early.</p></div></li>
+        </ol>
+      </div>
+
+      <div class="connect gui-panel reveal" data-tabs>
+        <div class="tabs" role="tablist" aria-label="Choose your edition">
+          <button class="tab" role="tab" id="tab-java" aria-selected="true" aria-controls="panel-java">Java (PC)</button>
+          <button class="tab" role="tab" id="tab-bedrock" aria-selected="false" aria-controls="panel-bedrock" tabindex="-1">Bedrock</button>
+        </div>
+        <div class="tabpanel" id="panel-java" role="tabpanel" aria-labelledby="tab-java">
+          <ol>
+            <li>Open Minecraft Java Edition and click <strong>Multiplayer</strong>.</li>
+            <li>Click <strong>Add Server</strong> and paste the address below.</li>
+            <li>Hit <strong>Done</strong>, then join.</li>
+          </ol>
+          <div class="address">
+            <span><span class="address__label">Server Address</span><span class="address__value" data-fill="java-address">play.safsmp.online</span></span>
+            <button type="button" class="copy-btn" data-copy-key="java" data-copy="play.safsmp.online" aria-label="Copy Java address"><svg aria-hidden="true"><use href="#icon-copy"/></svg>Copy<span class="copy-btn__tip">Copied!</span></button>
+          </div>
+        </div>
+        <div class="tabpanel" id="panel-bedrock" role="tabpanel" aria-labelledby="tab-bedrock" hidden>
+          <ol>
+            <li>Open Minecraft (phone, console or Windows) and go to <strong>Play → Servers</strong>.</li>
+            <li>Scroll down and tap <strong>Add Server</strong>.</li>
+            <li>Enter the address and port below, save, then join.</li>
+          </ol>
+          <div class="address">
+            <span><span class="address__label">Server Address</span><span class="address__value" data-fill="bedrock-address">play.safsmp.online</span></span>
+            <button type="button" class="copy-btn" data-copy="play.safsmp.online" data-fill-copy="bedrock-address" aria-label="Copy Bedrock address"><svg aria-hidden="true"><use href="#icon-copy"/></svg>Copy<span class="copy-btn__tip">Copied!</span></button>
+          </div>
+          <div class="address">
+            <span><span class="address__label">Port</span><span class="address__value" data-fill="bedrock-port">50338</span></span>
+            <button type="button" class="copy-btn" data-copy="50338" data-fill-copy="bedrock-port" aria-label="Copy Bedrock port"><svg aria-hidden="true"><use href="#icon-copy"/></svg>Copy<span class="copy-btn__tip">Copied!</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= RANKS PREVIEW ======================= -->
+  <section class="section" id="ranks">
     <div class="container">
-      <div class="section__head reveal">
-        <p class="eyebrow">HOW TO JOIN</p>
-        <h2>Jump straight in</h2>
-        <p>SAF is an open server — no whitelist, no application, and no approval required. Join the Discord for the community, or connect directly on Java or Bedrock.</p>
+      <div class="section__head section__head--center reveal">
+        <p class="eyebrow">Support the server</p>
+        <h2>Galaxy Ranks</h2>
+        <p>Optional perks that keep SAF running: extra claim blocks, homes, kits and more. Each rank lasts 45 days.</p>
       </div>
-
-      <div class="recipe reveal">
-        <div class="recipe__row">
-          <div class="recipe__slot">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="4"/><circle cx="9" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1" fill="currentColor" stroke="none"/></svg>
-            <span>Join Discord</span>
-          </div>
-          <span class="recipe__op recipe__op--arrow">→</span>
-          <div class="recipe__slot recipe__slot--result">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            <span>Connect &amp; Play</span>
-          </div>
-        </div>
-        <p class="recipe__caption">No whitelist. No application. Everyone is welcome.</p>
+      <div class="ranks">
+        <a class="rank astral reveal" href="/store#ranks" data-tilt data-burst="diamond">
+          <span class="rank__tag">Starter</span>
+          <img src="/assets/img/rank-astral.png" width="84" height="24" alt="Astral">
+          <span class="rank__price">&#8369;99 <small>/ 45 days</small></span>
+          <span class="rank__more">2,500 claim blocks · 4 homes →</span>
+        </a>
+        <a class="rank eclipse reveal" href="/store#ranks" data-tilt data-burst="grass">
+          <span class="rank__tag">Popular</span>
+          <img src="/assets/img/rank-eclipse.png" width="84" height="24" alt="Eclipse">
+          <span class="rank__price">&#8369;199 <small>/ 45 days</small></span>
+          <span class="rank__more">5,000 claim blocks · 6 homes →</span>
+        </a>
+        <a class="rank starlight reveal" href="/store#ranks" data-tilt data-burst="discord">
+          <span class="rank__tag">Best value</span>
+          <img src="/assets/img/rank-starlight.png" width="84" height="24" alt="Starlight">
+          <span class="rank__price">&#8369;349 <small>/ 45 days</small></span>
+          <span class="rank__more">Netherite starter pack →</span>
+        </a>
+        <a class="rank celestial-rank reveal" href="/store#ranks" data-tilt data-burst="gold">
+          <span class="rank__tag">Ultimate</span>
+          <img src="/assets/img/rank-celestial.png" width="84" height="24" alt="Celestial">
+          <span class="rank__price">&#8369;499 <small>/ 45 days</small></span>
+          <span class="rank__more">/claimfly + everything →</span>
+        </a>
       </div>
-
-      <ol class="steps reveal">
-        <li class="step">
-          <span class="step__num"></span>
-          <div class="step__body">
-            <h3>Join the Discord</h3>
-            <p>Hang out with the community, see announcements, get support, and meet other players.</p>
-            <a class="btn btn--primary btn--sm" href="https://discord.gg/DzztgFdqKV" target="_blank" rel="noopener noreferrer">Join the Discord</a>
-          </div>
-        </li>
-        <li class="step">
-          <span class="step__num"></span>
-          <div class="step__body">
-            <h3>Connect directly</h3>
-            <p>No whitelist or application is required. Add the server and start playing.</p>
-            <div class="address-chip">
-              <span class="address-chip__text">Java: play.safsmp.online</span>
-              <button type="button" class="copy-btn" data-copy="play.safsmp.online">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
-                Copy
-                <span class="copy-btn__tip">Copied!</span>
-              </button>
-            </div>
-            <div class="address-chip">
-              <span class="address-chip__text">Bedrock: IP:play.safsmp.online Port:50338</span>
-              <button type="button" class="copy-btn" data-copy="play.safsmp.online:50338">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
-                Copy
-                <span class="copy-btn__tip">Copied!</span>
-              </button>
-            </div>
-          </div>
-        </li>
-      </ol>
+      <div class="ranks-cta reveal">
+        <a class="btn btn--store" href="/store"><svg aria-hidden="true"><use href="#icon-cart"/></svg>See all perks in the Store</a>
+        <p>Purchases are handled safely through Discord tickets.</p>
+      </div>
     </div>
   </section>
 
+  <!-- ======================= RULES ======================= -->
   <section class="section section--alt" id="rules">
     <div class="container">
       <div class="section__head reveal">
-        <p class="eyebrow">GROUND RULES</p>
+        <p class="eyebrow">Ground Rules</p>
         <h2>Keep it simple</h2>
-        <p>Nothing complicated — just enough so the economy stays fair and the world stays chill.</p>
+        <p>Just enough so the economy stays fair and the world stays chill.</p>
       </div>
-      <ul class="rules-list reveal">
-        <li class="rule">
-          <span class="rule__mark">01</span>
-          <p><strong>Claim your base.</strong> Anything outside a claim is fair game, so don't leave something valuable unclaimed.</p>
-        </li>
-        <li class="rule">
-          <span class="rule__mark">02</span>
-          <p><strong>Peaceful by default.</strong> No unauthorized killing. Fighting, raiding, and PvP only happen when everyone involved has agreed to it.</p>
-        </li>
-        <li class="rule">
-          <span class="rule__mark">03</span>
-          <p><strong>No griefing and avoid toxicity.</strong> Be kind, show some respect.</p>
-        </li>
-        <li class="rule">
-          <span class="rule__mark">04</span>
-          <p><strong>No cheats or hacked clients.</strong> Play it straight — exploits and glitch abuse ruin it for everyone else, including the economy.</p>
-        </li>
-        <li class="rule">
-          <span class="rule__mark">05</span>
-          <p><strong>Report bugs and dupes.</strong> instead of using them. We'd rather fix it than ban someone over it.</p>
-        </li>
-        <li class="rule">
-          <span class="rule__mark">06</span>
-          <p><strong>Be a decent hang.</strong> Trade fair, treat teammates well, and keep it chill for everyone else grinding alongside you.</p>
-        </li>
+      <ul class="rules-list">
+        <li class="rule gui-panel reveal"><span class="rule__mark">01</span><p><strong>Claim your base.</strong> Anything outside a claim is fair game, so don't leave something valuable unclaimed.</p></li>
+        <li class="rule gui-panel reveal"><span class="rule__mark">02</span><p><strong>Peaceful by default.</strong> No unauthorized killing. Fighting, raiding and PvP only happen when everyone involved has agreed to it.</p></li>
+        <li class="rule gui-panel reveal"><span class="rule__mark">03</span><p><strong>No griefing, no toxicity.</strong> Be kind and show some respect.</p></li>
+        <li class="rule gui-panel reveal"><span class="rule__mark">04</span><p><strong>No cheats or hacked clients.</strong> Exploits and glitch abuse ruin it for everyone else, including the economy.</p></li>
+        <li class="rule gui-panel reveal"><span class="rule__mark">05</span><p><strong>Report bugs and dupes.</strong> Don't use them. We'd rather fix it than ban someone over it.</p></li>
+        <li class="rule gui-panel reveal"><span class="rule__mark">06</span><p><strong>Be a decent hang.</strong> Trade fair, treat teammates well and keep it chill for everyone grinding alongside you.</p></li>
       </ul>
     </div>
   </section>
 
-  <section class="section community" id="community">
-    <div class="container community__inner reveal">
-      <p class="eyebrow" style="justify-content:center;">STAY IN TOUCH</p>
-      <h2>Come say hi before you spawn in</h2>
-      <p>Questions about the server, ideas for the world, or just want to see what's being built? This is the place.</p>
-      <div class="community__btns">
-        <a class="btn btn--primary" href="https://discord.gg/DzztgFdqKV" id="discordLink">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="6" width="16" height="12" rx="4"/><circle cx="9" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1" fill="currentColor" stroke="none"/></svg>
-          Join the Discord
-        </a>
-        <a class="btn btn--store" href="/store">
-          <svg aria-hidden="true"><use href="#icon-cart"/></svg>
-          Support SAF in the Store
-        </a>
+  <!-- ======================= FAQ ======================= -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section__head section__head--center reveal">
+        <p class="eyebrow">FAQ</p>
+        <h2>Questions? Answers.</h2>
+      </div>
+      <div class="faq">
+        <details class="gui-panel reveal"><summary>Is SAF free to play?</summary><p>Yes. The server is free and open to everyone. Ranks in the store are optional perks that help keep the server running.</p></details>
+        <details class="gui-panel reveal"><summary>Do I need to apply or get whitelisted?</summary><p>No. There's no whitelist and no application. Add the server and join.</p></details>
+        <details class="gui-panel reveal"><summary>Can Bedrock players join? (phone, console, Windows)</summary><p>Yes. Java and Bedrock players share the same world. On Bedrock, use the address <strong><span data-fill="bedrock-address">play.safsmp.online</span></strong> with port <strong><span data-fill="bedrock-port">50338</span></strong>.</p></details>
+        <details class="gui-panel reveal"><summary>Can other players attack me or raid my base?</summary><p>PvP only happens when both sides agree to it. Claimed land is protected, but anything outside a claim is fair game, so claim your base early.</p></details>
+        <details class="gui-panel reveal"><summary>How do I buy a rank or Ecoins?</summary><p>Join the Discord and open a support ticket. Staff will send payment details and give you your purchase in-game. See the <a href="/store#how">store</a> for the full steps.</p></details>
+        <details class="gui-panel reveal"><summary>I found a bug or a dupe. What should I do?</summary><p>Report it in the Discord instead of using it. We'd rather fix it than ban someone over it.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CTA ======================= -->
+  <section class="section" id="community" style="padding-top:0">
+    <div class="container">
+      <div class="cta-band reveal">
+        <div class="sky" aria-hidden="true">
+          <div class="sky__glow"></div>
+          <div class="stars"></div>
+          <svg class="sky__hills" viewBox="0 0 1200 340" preserveAspectRatio="none">
+            <path d="M0 220 L150 180 L320 215 L480 160 L660 210 L840 170 L1000 205 L1200 180 L1200 340 L0 340 Z" fill="var(--hill-1)"/>
+            <path d="M0 270 L200 245 L400 275 L600 240 L800 270 L1000 250 L1200 265 L1200 340 L0 340 Z" fill="var(--hill-2)"/>
+          </svg>
+        </div>
+        <img src="/assets/img/logo-sm.webp" width="160" height="133" alt="" data-burst="gold" style="cursor:pointer">
+        <h2>Come say hi before you spawn in</h2>
+        <p>Questions about the server, ideas for the world, or just want to see what's being built? The Discord is the place.</p>
+        <div class="cta-band__btns">
+          <a class="btn btn--discord" href="https://discord.gg/DzztgFdqKV" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#icon-discord"/></svg>Join the Discord</a>
+          <a class="btn btn--store" href="/store"><svg aria-hidden="true"><use href="#icon-cart"/></svg>Support SAF</a>
+        </div>
       </div>
     </div>
   </section>
 </main>
 
 <footer class="site-footer">
-  <div class="container" style="display:flex; flex-wrap:wrap; gap:var(--space-3); align-items:center; justify-content:space-between; width:100%;">
-    <span>SAF — Sunrise Asylum Foundation, a chill Java + Bedrock economy SMP. <a href="https://safsmp.online">safsmp.online</a> · <a href="/store">Store</a></span>
-    <span>Not affiliated with Mojang or Microsoft.</span>
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <img src="/assets/img/logo-sm.webp" width="52" height="43" alt="">
+        <div><strong>SAF SMP</strong>Sunrise Asylum Foundation, a chill Java + Bedrock economy SMP. Free and open to everyone.</div>
+      </div>
+      <div class="footer__col">
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#join">How to Join</a></li>
+          <li><a href="#rules">Rules</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h3>Community</h3>
+        <ul>
+          <li><a href="https://discord.gg/DzztgFdqKV" target="_blank" rel="noopener noreferrer">Discord</a></li>
+          <li><a href="/store">Store</a></li>
+          <li><a href="/store#ecoins">Ecoins</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© <span id="year">2026</span> SAF SMP · <span data-fill="java-address">play.safsmp.online</span></span>
+      <span>Not affiliated with Mojang or Microsoft.</span>
+    </div>
   </div>
 </footer>
 
-<script>
-  // Mobile nav toggle
-  var navToggle = document.getElementById('navToggle');
-  var navMobile = document.getElementById('navMobile');
-  navToggle.addEventListener('click', function(){
-    var isOpen = navMobile.classList.toggle('is-open');
-    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-  });
-  navMobile.querySelectorAll('a').forEach(function(link){
-    link.addEventListener('click', function(){
-      navMobile.classList.remove('is-open');
-      navToggle.setAttribute('aria-expanded', 'false');
-    });
-  });
+<button type="button" class="to-top" aria-label="Back to top" data-burst="grass"><svg aria-hidden="true"><use href="#icon-up"/></svg></button>
 
-  // Copy-to-clipboard buttons
-  document.querySelectorAll('.copy-btn').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var text = btn.getAttribute('data-copy') || '';
-      var done = function(){
-        btn.classList.add('is-copied');
-        setTimeout(function(){ btn.classList.remove('is-copied'); }, 1500);
-      };
-      if(navigator.clipboard && navigator.clipboard.writeText){
-        navigator.clipboard.writeText(text).then(done).catch(done);
-      } else {
-        done();
-      }
-    });
-  });
-
-  // Scroll reveal
-  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var revealEls = document.querySelectorAll('.reveal');
-  if(prefersReduced || !('IntersectionObserver' in window)){
-    revealEls.forEach(function(el){ el.classList.add('is-visible'); });
-  } else {
-    var observer = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting){
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-    revealEls.forEach(function(el){ observer.observe(el); });
-  }
-
-  // Ambient particles (fireflies at night, pollen by day)
-  if(!prefersReduced){
-    var bg = document.querySelector('.hero__bg');
-    for(var i=0;i<7;i++){
-      var f = document.createElement('span');
-      f.className = 'hero__particle';
-      f.style.left = (8 + Math.random()*84) + '%';
-      f.style.top = (30 + Math.random()*55) + '%';
-      f.style.animationDelay = (Math.random()*6) + 's';
-      f.style.animationDuration = (7 + Math.random()*5) + 's';
-      bg.appendChild(f);
-    }
-  }
-
-  // Star field
-  var starField = document.getElementById('starField');
-  for(var s=0;s<45;s++){
-    var star = document.createElement('span');
-    star.className = 'star';
-    star.style.left = (Math.random()*100) + '%';
-    star.style.top = (Math.random()*70) + '%';
-    star.style.animationDelay = (Math.random()*3) + 's';
-    starField.appendChild(star);
-  }
-
-  // Day / Night mode
-  var root = document.documentElement;
-  var toggleBtn = document.getElementById('daynightToggle');
-  var daynightLabel = document.getElementById('daynightLabel');
-  var metaTheme = document.getElementById('metaTheme');
-  var THEME_KEY = 'saf-theme';
-
-  function applyTheme(theme){
-    root.setAttribute('data-theme', theme);
-    toggleBtn.setAttribute('aria-pressed', theme === 'day' ? 'true' : 'false');
-    daynightLabel.textContent = theme === 'day' ? 'Day' : 'Night';
-    metaTheme.setAttribute('content', theme === 'day' ? '#8FD0F7' : '#0B1526');
-  }
-
-  var savedTheme = null;
-  try{ savedTheme = localStorage.getItem(THEME_KEY); }catch(e){}
-  applyTheme(savedTheme === 'day' || savedTheme === 'night' ? savedTheme : 'night');
-
-  toggleBtn.addEventListener('click', function(){
-    var next = root.getAttribute('data-theme') === 'day' ? 'night' : 'day';
-    applyTheme(next);
-    try{ localStorage.setItem(THEME_KEY, next); }catch(e){}
-  });
-
-  // Live server status via mcsrvstat.us (public, no key required)
-  var statusLine = document.getElementById('statusLine');
-  fetch('https://api.mcsrvstat.us/3/play.safsmp.online:50338')
-    .then(function(r){ return r.json(); })
-    .then(function(data){
-      if(data && data.online){
-        var count = (data.players && typeof data.players.online === 'number') ? data.players.online : 0;
-        statusLine.innerHTML = '<span class="dot"></span> Online now — ' + count + ' player' + (count === 1 ? '' : 's') + ' in the world';
-        statusLine.classList.add('is-online');
-      } else {
-        statusLine.innerHTML = '<span class="dot"></span> Offline right now — the world is still here when you join.';
-        statusLine.classList.add('is-offline');
-      }
-    })
-    .catch(function(){
-      statusLine.innerHTML = '<span class="dot"></span> Status unavailable — jump in and see for yourself.';
-    });
-</script>
+<script src="/assets/site.js"></script>
 </body>
 </html>
