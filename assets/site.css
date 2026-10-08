@@ -99,24 +99,14 @@ code{ font-family:ui-monospace, 'SFMono-Regular', Consolas, monospace; font-size
 .section__head h2{ font-size:clamp(1.35rem, 2.8vw, 2rem); margin-bottom:var(--space-4); }
 .section__head p{ color:var(--color-text-muted); font-size:1.05rem; }
 
-/* ---------- Buttons ---------- */
+/* ---------- Buttons (layout; the wood + vine skin lives at the end of this file) ---------- */
 .btn{
   display:inline-flex; align-items:center; justify-content:center; gap:var(--space-2);
-  padding:13px 22px; border-radius:var(--radius-sm); font-weight:700; font-size:0.95rem;
+  padding:14px 22px 12px; border-radius:var(--radius-sm); font-weight:700; font-size:0.95rem;
   text-decoration:none; white-space:nowrap; position:relative;
-  transition:transform .12s var(--ease), box-shadow .12s var(--ease), background .2s var(--ease), filter .2s var(--ease), border-color .2s var(--ease), color .2s var(--ease);
-  box-shadow:inset 2px 2px 0 rgba(255,255,255,0.18), inset -3px -3px 0 rgba(0,0,0,0.28), 0 6px 16px rgba(0,0,0,0.22);
 }
 .btn svg{ width:18px; height:18px; flex:0 0 auto; }
-.btn:hover{ transform:translateY(-2px); filter:brightness(1.08); }
-.btn:active{ transform:translateY(1px); box-shadow:inset 2px 2px 0 rgba(0,0,0,0.25), inset -2px -2px 0 rgba(255,255,255,0.08); }
-.btn--primary{ background:var(--grass); color:#10200A; }
-.btn--discord{ background:var(--discord); color:#fff; }
-.btn--store{ background:var(--gold); color:#2A1A05; }
-[data-theme="day"] .btn--store{ background:#F0A93C; }
-.btn--ghost{ background:var(--color-surface); color:var(--color-text); border:1px solid var(--color-border-strong); box-shadow:none; }
-.btn--ghost:hover{ border-color:var(--gold-bright); color:var(--gold-bright); filter:none; }
-.btn--sm{ padding:8px 14px; font-size:0.82rem; }
+.btn--sm{ padding:9px 14px 8px; font-size:0.82rem; }
 .btn--block{ width:100%; }
 
 /* ---------- Header ---------- */
@@ -157,7 +147,6 @@ code{ font-family:ui-monospace, 'SFMono-Regular', Consolas, monospace; font-size
   font-family:var(--font-pixel); font-size:0.62rem; color:var(--color-text);
   transition:background .3s var(--ease), border-color .3s var(--ease);
 }
-.daynight-toggle:hover{ border-color:var(--gold-bright); }
 .daynight-toggle__icon{ width:16px; height:16px; position:relative; flex:0 0 auto; }
 .daynight-toggle__icon .mini-sun, .daynight-toggle__icon .mini-moon{
   position:absolute; inset:0; border-radius:3px; transition:opacity .3s var(--ease), transform .3s var(--ease);
@@ -266,7 +255,6 @@ code{ font-family:ui-monospace, 'SFMono-Regular', Consolas, monospace; font-size
   transition:color .2s var(--ease), background .2s var(--ease);
   position:relative;
 }
-.copy-btn:hover{ color:#fff; background:var(--grass-dark); }
 .copy-btn svg{ width:14px; height:14px; }
 .copy-btn__tip{
   position:absolute; bottom:calc(100% + 8px); left:50%; transform:translateX(-50%) translateY(4px);
@@ -342,7 +330,6 @@ code{ font-family:ui-monospace, 'SFMono-Regular', Consolas, monospace; font-size
 }
 .to-top svg{ width:20px; height:20px; }
 .to-top.is-visible{ opacity:1; transform:none; pointer-events:auto; }
-.to-top:hover{ filter:brightness(1.1); }
 
 /* Logo bob */
 [data-logo]{ padding:0; border:0; background:none; display:block; }
@@ -355,3 +342,112 @@ code{ font-family:ui-monospace, 'SFMono-Regular', Consolas, monospace; font-size
 @media (prefers-reduced-motion: reduce){
   .burst, .float-text{ display:none; }
 }
+
+/* =====================================================================
+   Wood + vine skin for every button on the site.
+   Each button type uses a different wood so they stay easy to tell apart:
+     primary = oak · discord = dark oak · store = spruce · ghost = birch
+   ===================================================================== */
+.btn, .copy-btn, .daynight-toggle, .nav__toggle, .to-top, .tab[aria-selected="true"]{
+  --wood-hi:#B07A3E; --wood-lo:#8A5A2B; --wood-edge:#3B2210; --wood-text:#FFF4DC; --wood-shadow:rgba(40,20,5,.85);
+  color:var(--wood-text);
+  text-shadow:1px 1px 0 var(--wood-shadow);
+  background:
+    url("img/wood-grain.svg") 0 0 / 64px 64px,
+    linear-gradient(180deg, var(--wood-hi), var(--wood-lo));
+  image-rendering:pixelated;
+  border:2px solid var(--wood-edge);
+  border-radius:3px;
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.22),
+    inset 2px 0 0 rgba(255,255,255,.08),
+    inset 0 -3px 0 rgba(0,0,0,.28),
+    0 3px 0 var(--wood-edge),
+    0 8px 16px rgba(0,0,0,.25);
+  transition:transform .12s var(--ease), box-shadow .12s var(--ease), filter .2s var(--ease);
+}
+.btn svg, .copy-btn svg, .to-top svg, .nav__toggle svg{ filter:drop-shadow(1px 1px 0 var(--wood-shadow)); }
+.btn:hover, .copy-btn:hover, .daynight-toggle:hover, .nav__toggle:hover, .to-top:hover{ transform:translateY(-2px); filter:brightness(1.1) saturate(1.05); }
+.btn:active, .copy-btn:active, .daynight-toggle:active, .nav__toggle:active, .to-top:active{
+  transform:translateY(2px);
+  box-shadow:inset 0 2px 0 rgba(0,0,0,.25), inset 0 -1px 0 rgba(255,255,255,.1), 0 1px 0 var(--wood-edge);
+}
+
+/* Wood types */
+.btn--discord{ --wood-hi:#6B4526; --wood-lo:#4A2F18; --wood-edge:#21130A; }
+.btn--discord svg{ color:#B3BAFF; }
+.btn--store{ --wood-hi:#9C5E33; --wood-lo:#74401F; --wood-edge:#33170A; --wood-text:#FFE08A; }
+.btn--ghost{ --wood-hi:#E0D2A6; --wood-lo:#C2AE7A; --wood-edge:#5E4E2C; --wood-text:#2E2410; --wood-shadow:rgba(255,255,255,.55); }
+.copy-btn, .daynight-toggle, .nav__toggle{ --wood-hi:#6B4526; --wood-lo:#4A2F18; --wood-edge:#21130A; }
+.daynight-toggle, .copy-btn{ color:var(--wood-text); }
+
+/* Vines draped over the top edge */
+.btn::before, .copy-btn::before, .daynight-toggle::before, .nav__toggle::before, .to-top::before, .tab[aria-selected="true"]::before{
+  content:""; position:absolute; left:-2px; right:-2px; top:-6px; height:16px;
+  background:url("img/vine-top.svg") repeat-x 0 0 / 64px 16px;
+  image-rendering:pixelated; pointer-events:none; z-index:1;
+  transform-origin:50% 0;
+}
+.btn--store::before{ background-position:-22px 0; }
+.btn--discord::before{ background-position:-40px 0; }
+.btn--ghost::before{ background-position:-12px 0; }
+.copy-btn::before, .daynight-toggle::before, .nav__toggle::before, .tab[aria-selected="true"]::before{ top:-5px; height:12px; background-size:48px 12px; }
+
+/* A vine strand hanging down the right side of full-size buttons */
+.btn::after{
+  content:""; position:absolute; right:6px; top:2px; width:12px; height:28px;
+  background:url("img/vine-side.svg") no-repeat 0 0 / 12px 28px;
+  image-rendering:pixelated; pointer-events:none; z-index:1; transform:scaleX(-1); transform-origin:50% 0;
+}
+.btn--sm::after{ display:none; }
+
+/* Leaves rustle on hover */
+.btn:hover::before, .copy-btn:hover::before, .daynight-toggle:hover::before, .nav__toggle:hover::before, .to-top:hover::before{ animation:rustle .5s steps(4) 1; }
+.btn:hover::after{ animation:sway .9s ease-in-out infinite alternate; }
+@keyframes rustle{ 0%{ transform:translateY(0); } 25%{ transform:translateY(-1px) skewX(4deg); } 50%{ transform:translateY(1px) skewX(-4deg); } 75%{ transform:translateY(-1px) skewX(2deg); } 100%{ transform:none; } }
+@keyframes sway{ from{ transform:scaleX(-1) rotate(-6deg); } to{ transform:scaleX(-1) rotate(6deg); } }
+
+/* Small controls need a positioning context for the vines */
+.copy-btn, .daynight-toggle, .nav__toggle, .tab{ position:relative; }
+.to-top{ transition:opacity .25s var(--ease), transform .25s var(--ease), filter .2s var(--ease); }
+.to-top.is-visible:hover{ transform:translateY(-2px); }
+
+@media (prefers-reduced-motion: reduce){
+  .btn:hover::before, .btn:hover::after, .copy-btn:hover::before{ animation:none; }
+}
+
+/* =====================================================================
+   Page transition: two vine-covered wooden doors close over the page,
+   the logo pops in, then the doors open on the next page.
+   ===================================================================== */
+.page-doors{ position:fixed; inset:0; z-index:1000; pointer-events:none; overflow:hidden; }
+.page-doors__door{
+  position:absolute; top:0; bottom:0; width:50.5%;
+  background:
+    url("img/vine-top.svg") repeat-x 0 0 / 256px 64px,
+    url("img/wood-grain.svg") 0 0 / 96px 96px,
+    repeating-linear-gradient(90deg, transparent 0 94px, rgba(0,0,0,.35) 94px 98px),
+    linear-gradient(180deg, #A06C35, #7E5128);
+  image-rendering:pixelated;
+  box-shadow:inset 0 0 0 4px #3B2210, inset 0 0 60px rgba(0,0,0,.35);
+  transition:transform .55s cubic-bezier(.7,0,.3,1);
+}
+.page-doors__door--left{ left:0; transform:translateX(-101%); }
+.page-doors__door--right{ right:0; transform:translateX(101%); background-position:-90px 0, 0 0, 0 0, 0 0; }
+/* iron hinges + handle */
+.page-doors__door::before, .page-doors__door::after{ content:""; position:absolute; width:46px; height:14px; background:#3a3a3a; box-shadow:inset 0 3px 0 #6b6b6b, inset 0 -3px 0 #1e1e1e; }
+.page-doors__door--left::before{ left:0; top:18%; } .page-doors__door--left::after{ left:0; bottom:18%; }
+.page-doors__door--right::before{ right:0; top:18%; } .page-doors__door--right::after{ right:24px; top:calc(50% - 30px); width:14px; height:60px; box-shadow:inset 3px 0 0 #6b6b6b, inset -3px 0 0 #1e1e1e; }
+.page-doors__logo{
+  position:absolute; left:50%; top:50%; width:min(300px, 60vw); z-index:2;
+  transform:translate(-50%,-50%) scale(.4) rotate(-10deg); opacity:0;
+  filter:drop-shadow(0 18px 30px rgba(0,0,0,.55));
+  transition:transform .4s cubic-bezier(.3,1.6,.5,1), opacity .25s var(--ease);
+}
+.page-doors.is-closed .page-doors__door{ transform:none; }
+.page-doors.is-closed .page-doors__logo{ transform:translate(-50%,-50%) scale(1) rotate(0); opacity:1; transition-delay:.3s; }
+.page-doors.is-closed{ pointer-events:auto; }
+
+/* Before JS runs on the arriving page, keep it covered so nothing flashes */
+html.is-arriving body{ overflow:hidden; }
+html.is-arriving body::after{ content:""; position:fixed; inset:0; z-index:999; background:linear-gradient(180deg, #A06C35, #7E5128); }

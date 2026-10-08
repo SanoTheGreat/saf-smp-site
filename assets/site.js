@@ -191,7 +191,8 @@ var SAF_SERVER = {
     grass: ['#63A83B', '#7EFC20', '#4C7A2A', '#8B5A2B'],
     gold:  ['#FFD27A', '#F4BB5E', '#FFF1B8', '#D98A1B'],
     diamond: ['#5FD8E0', '#A8F4F8', '#1FA8B4', '#FFFFFF'],
-    discord: ['#5865F2', '#8E97FF', '#C9CDFF', '#FFFFFF']
+    discord: ['#5865F2', '#8E97FF', '#C9CDFF', '#FFFFFF'],
+    wood:  ['#B07A3E', '#6B4526', '#3E8A22', '#6CC23A', '#A6E05A']
   };
 
   // Minecraft-style block-break particles at (x, y)
@@ -243,10 +244,8 @@ var SAF_SERVER = {
     var el = e.target.closest('.btn, .copy-btn, .tab, .faq summary, [data-burst]');
     if(!el) return;
     var pt = pointFor(e, el);
-    var palette = el.getAttribute('data-burst') ||
-      (el.classList.contains('btn--discord') ? 'discord' :
-       el.classList.contains('btn--primary') ? 'grass' :
-       el.classList.contains('copy-btn') ? 'grass' : 'gold');
+    // Wooden buttons shed wood chips and leaves
+    var palette = el.getAttribute('data-burst') || 'wood';
     if(!el.matches('summary')) press(el);
     burst(pt.x, pt.y, palette, el.classList.contains('copy-btn') ? 14 : 10);
     if(el.classList.contains('copy-btn')) floatText(pt.x, pt.y - 10, '+1 XP');
@@ -318,4 +317,61 @@ var SAF_SERVER = {
       card.addEventListener('pointerleave', function(){ card.style.transform = ''; });
     });
   }
+})();
+
+/* ---------- Page transition: wooden doors between Home and Store ---------- */
+(function(){
+  var KEY = 'saf-doors';
+  var root = document.documentElement;
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function pageOf(url){
+    var p = url.pathname.replace(/index\.html$/, '').replace(/\.html$/, '').replace(/\/$/, '');
+    return p || '/';
+  }
+
+  var doors = document.createElement('div');
+  doors.className = 'page-doors';
+  doors.setAttribute('aria-hidden', 'true');
+  doors.innerHTML =
+    '<div class="page-doors__door page-doors__door--left"></div>' +
+    '<div class="page-doors__door page-doors__door--right"></div>' +
+    '<img class="page-doors__logo" src="/assets/img/logo.webp" alt="">';
+  document.body.appendChild(doors);
+
+  function open(){
+    doors.classList.remove('is-closed');
+    root.classList.remove('is-arriving');
+  }
+
+  // Arriving from another page: start shut, then swing the doors open
+  var arriving = false;
+  try{ arriving = !!sessionStorage.getItem(KEY); sessionStorage.removeItem(KEY); }catch(e){}
+  if(arriving){
+    doors.querySelectorAll('.page-doors__door, .page-doors__logo').forEach(function(el){ el.style.transition = 'none'; });
+    doors.classList.add('is-closed');
+    root.classList.remove('is-arriving');
+    void doors.offsetWidth;
+    doors.querySelectorAll('.page-doors__door, .page-doors__logo').forEach(function(el){ el.style.transition = ''; });
+    setTimeout(open, 380);
+  }
+
+  // Coming back via the browser's back/forward cache: make sure the doors are open
+  window.addEventListener('pageshow', function(e){ if(e.persisted) open(); });
+
+  if(prefersReduced) return;
+
+  // Leaving: close the doors, pop the logo, then navigate
+  document.addEventListener('click', function(e){
+    if(e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var a = e.target.closest('a[href]');
+    if(!a || a.target === '_blank' || a.hasAttribute('download')) return;
+    var url = new URL(a.href, location.href);
+    if(url.origin !== location.origin || pageOf(url) === pageOf(location)) return;
+
+    e.preventDefault();
+    try{ sessionStorage.setItem(KEY, '1'); }catch(err){}
+    doors.classList.add('is-closed');
+    setTimeout(function(){ location.href = url.href; }, 750);
+  });
 })();
