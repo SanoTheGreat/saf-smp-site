@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/site.css?v=20261008-2">
 <style>
   /* ---------- Hero ---------- */
   .hero{ position:relative; overflow:hidden; padding:var(--space-8) 0 calc(var(--space-9) + 40px); min-height:calc(100vh - var(--header-h)); display:flex; align-items:center; }
@@ -117,9 +117,9 @@
     background-image:radial-gradient(1.5px 1.5px at 12% 18%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 72% 12%,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 85% 60%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 30% 75%,#fff 50%,transparent 51%); }
   .rank > *{ position:relative; }
   .rank__tag{ font-size:.7rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:#FFD27A; }
-  /* 84x24 pixel-art badges: whole-number scaling only (2x, 3x on phones) */
-  .rank img{ width:168px; height:48px; image-rendering:pixelated; }
-  @media (max-width:600px){ .rank img{ width:252px; height:72px; } }
+  /* Badge files are pre-enlarged 8x so they stay sharp at any size / screen scaling */
+  .rank img{ width:100%; max-width:216px; height:auto; }
+  @media (max-width:600px){ .rank img{ max-width:260px; } }
   .rank__price{ font-size:1.6rem; font-weight:800; }
   .rank__price small{ font-size:.8rem; color:#B9C4B5; font-weight:600; }
   .rank__more{ font-size:.85rem; color:#FFD27A; font-weight:600; margin-top:auto; }
@@ -383,25 +383,25 @@
       <div class="ranks">
         <a class="rank astral reveal" href="/store#ranks" data-tilt data-burst="diamond">
           <span class="rank__tag">Starter</span>
-          <img src="/assets/img/rank-astral.png" width="84" height="24" alt="Astral">
+          <img src="/assets/img/rank-astral-8x.png" width="672" height="192" alt="Astral">
           <span class="rank__price">&#8369;99 <small>/ 45 days</small></span>
           <span class="rank__more">2,500 claim blocks · 4 homes →</span>
         </a>
         <a class="rank eclipse reveal" href="/store#ranks" data-tilt data-burst="grass">
           <span class="rank__tag">Popular</span>
-          <img src="/assets/img/rank-eclipse.png" width="84" height="24" alt="Eclipse">
+          <img src="/assets/img/rank-eclipse-8x.png" width="672" height="192" alt="Eclipse">
           <span class="rank__price">&#8369;199 <small>/ 45 days</small></span>
           <span class="rank__more">5,000 claim blocks · 6 homes →</span>
         </a>
         <a class="rank starlight reveal" href="/store#ranks" data-tilt data-burst="discord">
           <span class="rank__tag">Best value</span>
-          <img src="/assets/img/rank-starlight.png" width="84" height="24" alt="Starlight">
+          <img src="/assets/img/rank-starlight-8x.png" width="672" height="192" alt="Starlight">
           <span class="rank__price">&#8369;349 <small>/ 45 days</small></span>
           <span class="rank__more">Netherite starter pack →</span>
         </a>
         <a class="rank celestial-rank reveal" href="/store#ranks" data-tilt data-burst="gold">
           <span class="rank__tag">Ultimate</span>
-          <img src="/assets/img/rank-celestial.png" width="84" height="24" alt="Celestial">
+          <img src="/assets/img/rank-celestial-8x.png" width="672" height="192" alt="Celestial">
           <span class="rank__price">&#8369;499 <small>/ 45 days</small></span>
           <span class="rank__more">/claimfly + everything →</span>
         </a>
@@ -508,6 +508,6 @@
 
 <button type="button" class="to-top" aria-label="Back to top" data-burst="grass"><svg aria-hidden="true"><use href="#icon-up"/></svg></button>
 
-<script src="/assets/site.js"></script>
+<script src="/assets/site.js?v=20261008-2"></script>
 </body>
 </html>
