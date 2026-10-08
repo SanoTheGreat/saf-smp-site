@@ -105,7 +105,7 @@
   /* ---------- Ranks preview ---------- */
   .ranks{ display:grid; grid-template-columns:repeat(4,1fr); gap:var(--space-4); margin-bottom:var(--space-6); }
   @media (max-width:960px){ .ranks{ grid-template-columns:repeat(2,1fr); } }
-  @media (max-width:480px){ .ranks{ grid-template-columns:1fr; } }
+  @media (max-width:600px){ .ranks{ grid-template-columns:1fr; } }
   .rank{
     position:relative; display:flex; flex-direction:column; gap:var(--space-3); padding:var(--space-5);
     border-radius:var(--radius-md); text-decoration:none; color:#EDE6D0; overflow:hidden;
@@ -117,7 +117,9 @@
     background-image:radial-gradient(1.5px 1.5px at 12% 18%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 72% 12%,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 85% 60%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 30% 75%,#fff 50%,transparent 51%); }
   .rank > *{ position:relative; }
   .rank__tag{ font-size:.7rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:#FFD27A; }
-  .rank img{ width:100%; max-width:210px; image-rendering:pixelated; }
+  /* 84x24 pixel-art badges: whole-number scaling only (2x, 3x on phones) */
+  .rank img{ width:168px; height:48px; image-rendering:pixelated; }
+  @media (max-width:600px){ .rank img{ width:252px; height:72px; } }
   .rank__price{ font-size:1.6rem; font-weight:800; }
   .rank__price small{ font-size:.8rem; color:#B9C4B5; font-weight:600; }
   .rank__more{ font-size:.85rem; color:#FFD27A; font-weight:600; margin-top:auto; }
