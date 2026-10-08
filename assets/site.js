@@ -8,9 +8,9 @@
    The live status check tries Java first, then Bedrock, and shows whichever
    answers. */
 var SAF_SERVER = {
-  javaAddress: 'play.safsmp.online',
-  bedrockAddress: 'play.safsmp.online',
-  bedrockPort: '50338'
+  javaAddress: '104.234.6.162:26117',
+  bedrockAddress: '104.234.6.162',
+  bedrockPort: '26117'
 };
 
 (function(){
@@ -160,8 +160,8 @@ var SAF_SERVER = {
         throw new Error('offline');
       });
     };
-    var javaUrl = 'https://api.mcsrvstat.us/3/' + encodeURIComponent(SAF_SERVER.javaAddress);
-    var bedrockUrl = 'https://api.mcsrvstat.us/bedrock/3/' + encodeURIComponent(bedrockFull);
+    var javaUrl = 'https://api.mcsrvstat.us/3/' + SAF_SERVER.javaAddress;
+    var bedrockUrl = 'https://api.mcsrvstat.us/bedrock/3/' + bedrockFull;
 
     query(javaUrl)
       .catch(function(){ return query(bedrockUrl); })
