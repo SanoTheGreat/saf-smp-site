@@ -8,9 +8,9 @@
    The live status check tries Java first, then Bedrock, and shows whichever
    answers. */
 var SAF_SERVER = {
-  javaAddress: 'play.safsmp.online:26117',
+  javaAddress: 'play.safsmp.online:25955',
   bedrockAddress: 'play.safsmp.online',
-  bedrockPort: '26117'
+  bedrockPort: '25955'
 };
 
 (function(){
